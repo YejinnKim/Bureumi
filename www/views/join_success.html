@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>부름이 회원가입 성공</title>
+    <style>
+        html, body{
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+        }
+        div{
+            border: 0px solid #000000;
+            box-sizing: border-box;
+        }
+        div#container{
+            width: 100%;
+            height: 100%;
+            background-color: #f1f1f1;
+        }
+        div#welcome{
+            position: absolute;
+            top: 50%; left: 50%;
+            height: 100px;
+            transform: translate(-50%, 10%);
+            margin-top: -250px;
+            text-align: center;
+        }
+        div#welcome p{
+            color: #333333;
+            font-weight: 600;
+            font-size: 30px;
+        }
+        div#welcome span{
+            color: #326cff;
+            font-size: 50px;
+            font-weight: 800;
+            vertical-align: bottom;
+        }
+        .login_button{
+            width: 200px;
+            background-color: #326cff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .login_button:hover{
+            background-color: #2959d3;
+        }
+        @media (max-width: 990px) {
+            div#welcome span:nth-child(2){
+                width: 320px;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/login" method='get'>
+    <div id="container">
+        <div id="welcome">
+            <img src="../img/logo.png">
+            <p style="font-size: 20px;">회원가입 성공!</p>
+            <p><span>부름이</span>에 <span></span>오신 걸 환영합니다</p><br>
+            <button type="submit" value="button" class="login_button" onclick="location('login.html')">로그인하러 가기</button>
+        </div>
+        
+    </div>
+</form>
+</body>
+</html> 

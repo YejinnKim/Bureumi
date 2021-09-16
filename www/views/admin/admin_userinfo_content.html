@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부름이 관리자페이지</title>
+    <link rel="stylesheet" href="../../css/admin_index_nav.css" type="text/css" />
+    <link rel="stylesheet" href="../../css/admin_userinfo.css" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    <nav class="leftsidebar">
+        <div class="logo"><a href="/admin"><img src="../../img/bureumi_logo.png"></a></div>
+        <ul>
+            <li class="adminid">
+                관리자아이디: <%=id%>
+                <br><input type="submit" value="로그아웃" onclick="location.href='/logout'">
+            </li>
+            <li>
+                <a href="#" class="dropmenu-btn">회원관리
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+            </li>
+            <li>
+                <ul class="dropmenu-show">
+                    <li><a href="/admin/userinfo">회원정보관리</a></li>
+                    <li><a href="/admin/bureumiinfo">부름이정보관리</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#" class="dropmenu2-btn">글관리
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+            </li>
+            <li>    
+                <ul class="dropmenu2-show">
+                    <li><a href="/admin/request">요청글관리</a></li>
+                    <li><a href="/admin/score">평점글관리</a></li>
+                    <li><a href="/admin/matching">요청진행(매칭)관리</a></li>
+                    <li><a href="/admin/notice">공지관리</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="right_content">
+            <h2>회원관리 > 회원정보관리 > 회원정보상세</h2>
+            <hr>
+            <table id='user_box'>
+                <tr><td colspan="2">회원정보</td></tr>
+                <tr>
+                    <td>회원코드</td>
+                    <td><%= user.user_code %></td>
+                </tr>
+                <tr>
+                    <td>아이디</td>
+                    <td><%= user.user_id %></td>
+                </tr>
+                <tr>
+                    <td>닉네임</td>
+                    <td><%= user.user_name %></td>
+                </tr>
+                <tr>
+                    <td>회원등급</td>
+                    <td><%= user.user_level %></td>
+                </tr>
+                <tr>
+                    <td>생년월일</td>
+                    <td><%= moment(user.date_birth).format('YYYY-MM-DD') %></td>
+                </tr>
+                <tr>
+                    <td>성별</td>
+                    <td><%= user.user_gender %></td>
+                </tr>
+                <tr>
+                    <td>직업</td>
+                    <td><%= user.user_job %></td>
+                </tr>
+                <tr>
+                    <td>핸드폰번호</td>
+                    <td><%= user.phone_number %></td>
+                </tr>
+            </table>
+            <table>
+                <tr><td colspan="2">부름이정보</td></tr>
+                <% if(!bureumi) { %>
+                    <tr><td>부름이코드</td><td>해당없음</td></tr>
+                <% } else { %>
+                <tr>
+                    <td>부름이코드</td>
+                    <td><%= bureumi.bureumi_code %></td>
+                </tr>
+                <tr>
+                    <td>진행상태</td>
+                    <td><%= bureumi.state %></td>
+                </tr>
+                <tr>
+                    <td>부름이승인</td>
+                    <td><input type="button" value="승인" onClick="location.href='/admin/bureumi_approval/<%= bureumi.bureumi_code %>'"></td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+
+    <!--Juery cdn-->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
+    <script src="../../js/jquery-latest.min.js"></script>
+
+    <!--Bootstrap cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!--날짜 관련 api cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+    <!-- javascript -->
+    <script src="../../js/admin_index.js" type="text/javascript"></script>
+</body>
+
+
+</html>

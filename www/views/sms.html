@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부름이 본인인증</title>
+  <link rel="stylesheet" href="css/login.css" type="text/css" />
+</head>
+<div id="container" class="login">
+  <div id="logo">
+    <a href=""><img src="img/bureumi_logo.png" /></a>
+  </div>
+  <div class="login_form">
+<form action="/sms/verify" method="POST">
+    <input type='text' name="code">
+    <button type="submit" class="login_button">인증번호 확인</button>
+</form>
+</div>
+
+
+</html>
+

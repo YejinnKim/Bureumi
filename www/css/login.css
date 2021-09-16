@@ -1,0 +1,116 @@
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+body {
+  font-family: "맑은 고딕";
+  color: #404040;
+}
+
+input, button {
+  padding:10px;
+}
+
+.login{
+  margin-top: 50px;
+  text-align: center;
+}
+
+.login #logo{
+  padding: 30px;
+}
+
+.login_form {
+  position: relative;
+  margin: 30px auto;
+  padding: 20px 20px 20px;
+  width: 400px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login_form:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -8px;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+.login_form h1 {
+  margin: -20px -20px 21px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  text-shadow: 0 1px white;
+  background: #f3f3f3;
+  border-bottom: 1px solid #cfcfcf;
+  border-radius: 3px 3px 0 0;
+  background-image: -webkit-linear-gradient(top, whiteffd, #eef2f5);
+  -webkit-box-shadow: 0 1px whitesmoke;
+  box-shadow: 0 1px whitesmoke;
+}
+
+.login_form .input{
+  margin: 20px 0 0;
+}
+
+.login_form input[type=text], .login_form input[type=password] {
+  width: 94%;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: gray;
+}
+
+.login_form p.remember{
+  float: left;
+  padding: 10px;
+}
+
+.login_form p.remember label {
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+}
+.login_form a#joinBtn{
+  float: right;
+  padding: 5px;
+  line-height: 30px;
+  font-size: 12px;
+}
+
+.login_form .login_button {
+  width: 100%;
+  height: 45px;
+  background-color: rgb(50, 108, 255);
+  border: 1px;
+  border-radius: 3px;
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width : 700px){
+  .login_form{
+    position: relative;
+    margin: 30px auto;
+    width: 320px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}

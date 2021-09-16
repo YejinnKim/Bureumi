@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부름이 로그인</title>
+  <link rel="stylesheet" href="css/login.css" type="text/css" />
+  
+</head>
+
+<body>
+  <div id="container" class="login">
+    <div id="logo">
+      <a href=""><img src="img/bureumi_logo.png" /></a>
+    </div>
+
+    <div class="login_form">
+      <form method="post" action="/login" name="f1">
+        <div class="title">
+          <h1>로그인</h1>
+        </div>
+        <div>
+          <input type="text" name="userid" value="" placeholder="아이디를 입력하세요" class="input" /></p>
+        </div>
+        <div> 
+          <input type="password" name="password" value="" placeholder="비밀번호를 입력하세요" class="input"/></p>
+        </div>
+        <p class="remember">
+          <label>
+            <input type="checkbox" name="remember" id="remember">
+            아이디 저장
+          </label>
+        </p>
+        <a href="join.html" id="joinBtn">회원가입하기</a>
+        <div>
+          <button type="submit" class="login_button">로그인</button>
+        </div>
+      </form>
+      <div class="result"></div>
+    </div>
+  </div>
+  <script src="../js/login.js" type="text/javascript"></script>
+  <script>
+    document.querySelector('.login_button').addEventListener('click', function(){
+        var userid = document.getElementsByName('userid')[0].value;
+        var password = document.getElementsByName('password')[0].value;
+        var data = {'userid': userid, 'password' : password}
+        sendAjax('http://localhost:3000/login', data);
+    });
+
+    function sendAjax(url, data){
+        data = JSON.stringify(data);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', "application/json");
+        xhr.send(data);
+
+        xhr.addEventListener('load', function(){
+            var result = JSON.parse(xhr.responseText);
+            var resultDiv = document.querySelector(".result");
+
+            if(result.userid) {
+              //resultDiv.innerHTML = "welcome, " + result.email + "!!";
+              window.location.href="/login_success";
+            }
+            else if (xhr.status === 401) resultDiv.innerHTML = result + "<div class='signup'><a href='/join'>signup</a></div>";
+            else resultDiv.innerHTML = result;
+          });
+    }
+</script> 
+</body>
+
+</html>

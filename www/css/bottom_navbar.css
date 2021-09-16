@@ -1,0 +1,47 @@
+
+.bottom_nav{
+    background-color:#282b32;
+    bottom: 0;
+    padding-bottom: 0px !important;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 80px;
+    z-index: 100;
+}
+.bottom_nav a:hover{
+    text-decoration: none;
+    color: white;
+}
+.item{
+    width: 25%;
+    height: 100%;
+    padding: auto 0;
+    color:white;
+    font-size: 0em;
+    transition: width 1s ease, font-size 0.3s;
+    text-align: center;
+    line-height: 80px;
+    cursor: pointer;
+}
+.item:hover{
+    background-color: #326cff;
+    
+}
+.material-icons {
+    
+    font-size: 16px;
+}
+#mainText{
+    text-shadow: slategrey 10px;
+}
+.navbar-translate a:hover{
+    color: white;
+}
+
+@media (min-width: 990px) {
+    section.bottom_nav{
+        display: none;
+    }
+}
