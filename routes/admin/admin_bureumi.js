@@ -14,26 +14,20 @@ router.get('/bureumiinfo', function (req, res) {
     });
 });
 
-router.get('/bureumi_approval/:bureumi_code', function(req, res) {
-    var bcode = req.params.bureumi_code;
-    var userid;
-    var sql1 = 'select user_id from bureumi where bureumi_code=?';
-    var sql2 = 'update bureumi set state=\'승인완료\' where bureumi_code=?';
-    var sql3 = 'update user set user_level=\'부름이\' where user_id=?';
+router.get('/bureumi_approval/:user_id', function(req, res) {
+    var userid = req.params.user_id;
+    var sql1 = 'update bureumi set state=\'승인완료\' where user_id=?';
+    var sql2 = 'update user set user_level=\'부름이\' where user_id=?';
 
-    connection.query(sql1, bcode, function(err, result) {
+    connection.query(sql1, userid, function(err, result) {
         if (err) throw err;
-        userid = result[0].user_id;
+        
     });
-    connection.query(sql2, bcode, function(err, result) {
-        if (err) throw err;
-        res.redirect('/admin/bureumiinfo'); /* 밑에 수정 후 지우기 */
-    });
-    /* sql3 오류남, 수정 필요 (userid 파라미터 못받는듯, ? syntax 에러)*/
-    /* connection.query(sql3, userid, function(err, result) {
+    connection.query(sql2, userid, function(err, result) {
         if (err) throw err;
         res.redirect('/admin/bureumiinfo');
-    }); */
+    });
+    
 }); 
 
 module.exports = router;

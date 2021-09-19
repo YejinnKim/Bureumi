@@ -11,16 +11,29 @@ router.get('/', function(req, res){
     if(id=='admin') res.redirect('/admin'); //관리자 로그인시 admin page 이동
 
     var sql1 = 'select * from user where user_id = ?';
-    var sql2 = 'select * from request where writer_id = ?';
+    var sql2 = 'select * from request where request_code in (select request_code from matching where (requester_id = ? or bureumi_id = ?) and matching_progress != \'완료\')';
+    var sql3 = 'select * from request where request_code in (select request_code from matching where (requester_id = ? or bureumi_id = ?) and matching_progress = \'완료\')';
+    var sql4 = 'select * from request where writer_id = ? and request_code not in (select request_code from matching where requester_id = ?) order by length(request_code) desc, request_code desc';
     var userinfo;
+    var matching;
+    var matching_cmplt;
+    var ids = [id, id]
 
     connection.query(sql1, id, function(err, result) {
         if (err) throw err;
         userinfo = result;
     });
-    connection.query(sql2, id, function(err, result) {
+    connection.query(sql2, ids, function(err, result) {
         if (err) throw err;
-        res.render('profile', {'id' : id, userinfo: userinfo, search : result});
+        matching = result;
+    });
+    connection.query(sql3, ids, function(err, result) {
+        if (err) throw err;
+        matching_cmplt = result;
+    });
+    connection.query(sql4, ids, function(err, result) {
+        if (err) throw err;
+        res.render('profile', {'id' : id, userinfo: userinfo, matching: matching, matching_cmplt: matching_cmplt, search : result});
     });
     
 });

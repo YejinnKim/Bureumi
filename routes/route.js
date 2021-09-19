@@ -26,7 +26,9 @@ const bureumi_auth = require('./bureumi_auth/bureumi_auth');
 const admin = require('./admin/admin');
 const notice = require('./notice/notice');
 const notice_content = require('./notice/notice_content');
-const address_update = require('./join/address_update.js')
+const address_update = require('./join/address_update.js');
+const chatting = require('./chatting/chatting.js');
+const matching = require('./matching/matching.js');
 
 //url 라우팅
 router.get('/', function(req, res){
@@ -60,6 +62,9 @@ router.use('/notice', notice);
 router.use('/notice', notice_content);
 /* router.use('/address_save',address_save);
 router.use('/address_join',address_join); */
-router.use('/address_update',address_update)
+router.use('/address_update',address_update);
+router.use('/chatting',chatting);
+router.use('/matching',matching);
+
 
 module.exports = router;
