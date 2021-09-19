@@ -88,7 +88,6 @@
                 <!--data-->
                 <h3 class="title"><%=id%></h3>
                 <h6><%= userinfo[0].user_location %> | <%= userinfo[0].user_level %> 회원</h6>
-                <!--주소 수정 기능 추가, 수정 필요-->
                 <input type="button" class='gpsAuth' value="현재 위치 업데이트">
               </div>
             </div>
@@ -102,23 +101,41 @@
             <div class="profile-tabs">
               <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#my_post" role="tab" data-toggle="tab">작성한 요청</a>
+                  <a class="nav-link active" href="#my_matching" role="tab" data-toggle="tab">진행 중인 요청</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#my_accept" role="tab" data-toggle="tab">수락한 요청</a>
+                  <a class="nav-link" href="#my_request" role="tab" data-toggle="tab">대기 중인 요청</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#my_score" role="tab" data-toggle="tab">평점 조회</a>
+                  <a class="nav-link" href="#my_cmplt" role="tab" data-toggle="tab">완료된 요청</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
         <div class="tab-content tab-space">
-          <div class="tab-pane active text-center my_info" id="my_post">
+          <div class="tab-pane active text-center my_info" id="my_matching">
             <div class="row">
               <div class="col-md-3 ml-auto"></div>
               <div class="col-md-3 mr-auto">
+                <table>
+                  <% matching.forEach(function (value) { %>
+                  <tr>
+                    <td rowspan="2" class="rcategory"><%= value.category %></td>
+                    <td rowspan="2" class="rmatching"><% if(value.writer_id == id) { %> 부름이<br><b>요청</b> <% } else { %> 부름이<br><b>지원</b> <% } %></td>
+                    <td class="rtitle"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
+                  </tr>
+                  <tr>
+                    <td class="rprice"><%= value.request_price %></td>
+                  </tr>
+                  <% }); %>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane text-center my_info" id="my_request">
+            <div class="row">
+              <div class="col-md-3 ml-auto">
                 <table>
                   <% search.forEach(function (value) { %>
                   <tr>
@@ -133,14 +150,22 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane text-center my_info" id="my_accept">
+          <div class="tab-pane text-center my_info" id="my_cmplt">
             <div class="row">
-              <div class="col-md-3 ml-auto">data2</div>
-            </div>
-          </div>
-          <div class="tab-pane text-center my_info" id="my_score">
-            <div class="row">
-              <div class="col-md-3 ml-auto">data3</div>
+              <div class="col-md-3 ml-auto">
+                <table>
+                  <% matching_cmplt.forEach(function (value) { %>
+                  <tr>
+                    <td rowspan="2" class="rcategory"><%= value.category %></td>
+                    <td rowspan="2" class="rmatching"><% if(value.writer_id == id) { %> 부름이<br><b>요청</b> <% } else { %> 부름이<br><b>지원</b> <% } %></td>
+                    <td class="rtitle"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
+                  </tr>
+                  <tr>
+                    <td class="rprice"><%= value.request_price %></td>
+                  </tr>
+                  <% }); %>
+                </table>
+              </div>
             </div>
           </div>
         </div>

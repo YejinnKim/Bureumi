@@ -12,7 +12,6 @@ body {
     color: #222222;
     text-align: left;
 }
-
 /*모든 container 속성*/
 .container {
     width: 100%;
@@ -28,7 +27,7 @@ body {
 }
 
 .main-raised {
-    margin: -60px 30px 0px;
+    margin: -200px 30px 0px;
     border-radius: 6px;
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
@@ -151,6 +150,7 @@ body {
     transition: all .3s;
     border-radius: 30px;
     padding: 10px 15px;
+    border: 1px solid blue;
 }
 
 .nav-pills .nav-item .nav-link:hover {
@@ -226,37 +226,6 @@ body {
     background-position: top center;
 }
 
-.profile {
-    text-align: center;
-}
-
-.profile img {
-    max-width: 160px;
-    width: 100%;
-    margin: 0 auto;
-    -webkit-transform: translate3d(0, -50%, 0);
-    transform: translate3d(0, -50%, 0);
-}
-
-.profile .name {
-    margin-top: -80px;
-}
-
-.profile .name input {
-    margin-bottom: 20px;
-    padding: 5px;
-}
-
-.my_info {
-    /*margin-top: 3.213rem;*/
-    padding-bottom: 50px;
-}
-
-.my_info img {
-    width: 100%;
-    margin-bottom: 2.142rem;
-}
-
 /*footer*/
 footer {
     padding: 0.9375rem 0;
@@ -269,70 +238,60 @@ footer .copyright {
     padding: 15px 0;
 }
 
-
-#request{
-    width: 350px;
-    margin: 0 auto;
-}
-
-a{
-    color: #222222;
-}
-
-table {
-    margin: 10px auto;
-    border: 1px solid #eaeaea;
-    width: 90%;
-}
-/* #request table td{
-    border: 1px solid #eaeaea;
-  } */
-table tr {
-    height: 40px;
-    border: 1px solid #eaeaea;
-}
-
-.rcategory {
-    border-bottom: 1px solid #eaeaea;
-    background: #3f3d56;
-    text-align: center;
-    font-weight: 500;
-    color: white;
-    width: 20%;
-}
-.rtitle {
-    text-align: right;
-    padding: 15px;
-}
-.rprice {
-    border-bottom: 1px solid #eaeaea;
-    text-align: right;
-    font-weight: bold;
-    padding: 15px;
-}
-.rmatching {
-    width: 25%;
-}
-
-
 /*미디어 쿼리*/
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
     }
-    
 }
-@media (max-width: 500px) {
-    .nav-pills .nav-item .nav-link {
-        line-height: 24px;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 500;
-        max-width: 3.5rem;
-        text-align: center;
-        color: #555;
-        transition: all .3s;
-        border-radius: 30px;
-        padding: 10px 15px;
+
+.chat_menu {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: black;
+    text-align: center;
+}
+.chat_menu tr {
+    height: 40px;
+}
+.chat_menu td {
+    border: 1px solid #eaeaea;
+    width: 50%;
+}
+.chat_menu td a {
+    color: black;
+}
+
+.chat_content {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: black;
+    text-align: center;
+}
+.chat_content tr:nth-child(1) {
+    height: 400px;
+}
+.chat_content td {
+    border: 1px solid #eaeaea;
+}
+.chat_content td:nth-child(1) {
+    width: 85%;
+}
+
+.request_form {
+    width: 100%;
+}
+.request_form h3{
+    width: 320px;
+    margin: 80px auto 0px auto;
+}
+
+@media screen and (max-width : 980px){
+    .request_form{
+        position: relative;
+        margin: -20px auto 0px auto;
+        padding-bottom: 50px;
+        width: 90%;
+        border-radius: 3px;
     }
 }

@@ -12,6 +12,9 @@ body {
     color: #222222;
     text-align: left;
 }
+p {
+    color: black;
+}
 /*모든 container 속성*/
 .container {
     width: 100%;
@@ -250,10 +253,10 @@ footer .copyright {
 
 
 
-  
+
 .request_form {
     width: 100%;
-  }
+}
 .request_form h3{
     width: 320px;
     margin: 80px auto 0px auto;
@@ -275,34 +278,43 @@ footer .copyright {
     margin: 30px auto;
     font-size: 14px;
 }
+.request_content div{
+    text-align: right;
+}
 .request_content table{
     width: 100%;
     border: 1px solid #eaeaea;
     border-radius: 5px;
     box-shadow: black;
+    padding: 10px;
 }
 .request_content table tr{
     height: 20px;
 }
 .request_content table td{
     border-bottom: 1px solid #eaeaea;
+    padding: 7px;
+}
+.request_content table tr:nth-child(1) td {
+    color: black;
+    font-size: 25px;
+    text-align: left;
+    height: 40px;
+}
+.request_content table tr:nth-child(2) td {
+    background-color: #f5f5f5;
+    padding: 5px;
 }
 .request_content table tr:nth-child(3){
     height: 300px;
 }
-.request_content table td:nth-child(1){
-    width: 20%;
+.chat {
+    background-color: #f5f5f5;
+    font-size: 15px;
+}
+.chat div {
+    color: black;
     text-align: center;
-    font-weight: 500;
-    background-color: #282b32;
-    color: white;
-}
-.request_content table td:nth-child(2){
-    padding: 10px;
-    
-}
-.request_content button {
-    padding: 5px 20px;
 }
 .request_icon{
     height: 100px;
