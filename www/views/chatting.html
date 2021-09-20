@@ -14,6 +14,8 @@
 
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
 </head>
   <!--top navbar-->
   <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
@@ -77,6 +79,9 @@
             <div class="container">
                 <div class="request_form">
                     <h3>채팅</h3>
+                    <div>
+                      user id: <input id="nickname" value="<%=id%>"> </input>
+                    </div>
                     <table class="chat_menu">
                     <!-- 진행 중인 요청인지 확인 -->
                     <% if(mvalue) { %>
@@ -97,9 +102,40 @@
                       </tr>
                     </table>
                     <table class="chat_content">
-                      <tr><td colspan="2"></td></tr>
-                      <tr><td><input type="text" placeholder="메시지를 입력하세요." style="width: 90%; text-align: right;"></td><td><button>전송</button></td></tr>
+                      <tr>
+                        <td colspan="2">
+                          <ul id="messages"></ul>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <form action="">
+                            <input id="msg" placeholder="메시지를 입력하세요" autocomplete="off">
+                            <button>전송</button>
+                          </form>
+
+                          <script src="/socket.io/socket.io.js"></script>
+                          <script>
+                            $(function() {
+                              var socket = io();
+
+                              $('form').submit(function(e){
+                                e.preventDefault();
+                                socket.emit('chat message', $('#nickname').val() + ':' + $('#msg').val());
+                                $('#msg').val('');
+                                return false;
+                              });
+
+                              socket.on('chat message', function(msg){
+                                $('#messages').append($('<li>').text(msg));
+                              });
+                            });
+                          </script>
+                        </td>
+                      </tr>
                     </table>
+                    
                 </div>
             </div>
         </div>
