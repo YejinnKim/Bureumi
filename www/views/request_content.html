@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+  <title>부름이 요청 조회</title>
+  
+  <!--css-->
+  <link href="../css/top_navbar.css" rel="stylesheet">
+  <link href="../css/request_content.css" rel="stylesheet">
+  <link href="../css/bottom_navbar.css" rel="stylesheet">
+
+  <!--icon cdn-->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <!--Ajax-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+  <!--top navbar-->
+  <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        <a class="navbar-logo" href="/profile"><img src="../img/bureumi_logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="toggle-icon">토글 네비</span>
+          <!--햄버거 메뉴바-->
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="dropdown nav-item">
+            <a href="index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/search" class="dropdown-item">요청조회</a>
+              <a href="/category/배달" class="dropdown-item">카테고리</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="#" class="dropdown-item">후기조회</a>
+              <a href="/score" class="dropdown-item">후기작성</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
+            <div class="dropdown-menu dropdown-with-icons"> 
+              <a href="/notice" class="dropdown-item">공지사항</a>
+              <a href="#" class="dropdown-item">FAQ</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/profile" class="dropdown-item">프로필 설정</a>
+              <a href="/userinfo" class="dropdown-item">회원정보수정</a>
+              <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="/logout" class="dropdown-toggle2 nav-link">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+    <div class="page-header header-filter" data-parallax="true"></div>
+    <div class="main main-raised">
+        <div class="tab-content tab-space">
+            <div class="container">
+                <div class="request_form">
+                    <div class="request_content">
+                      <div>
+                        <% if(request.writer_id == id) { %>
+                        <button type="button" onclick="location.href='/request/<%= request.request_code %>/update'">수정</button>
+                        <button type="button" onclick="location.href='/request/<%= request.request_code %>/delete'">삭제</button>
+                        <% } %>
+                      </div>
+                      <table>
+                        <tr><td colspan="2"><%= request.request_title %></td></tr>
+                        <tr><td><%= request.writer_id %></td><td><%= request.request_location %></td></tr>
+                        <tr><td colspan="2"><%= request.request_content %></td></tr>
+                        <% if(mvalue) { %>
+                          <tr><td colspan="2" class="chat"><div>
+                            <% if(matching.requester_id != id && matching.bureumi_id != id) { %>
+                              다른 부름이와
+                            <% } %>
+                            <% if(matching.matching_progress == '완료') { %>
+                              완료된
+                            <% } else { %>
+                              진행 중인 
+                            <% } %>
+                            요청입니다.</div></td></tr>
+    
+                            <!-- 부름이 진행 (1) -->
+                            <% if(matching.requester_id == id && matching.matching_progress == '매칭요청') { %>
+                              <tr><td colspan="2"><%= matching.bureumi_id %>님의 부름이 지원 
+                                <button type="button" onclick="location.href='/matching/<%= matching.request_code %>/accept'">수락</button>
+                                <button type="button" onclick="location.href='/matching/<%= matching.request_code %>/accept_refusal'">거부</button></td></tr>
+                            <% } %>
+                            <!-- 부름이 진행 (2) -->
+                            <% if(matching.bureumi_id == id && matching.matching_progress == '진행중') { %>
+                              <tr><td colspan="2"><%= matching.requester_id %>님의 요청
+                                <button type="button" onclick="location.href='/matching/<%= matching.request_code %>/complete_req'">완료</button></td></tr>
+                            <% } %>
+                            <!-- 부름이 진행 (3) -->
+                            <% if(matching.requester_id == id && matching.matching_progress == '완료요청') { %>
+                              <tr><td colspan="2"><%= matching.bureumi_id %>님의 요청 완료
+                                <button type="button" onclick="location.href='/matching/<%= matching.request_code %>/complete'">수락</button></td></tr>
+                            <% } %>
+                            <!-- 부름이 진행 (4), 후기 작성 -->
+                            <% if((matching.requester_id == id || matching.bureumi_id == id) && matching.matching_progress == '완료') { %>
+                              <tr><td colspan="2"><% if(matching.requester_id == id) { %>
+                                  <%= matching.bureumi_id %>
+                                <% } else { %>
+                                  <%= matching.requester_id %>
+                                <% } %>님의 후기
+                                <button type="button" onclick="location.href='#'">작성</button></td></tr>
+                            <% } %>
+                        <% } else { %>
+                        <tr><td colspan="2" class="chat"><a href='/chatting/<%= request.request_code %>'><div>채팅하기</div></a></td></tr>
+                        <% } %>
+                      </table>
+                    </div>
+                    <!-- <div class="request_icon">
+                        <ul>
+                            <li>
+                                <div></div><br>
+                                <p>조회</p>
+                            </li>
+                            <li>
+                                <div></div><br>
+                                <p>채팅</p>
+                            </li>
+                            <li>
+                                <div></div><br>
+                                <p>즐겨찾기</p>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--하단 네비-->
+    <section class="bottom_nav">
+        <div class="item" onclick="location.href='/profile'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item" onclick="location.href='/search'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item" onclick="location.href='/request'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
+            </div>
+        </div>
+    </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="copyright float-center">
+        &copy; 2021 TeamProject_Bureumi
+      </div>
+    </div>
+  </footer>
+  
+    <!--Juery cdn-->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
+    <script src="js/jquery-latest.min.js"></script>
+  
+    <!--Bootstrap cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+    <!--날짜 관련 api cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+  
+    <!-- javascript -->
+    <script src="../js/profile.js" type="text/javascript"></script>
+  </body>
+
+</html>

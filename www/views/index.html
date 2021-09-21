@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+  <title> Bureumi Team Project </title>
+  
+  <!--css-->
+  <link href="css/top_navbar.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+  <link href="css/bottom_navbar.css" rel="stylesheet">
+  
+  <!--icon cdn-->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+  <!--top navbar-->
+  <nav class="navbar fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        <a class="navbar-logo" href="/profile"><img src="img/bureumi_logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="toggle-icon">토글 네비</span>
+          <!--햄버거 메뉴바-->
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="dropdown nav-item">
+            <a href="/index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/search" class="dropdown-item">요청조회</a>
+              <a href="/category/배달" class="dropdown-item">카테고리</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="#" class="dropdown-item">후기조회</a>
+              <a href="/score" class="dropdown-item">후기작성</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
+            <div class="dropdown-menu dropdown-with-icons"> 
+              <a href="/notice" class="dropdown-item">공지사항</a>
+              <a href="#" class="dropdown-item">FAQ</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/profile" class="dropdown-item">프로필 설정</a>
+              <a href="/userinfo" class="dropdown-item">회원정보수정</a>
+              <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="/login" class="dropdown-toggle2 nav-link">로그인</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="/join" class="dropdown-toggle2 nav-link">회원가입</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--content-->
+  <div class="page-header header-filter" data-parallax="true">
+    <p>dd</p>
+  </div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+              <div class="index_img">
+                <img src="img/index_img2_1920.jpg" class="index_img"><br>
+                <p>다양한 기기에서 사용할 수 있어요!</p>
+              </div>
+              <div class="index_img">
+                <img src="img/index_img4_1920.jpg" class="index_img">
+                <p>카테고리로 쉽게 편리하게 검색할 수 있어요!</p>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--하단 네비-->
+  <section class="bottom_nav">
+    <div class="item" onclick="location.href='/profile'">
+        <div class="nav-item">
+            <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
+        </div>
+    </div>
+    <div class="item" onclick="location.href='/search'">
+        <div class="nav-item">
+            <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
+        </div>
+    </div>
+    <div class="item" onclick="location.href='/request'">
+        <div class="nav-item">
+            <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
+        </div>
+    </div>
+    <div class="item">
+        <div class="nav-item">
+            <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
+        </div>
+    </div>
+</section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="copyright float-center">
+        &copy; 2021 TeamProject_Bureumi
+      </div>
+    </div>
+  </footer>
+
+  <!--Juery cdn-->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
+  <script src="js/jquery-latest.min.js"></script>
+
+  <!--Bootstrap cdn-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!--날짜 관련 api cdn-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+  <!-- javascript -->
+  <script src="js/profile.js" type="text/javascript"></script>
+  <script src="js/bottom.js" type="text/javascript"></script>
+  
+</body>
+
+</html>

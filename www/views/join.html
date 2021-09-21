@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부름이 회원가입</title>
+    <link rel="stylesheet" href="css/join.css" type="text/css" media="all" />
+    <script src="js/join.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="container" class="join">
+        <div id="logo">
+            <a href=""><img src="img/bureumi_logo.png" /></a>
+        </div>
+
+        <div class="join_form">
+            <form method="post" action="/join" name="join_form">
+                <div class="title">
+                    <h1>회원가입</h1>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_name">아이디</a>
+                    </div>
+                    <div>
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요" class="input"/>
+                    </div>
+                    <div class="alert">
+                        <div id="alert_userid" class="text_alert"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_name">비밀번호</a>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="input" />
+                    </div>
+                    <div class="alert">
+                        <div id="alert_password" class="text_alert"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_name">비밀번호 확인</a>
+                    </div>
+                    <div>
+                        <input type="password" name="password2" onfocus="" placeholder="비밀번호를 재입력하세요" class="input" />
+                    </div>
+                    <div class="alert">
+                        <div id="alert_password2" class="text_alert"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_name">닉네임</a>
+                    </div>
+                    <div>
+                        <input type="text" name="username" placeholder="닉네임을 입력하세요" class="input"/>
+                    </div>
+                    <div class="alert">
+                        <div id="alert_username" class="text_alert"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_name">생년월일</a>
+                    </div>
+                    <div id="bir">
+                        <div id="bir_yy">
+                            <input type="text" name="datebirth" maxlength="4" placeholder="yyyy(연도 4자)" class="input_yy">
+                        </div>
+                        <div id="bir_mm">
+                            <span>
+                                <select id="mm" class="sel" name="birth_mm">
+                                    <option selected>월</option>
+                                    <option value="01" name="table1">1</option>
+                                    <option value="02" name="table2">2</option>
+                                    <option value="03" name="table3">3</option>
+                                    <option value="04" name="table4">4</option>
+                                    <option value="05" name="table5">5</option>
+                                    <option value="06" name="table6">6</option>
+                                    <option value="07" name="table7">7</option>
+                                    <option value="08" name="table8">8</option>
+                                    <option value="09" name="table9">9</option>                                    
+                                    <option value="10" name="table10">10</option>
+                                    <option value="11" name="table11">11</option>
+                                    <option value="12" name="table12">12</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div id="bir_dd">
+                                <input type="text" name="dd"  maxlength="2" placeholder="dd" class="input_dd">
+                        </div>
+                    </div>
+                    <div class="alert">
+                        <div id="alert_bir" class="text_alert"></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_name">전화번호</a>
+                    </div>
+                    <input type="tel" name="phonenumber" maxlength="16" placeholder="-없이 입력" class="input">
+                    <div class="alert">
+                        <div id="alert_phone" class="text_alert"></div>
+                    </div>
+                    
+                    
+                </div>
+                <!--submit 부분 주의. js 안먹힘-->
+                <div>
+                    <input type="submit" class="join_button" onclick="join()" value="회원가입 하기"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

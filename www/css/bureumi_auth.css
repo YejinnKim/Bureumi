@@ -1,0 +1,341 @@
+*{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+} 
+body {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222222;
+    text-align: left;
+}
+
+/*모든 container 속성*/
+.container {
+    width: 100%;
+    margin: 0px auto;
+    /* padding: 0px 15px; */
+}
+
+/*contentr*/
+.main{
+    background: #ffffff;
+    position: relative;
+    z-index: 3;
+}
+
+.main-raised {
+    margin: -200px 30px 0px;
+    border-radius: 6px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-3, .col-md-6{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    
+}
+
+.nav-link.disabled {
+    color: #6c757d;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #326cff;
+}
+
+.tab-content>.tab-pane {
+    display: none;
+    
+}
+
+.tab-content>.active {
+    display: block;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.fixed-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2000;
+}
+    
+.mr-auto{
+    margin-right: auto !important;
+}
+
+.ml-auto {
+    margin-left: auto !important;
+}
+.text-center {
+    text-align: center !important;
+    width: 100%;
+    
+}
+
+.main > .profile-content > .container > .text-center{
+    width: 70%;
+    margin: 0 auto;
+    background-color:#e5e5e5;
+    border: 1px solid #e5e5e5;
+}
+
+.nav-tabs, .nav-pills {
+    border: 0;
+    border-radius: 3px;
+    padding: 0 15px;
+}
+.nav .nav-item {
+    position: relative;
+}
+
+.img-raised {
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.rounded {
+    border-radius: 6px !important;
+}
+
+.nav-pills .nav-item .nav-link {
+    line-height: 24px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    width: 6rem;
+    text-align: center;
+    color: #555;
+    transition: all .3s;
+    border-radius: 30px;
+    padding: 10px 15px;
+}
+
+.nav-pills .nav-item .nav-link:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+}
+
+.nav-pills .nav-item .nav-link.active {
+    color: #ffffff;
+    background-color: #326cff;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(50, 108, 255, 0.6);
+}
+
+.nav-pills.nav-pills-icons .nav-item .nav-link {
+    border-radius: 4px;
+}
+
+.tab-space {
+    padding: 20px 0 50px 0px;
+}
+
+.page-header {
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+
+.page-header .content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 880px;
+}
+
+.header-filter {
+    position: relative;
+}
+
+.header-filter:before, .header-filter:after {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+}
+
+.header-filter::before {
+    background: #282b32;
+}
+
+.header-filter .container {
+    z-index: 2;
+    position: relative;
+}
+
+.page-header {
+    height: 380px;
+    background-position: top center;
+}
+
+
+/*footer*/
+footer {
+    padding: 0.9375rem 0;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+}
+
+footer .copyright {
+    padding: 15px 0;
+}
+
+
+
+.userinfo{
+    width: 100%;
+}
+.userinfo h3{
+    width: 90%;
+    margin: 0px auto 20px auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.userinfo table{
+    width: 90%;
+    margin: 0 auto;
+    font-size: 13px;
+}
+.userinfo table tr td:nth-child(1){
+    width: 100px;
+    padding-right: 30px;
+    text-align: right;
+    background-color: #3f3d56;
+    color: white;
+}
+.userinfo table tr td:nth-child(2){
+    width: 100px;
+    text-align: left;
+    padding-left: 30px;
+    background-color: #f6f6f6;
+}
+
+.userinfo > div{
+    width: 350px;
+    margin: 20px auto;
+    text-align: center;
+}
+.userinfo > div > input{
+    width: 120px;
+    background-color: #326cff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 5px;
+    cursor: pointer;
+}
+.userinfo > div > input:nth-child(1){
+    background-color: #326cff;
+    color: white;
+}
+.userinfo > div > input:nth-child(2){
+    background-color: #f2f2f2;
+    color: #222222;
+}
+
+.userinfo table{
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+.userinfo table tr td:nth-child(1){
+    width: 70px;
+    padding-right: 30px;
+    text-align: right;
+    background-color: #3f3d56;
+    color: white;
+}
+.userinfo table tr td:nth-child(2){
+    width: 200px;
+    text-align: left;
+    padding-left: 30px;
+    background-color: #f6f6f6;
+}
+
+
+/*미디어 쿼리*/
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+}
+@media (max-width: 500px) {
+    .nav-pills .nav-item .nav-link {
+        line-height: 24px;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 500;
+        max-width: 3.5rem;
+        text-align: center;
+        color: #555;
+        transition: all .3s;
+        border-radius: 30px;
+        padding: 10px 15px;
+    }
+}
+@media (max-width: 500px) {
+    
+}

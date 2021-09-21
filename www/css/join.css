@@ -1,0 +1,160 @@
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: black;
+  }
+
+body {
+    font-family: "맑은 고딕";
+    color: #404040;
+}
+
+input, button {
+    padding:10px;
+}
+
+.join{
+    margin-top: 50px;
+}
+
+.join #logo{
+    text-align: center;
+    padding: 30px;
+}
+
+.join_form{
+    position: relative;
+    margin: 30px auto;
+    padding: 20px 20px 20px;
+    width: 400px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.join_form .title h1{
+    margin: -20px -20px 21px;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    text-shadow: 0 1px white;
+    background: #f3f3f3;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 3px 3px 0 0;
+    background-image: -webkit-linear-gradient(top, whiteffd, #eef2f5);
+    -webkit-box-shadow: 0 1px whitesmoke;
+    box-shadow: 0 1px whitesmoke;
+}
+
+.join_form .input, .join_button{
+    width: 94%;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 3px;
+    border-color: gray;
+}
+
+.join_form .form_name{
+    color: gray;
+}
+
+.join_form .alert{
+    padding-bottom: 10px;
+}
+
+.join_form .text_alert{
+    height: 20px;
+}
+
+.join_form .join_button{
+    width: 100%;
+    height: 44px;
+    background-color: #326cff;
+    border: 1px;
+    border-radius: 3px;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 20px;
+    cursor: pointer;
+}
+#bir input{
+    padding: 0;
+    border-radius: 3px;
+}
+
+ #bir span {
+    display: block;
+    width: 100%;
+    border: solid 1px gray;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+}
+
+.input_yy, .input_dd {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    border: solid 1px gray;
+    background: #fff;
+    font-size: 15px;
+}
+
+#bir {
+    display: table;
+    width: 98%;
+}
+
+#bir_yy {
+    display: table-cell;
+    width: 147px;
+}
+
+#bir_mm {
+    display: table-cell;
+    width: 147px;
+    vertical-align: middle;
+}
+
+#bir_dd {
+    display: table-cell;
+    width: 147px;
+}
+
+#bir_mm, #bir_dd {
+    padding-left: 10px;
+}
+
+select {
+    width: 100%;
+    height: 29px;
+    font-size: 15px;
+    background: #fff no-repeat;
+    background-size: 20px 8px;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+}
+
+
+@media screen and (max-width : 700px){
+    .join_form{
+      position: relative;
+      margin: 30px auto;
+      width: 320px;
+      background: white;
+      border-radius: 3px;
+      box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+
+
