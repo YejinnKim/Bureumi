@@ -43,6 +43,10 @@
     <form  action="/save" method="post" class="mapform">
 
         <input style="width:60%;float:left;text-align:center;display:none;" type='text'  id ="user_address"name="user_address" >
+        <!--9.25추가-->
+        <input style="display:none;" type='text'  id ="addressLatitude"name="addressLatitude" >
+        <input style="display:none;" type='text'  id ="addressLongitude"name="addressLongitude" >
+        <!--        -->
         <div id="map" style="width:100%;height:600px;"></div>
         <p></p>
         <button type="submit" class="address_save">주소 저장하기</button>
@@ -98,28 +102,28 @@
         window.addEventListener('load', function () {
             if (navigator.geolocation) {
 
-                // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-                navigator.geolocation.getCurrentPosition(function (position) {
+                    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var lat = position.coords.latitude, // 위도
+                            lon = position.coords.longitude; // 경도
+                        document.getElementById('addressLatitude').value=lat
+                        document.getElementById('addressLongitude').value=lon 
+                        var locPosition = new kakao.maps.LatLng(lat, lon)//마커표시위치
+                        var coord = new kakao.maps.LatLng(lat, lon);
+                        var callback = function (result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                my_address = result[0].address.address_name
+                                my_address = String(my_address)
+                                document.getElementById('user_address').value = my_address;
+                                message = '<div style="width:330px;text-align:center;padding:3px 0;">  '+result[0].address.address_name+'</div> ';
+                                displayMarker(locPosition, message);
+                            }
+                        };
+                        
+                        geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
-                    var lat = position.coords.latitude, // 위도
-                        lon = position.coords.longitude; // 경도
-                    var locPosition = new kakao.maps.LatLng(lat, lon)//마커표시위치
-                    var coord = new kakao.maps.LatLng(lat, lon);
-                    var callback = function (result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                            my_address = result[0].address.address_name
-                            my_address = String(my_address)
-                            document.getElementById('user_address').value = my_address;
-                            message = '<div style="width:330px;text-align:center;padding:3px 0;">  '+result[0].address.address_name+'</div> ';
-                            displayMarker(locPosition, message);
-                        }
-                    };
-                    
-                    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
-
-                });
-
+            });
             } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
                 var locPosition = new kakao.maps.LatLng(37.50009896024148, 126.86813660662058),

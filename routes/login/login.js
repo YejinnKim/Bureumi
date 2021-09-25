@@ -36,12 +36,6 @@ passport.use('local-login', new LocalStrategy({
         if(rows.length){
             console.log('existed user')
 
-            //
-                req.session.user={
-                    user_id: userid
-                }
-            //
-
             //사용자 정보 세션처리
             req.session.user_info={
                 user_id : userid,
@@ -50,7 +44,11 @@ passport.use('local-login', new LocalStrategy({
                 user_address : rows[0].user_location,
                 user_level : rows[0].user_level,
                 user_name : rows[0].user_name,
-                birth_date : rows[0].date_birth
+                birth_date : rows[0].date_birth,
+                // 9.24 test : 경도 위도 세션처리
+                addressLat : rows[0].latitude,
+                addressLon : rows[0].longitude
+                // 9.24test
             }
             return done(null, {'id' : userid, 'userid' : userid, 'password' : password})
             
