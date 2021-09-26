@@ -9,6 +9,7 @@ const index = require('./index/index');
 const sms = require('./join/sms');
 const join_success = require('./join/join_success');
 const login_success = require('./login/login_success');
+const update_success = require('./profile/update_success')
 const search = require('./search/search');
 const request = require('./request/request');
 const category = require('./category/category');
@@ -43,6 +44,7 @@ router.use('/index', index);
 router.use('/sms',sms);
 router.use('/join_success',join_success);
 router.use('/login_success', login_success);
+router.use('/update_success',update_success)
 router.use('/search', search);
 router.use('/request', request);
 router.use('/request', request_content);

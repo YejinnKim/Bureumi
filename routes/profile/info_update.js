@@ -4,11 +4,12 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var connection = require('../../join/connection');
 const Vonage = require('@vonage/server-sdk');
+const APIKEY = process.env.APIKEY 
+,APISECRET = process.env.APISECRET
 const vonage = new Vonage({
-    apiKey: "984b5f18",
-    apiSecret: "O1S7Mt1ju83oekLQ"
-})
-
+  apiKey: APIKEY,
+  apiSecret: APISECRET
+}) 
 router.post('/', (req, res) => { //개인정보 처리
     var pass = req.body.password
     var pass_check = req.body.password2
@@ -53,11 +54,12 @@ router.post('/', (req, res) => { //개인정보 처리
                             'user_birth': user_birth,
                             'user_name': user_name
                         }
-                        res.redirect('/user_info_sms')
+                        res.redirect('/userinfo_sms')
 
                     }
                     else {
-                        console.log('sorry, try again')
+                        console.log('사용할 수 없는 휴대폰 번호입니다.');
+                        res.send('<script type="text/javascript">alert("사용할 수 없는 휴대폰 번호입니다."); window.history.go(-1)</script>');
                         
                     }
                 }
@@ -70,27 +72,27 @@ router.post('/', (req, res) => { //개인정보 처리
             req.session.user_info.birth_date = user_birth
             req.session.user_info.user_name = user_name
             var user_id = req.session.user_info.user_id
-            var user_password = req.session.user_info.user_password
-            var user_name = req.session.user_info.user_name
-            var birth_date = req.session.user_info.birth_date
+            var user_password = pass
+            var user_name = user_name
+            var birth_date = user_birth
             var sql = 'update user set user_password=?, user_name=?, date_birth=? where user_id=?'
             var data=[user_password,user_name,birth_date,user_id]
 
             connection.query(sql,data,function(err,result)
             {
                 if(err) throw err;
-                  res.redirect('/user_info')
+                console.log('정보 수정 성공')
+                req.logout();
+                req.session.destroy()
+                res.redirect('/update_success');
 
             })
-            //회원정보 수정시 입력한 데이터를 session에 넣어주고 임시 세션 삭제
-                  console.log('정보 수정 성공')
         }
-
     }
     else {
-        console.log('비밀번호를 확인해주세요')
+        console.log('비밀번호 불일치');
+        res.send('<script type="text/javascript">alert("비밀번호가 정확하지 않습니다."); window.history.go(-1)</script>');
     }
-
 })
 
 module.exports = router;
