@@ -46,8 +46,8 @@
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a href="#" class="dropdown-item">후기조회</a>
-              <a href="/score" class="dropdown-item">후기작성</a>
+              <a href="/review_list" class="dropdown-item">후기조회</a>
+              <a href="/review" class="dropdown-item">후기작성</a>
             </div>
           </li>
           <li class="dropdown nav-item">
@@ -87,7 +87,7 @@
               <div class="name">
                 <!--data-->
                 <h3 class="title"><%=id%></h3>
-                <h6><%= userinfo[0].user_location %> | <%= userinfo[0].user_level %> 회원</h6>
+                <h6><%= userinfo[0].user_location %> | <%= userinfo[0].user_level %> 회원 | 평점 <%= userscore %>점</h6>
                 <input type="button" class='gpsAuth' value="현재 위치 업데이트">
               </div>
             </div>

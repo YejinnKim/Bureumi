@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-  <title>부름이 요청 작성</title>
+  <title>부름이 요청 수정</title>
   
   <!--css-->
   <link href="/css/top_navbar.css" rel="stylesheet">
@@ -59,7 +59,7 @@
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/profile" class="dropdown-item">프로필 설정</a>
-              <a href="/pass_check" class="dropdown-item">회원정보수정</a>
+              <a href="/userinfo" class="dropdown-item">회원정보수정</a>
               <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
             </div>
           </li>
@@ -75,24 +75,14 @@
   <div class="main main-raised">
         <div class="tab-content tab-space">
           <div class="request_form">
-              <form method="post" action="/request/data" name="request_form">
+              <form method="post" action="/request/<%= value.request_code %>/update/data" name="request_form">
                   <div class="title">
                       <h1>요청작성</h1>
                   </div>
                   <div>
                     <div>
                       <p>카테고리</p>
-                        <select name="category" id="category_opt">
-                            <option hidden>카테고리를 선택하세요</option>
-                            <option name="배달">배달</option>
-                            <option name="편의점">편의점</option>
-                            <option name="설치/조립">설치/조립</option>
-                            <option name="장보기">장보기</option>
-                            <option name="줄서기">줄서기</option>
-                            <option name="우체국">우체국</option>
-                            <option name="청소">청소</option>
-                            <option name="기타">기타</option>
-                        </select>
+                        <input type="text" class="input" value="<%= value.category %>" readonly/>
                     </div>
                     <div class="alert">
                         <div id="alert_category" class="text_alert"></div>
@@ -102,7 +92,7 @@
                   <div>
                       <div>
                         <p>제목</p>
-                          <input type="text" name="title" placeholder="제목을 입력하세요" class="input"/>
+                          <input type="text" name="title" placeholder="제목을 입력하세요" class="input" value="<%= value.request_title %>"/>
                       </div>
                       <div class="alert">
                           <div id="alert_title" class="text_alert"></div>
@@ -112,7 +102,7 @@
                   <div>
                     <p>가격</p>
                       <div>
-                          <input type="text" name="price" placeholder="가격을 입력하세요" class="input"/>
+                          <input type="text" name="price" placeholder="가격을 입력하세요" class="input" value="<%= value.request_price %>"/>
                       </div>
                       <div class="alert">
                           <div id="alert_price" class="text_alert"></div>
@@ -122,7 +112,7 @@
                   <div>
                     <p>내용</p>
                       <div>
-                          <input type="text" name="content" placeholder="내용을 입력하세요" class="input_content"/>
+                          <input type="text" name="content" placeholder="내용을 입력하세요" class="input_content" value="<%= value.request_content %>"/>
                       </div>
                       <div class="alert">
                           <div id="alert_content" class="text_alert"></div>
@@ -130,7 +120,7 @@
                   </div>
   
                   <div>
-                      <button type="submit" class="request_button">등록</button>
+                      <button type="submit" class="request_button">수정</button>
                   </div>
               </form>
             </div>
