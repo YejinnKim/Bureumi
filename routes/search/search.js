@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
     if(!id) res.render('login');
     
     var sql = 'select * from request order by length(request_code) desc, request_code desc limit 4';
-    
+    // 9.27 메모 : sql 쿼리문은 request내용을 전부 가져와서 거리를 계산한 후 일정 거리 이상은 노출되지 않게 바꿀것 
     connection.query(sql, function(err, result) {
         if (err) throw err;
 
