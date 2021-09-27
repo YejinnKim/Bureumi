@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
         rcode = parseInt(rcode.substr(1)) + 1;
     })
 
-    res.render('request');
+    res.render('request', {value : null});
 });
 
 router.post('/data', function(req, res) {

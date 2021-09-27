@@ -122,7 +122,22 @@
                                 <% } else { %>
                                   <%= matching.requester_id %>
                                 <% } %>님의 후기
-                                <button type="button" onclick="location.href='#'">작성</button></td></tr>
+                                  
+                                <% if(review.length > 0) { %>
+                                  <% review.forEach(function (review) { %>
+                                    <% if(review.review_writer == id) { %>
+                                      <button type="button" onclick="location.href='/review_content/<%= matching.matching_code %>/<%= id %>'">작성완료</button>
+                                    <% } else if(i != 2) { %>
+                                      <button type="button" onclick="location.href='/score/<%= matching.matching_code %>'">작성</button>
+                                    <% } %>
+                                    <% if(review.review_writer != id) { %>
+                                      <button type="button" onclick="location.href='/review_content/<%= matching.matching_code %>/<%= review.review_writer %>'">조회</button>
+                                    <% } %>
+                                  <% }); %>
+                                <% } else { %>
+                                  <button type="button" onclick="location.href='/score/<%= matching.matching_code %>'">작성</button>
+                                <% } %>
+                                </td></tr>
                             <% } %>
                         <% } else { %>
                         <tr><td colspan="2" class="chat"><a href='/chatting/<%= request.request_code %>'><div>채팅하기</div></a></td></tr>

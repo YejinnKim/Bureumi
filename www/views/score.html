@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부름이 요청 조회</title>
+  <title>부름이 후기 작성</title>
 
   <!--css-->
-  <link href="css/top_navbar.css" rel="stylesheet">
-  <link href="css/score.css" rel="stylesheet">
-  <link href="css/bottom_navbar.css" rel="stylesheet">
+  <link href="../css/top_navbar.css" rel="stylesheet">
+  <link href="../css/score.css" rel="stylesheet">
+  <link href="../css/bottom_navbar.css" rel="stylesheet">
   
   <!--icon cdn-->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   
-  <script src="js/inquiry.js" type="text/javascript"></script>
+  <script src="../js/inquiry.js" type="text/javascript"></script>
 </head>
   <body class="profile-page">
     <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
       <div class="container">
         <div class="navbar-translate">
           <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-          <a class="navbar-logo" href="/profile"><img src="img/bureumi_logo.png"></a>
+          <a class="navbar-logo" href="/profile"><img src="../img/bureumi_logo.png"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="toggle-icon">토글 네비</span>
             <!--햄버거 메뉴바-->
@@ -77,11 +77,11 @@
       <div class="profile-content">
           <div class="tab-content tab-space">
             <div class="request_form">
-                <form method="post" action="" name="request_form">
+                <form method="post" action="/score/<%= mcode %>/data" name="request_form">
                     <div class="title">
                         <h1>평점작성</h1>
                     </div>
-        <form name="reviewform" class="reviewform" method="post" action="/save">
+        <form name="reviewform" class="reviewform" method="post" action="/score/<%= mcode %>/data">
             <input type="hidden" name="rate" id="rate" value="0"/>
             <p class="title_star" style="text-align: center;">상대의 점수를 별점으로 남겨주세요.</p>
   
@@ -103,10 +103,10 @@
             </div>
             <div class="review_contents">
                 <div class="warning_msg">내용은 최소 5글자 이상입니다.</div>
-                <textarea rows="10" class="review_textarea"></textarea>
+                <textarea rows="10" class="review_textarea" name="content"></textarea>
             </div>   
             <div class="cmd">
-                <input type="button" name="save" id="save" value="작성">
+                <button type="submit">작성</button>
             </div>
         </form>
         </form>
@@ -159,8 +159,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   
     <!-- javascript -->
-    <script src="js/profile.js" type="text/javascript"></script>
-    <script src="js/score.js" type="text/javascript"></script>
+    <script src="../js/profile.js" type="text/javascript"></script>
+    <script src="../js/score.js" type="text/javascript"></script>
   </body>
 
 </html>
