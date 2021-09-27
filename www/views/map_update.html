@@ -39,13 +39,17 @@
       <a href=""><img src="img/bureumi_logo.png" /></a>
     </div>
 
-
+<!--style="display:none;"-->
 
 <body>
     <form  action="/save/save_update" method="post" class="mapform">
         
 
-        <input style="width:60%;float:left;text-align:center; display:none;" type='text'  id ="user_address"name="user_address" >   
+        <input style="width:60%;float:left;text-align:center;display:none;" type='text'  id ="user_address"name="user_address" >
+        <!--9.24 추가-->
+        <input style="display:none;" type='text'  id ="addressLatitude"name="addressLatitude" >
+        <input style="display:none;" type='text'  id ="addressLongitude"name="addressLongitude" >
+        <!--       -->
         <div id="map" style="width:100%;height:600px;"></div>
         <p></p>
         <button type="submit" class="address_save" name="address_name">주소 저장하기</button>
@@ -102,6 +106,8 @@
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var lat = position.coords.latitude, // 위도
                         lon = position.coords.longitude; // 경도
+                    document.getElementById('addressLatitude').value=lat
+                    document.getElementById('addressLongitude').value=lon 
                     var locPosition = new kakao.maps.LatLng(lat, lon)//마커표시위치
                     var coord = new kakao.maps.LatLng(lat, lon);
                     var callback = function (result, status) {
