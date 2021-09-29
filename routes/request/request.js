@@ -11,11 +11,11 @@ var rcode;
 router.get('/', function (req, res) {
     try { // 9.25 사용자가 로그인을 하지 않았을때 login으로 넘겨버림 - 임시조치
         const user_id = req.session.user_info.user_id; 
-     }
-     catch (e) {
+    }
+    catch (e) {
         res.redirect('/login')
         
-     }
+    }
     
 
     
