@@ -19,60 +19,61 @@
 </head>
 
   <body>
-    <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-      <div class="container">
-        <div class="navbar-translate">
-          <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-          <a class="navbar-logo" href="profile"><img src="../img/bureumi_logo.png"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="toggle-icon">토글 네비</span>
-            <!--햄버거 메뉴바-->
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="dropdown nav-item">
-              <a href="index" class="dropdown-toggle2 nav-link">부름이 소개</a>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/search" class="dropdown-item">요청조회</a>
-                <a href="/category/배달" class="dropdown-item">카테고리</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="#" class="dropdown-item">후기조회</a>
-                <a href="/score" class="dropdown-item">후기작성</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
-              <div class="dropdown-menu dropdown-with-icons"> 
-                <a href="/notice" class="dropdown-item">공지사항</a>
-                <a href="#" class="dropdown-item">FAQ</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/profile" class="dropdown-item">프로필 설정</a>
-                <a href="/pass_check" class="dropdown-item">회원정보수정</a>
-                <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="/logout" class="dropdown-toggle2 nav-link">로그아웃</a>
-            </li>
-          </ul>
-        </div>
+    <!--top navbar-->
+  <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        <a class="navbar-logo" href="profile"><img src="img/bureumi_logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="toggle-icon">토글 네비</span>
+          <!--햄버거 메뉴바-->
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-    </nav>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="dropdown nav-item">
+            <a href="/index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/search" class="dropdown-item">요청조회</a>
+              <a href="/category/배달" class="dropdown-item">카테고리</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/review_list" class="dropdown-item">후기조회</a>
+              <a href="/review" class="dropdown-item">후기작성</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
+            <div class="dropdown-menu dropdown-with-icons"> 
+              <a href="/notice" class="dropdown-item">공지사항</a>
+              <a href="/faq" class="dropdown-item">FAQ</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/profile" class="dropdown-item">프로필 설정</a>
+              <a href="/pass_check" class="dropdown-item">회원정보수정</a>
+              <a href="" class="dropdown-item">부름이인증</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="/logout" class="dropdown-toggle2 nav-link">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     
     <div class="page-header header-filter" data-parallax="true"></div>
     <div class="main main-raised">
@@ -80,16 +81,13 @@
           <div class="tab-content tab-space">
             <div class="inquiry_form">
               <div id=""></div>
-        
-            <div id="request">
-              <h3>공지사항</h3>
-              <div id="request_box"></div>
-              <form action="/search">
+            <div class="notice">
+              <h2>공지사항</h2>
               <table>
                 <% notice.forEach(function (value) { %>
                 <tr>
-                  <td class="category"><%= value.notice_code %></td>
-                  <td class="title"><a href="/notice/<%= value.notice_code %>" ><%= value.notice_title %></a></td>
+                  <td><%= (value.notice_code).substr(1) %></td>
+                  <td><a href="/notice/<%= value.notice_code %>" ><%= value.notice_title %></a></td=>
                 </tr>
                 <% }); %>
               </table>
