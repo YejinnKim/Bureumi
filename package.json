@@ -46,7 +46,7 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "gps-distance": "0.0.4",
+    "haversine": "^1.1.1",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
