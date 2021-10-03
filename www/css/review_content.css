@@ -252,7 +252,9 @@ footer .copyright {
 
 
 
-
+a {
+    color: black;
+}
 
 .request_form {
     width: 100%;
@@ -283,25 +285,37 @@ footer .copyright {
     color: black;
     font-size: 25px;
     text-align: left;
-    height: 40px;
 }
 .request_content table tr:nth-child(2) td {
     padding: 5px;
-    height: 100px;
-    font-size: 50px;
+    font-size: 18px;
+    margin-top: 3px;
+    display: inline-flex;
 }
-.request_content table tr:nth-child(3){
+.request_content table tr:nth-child(2) td a{
+    color: black;
+    display: flex;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.request_content table tr:nth-child(2) td div {
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 15px;
+    display: flex;
+}
+.request_content table tr:nth-child(4){
     height: 200px;
 }
 
 .star {
-    width: 86%;
+    width: 75%;
     text-align: center;
     margin: 0 auto;
 }
 .star img {
     background-color: #326cff;
-    width: 60px;
+    width: 50px;
     margin: -3px;
 }
 
