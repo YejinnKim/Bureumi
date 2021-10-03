@@ -22,7 +22,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="profile"><img src="img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
           <!--햄버거 메뉴바-->
@@ -62,7 +62,7 @@
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/profile" class="dropdown-item">프로필 설정</a>
               <a href="/pass_check" class="dropdown-item">회원정보수정</a>
-              <a href="" class="dropdown-item">부름이인증</a>
+              <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
             </div>
           </li>
           <li class="dropdown nav-item">
@@ -83,7 +83,7 @@
                 <h3>리뷰 작성</h3>
                 <table>
                   <% if(value.length == 0) { %>
-                    <tr><td class="rmatching">작성할 리뷰가 없습니다.</td></tr>
+                    <tr style="height: 200px;"><td class="rmatching">작성할 리뷰가 없습니다.</td></tr>
                   <% } %>
                   <% value.forEach(function (value) { %>
                   <tr>

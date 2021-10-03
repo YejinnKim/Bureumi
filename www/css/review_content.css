@@ -252,26 +252,12 @@ footer .copyright {
 
 
 
-
+a {
+    color: black;
+}
 
 .request_form {
     width: 100%;
-}
-.request_form h3{
-    width: 320px;
-    margin: 80px auto 0px auto;
-}
-#category{
-    margin-top: -40px;
-    margin-right: 30px;
-    float: right;
-    width: 50px; height: 50px;
-    background-image: url(../img/category-icon1_80.png);
-    background-size: 90%;
-    background-color: #f5f5f5;
-    border-radius: 50px;
-    background-position: center;
-    cursor: pointer;
 }
 .request_content{
     width: 380px;
@@ -299,46 +285,38 @@ footer .copyright {
     color: black;
     font-size: 25px;
     text-align: left;
-    height: 40px;
 }
 .request_content table tr:nth-child(2) td {
     padding: 5px;
-    height: 100px;
-    font-size: 50px;
+    font-size: 18px;
+    margin-top: 3px;
+    display: inline-flex;
 }
-.request_content table tr:nth-child(3){
+.request_content table tr:nth-child(2) td a{
+    color: black;
+    display: flex;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.request_content table tr:nth-child(2) td div {
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 15px;
+    display: flex;
+}
+.request_content table tr:nth-child(4){
     height: 200px;
 }
-.chat {
-    background-color: #f5f5f5;
-    font-size: 15px;
-}
-.chat div {
-    color: black;
+
+.star {
+    width: 75%;
     text-align: center;
-}
-.request_icon{
-    height: 100px;
-}
-.request_icon ul{
-    width: 220px;
     margin: 0 auto;
 }
-.request_icon ul li{
-    list-style: none;
-    float: left;
-    text-align: center;
-}
-.request_icon ul li div{
-    width: 40px; height: 40px;
-    background-image: url(../img);
-    background-size: 90%;
-    background-color: #f5f5f5;
-    border-radius: 50px;
-    background-position: center;
-    cursor: pointer;
-    margin: 0px 10px;
-
+.star img {
+    background-color: #326cff;
+    width: 50px;
+    margin: -3px;
 }
 
 @media screen and (max-width : 980px){

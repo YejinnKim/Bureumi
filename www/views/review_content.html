@@ -22,7 +22,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="profile"><img src="img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
           <!--햄버거 메뉴바-->
@@ -62,7 +62,7 @@
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/profile" class="dropdown-item">프로필 설정</a>
               <a href="/pass_check" class="dropdown-item">회원정보수정</a>
-              <a href="" class="dropdown-item">부름이인증</a>
+              <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
             </div>
           </li>
           <li class="dropdown nav-item">
@@ -80,8 +80,21 @@
                 <div class="request_form">
                     <div class="request_content">
                       <table>
-                        <tr><td><%= value.review_writer %>님이 작성하신 후기</td></tr>
-                        <tr><td><%= value.review_score %>점</td></tr>
+                        <tr><td><a href="/request/<%= request.request_code %>"><%= request.request_title %></a></td></tr>
+                        <tr><td>
+                          <% if(value.review_writer==id) { %> 내가 작성
+                          <% } else { %> <a href="/profile/<%= value.review_writer %>"><img src="/img/logo.png" width="25"/></a>
+                          <%= value.review_writer %>가 작성<% } %>한 후기 
+                          <div><% if(request.writer_id==id) { %> [부름이 요청]<% } else { %> [부름이 지원] <% } %></div>
+                        </td></tr>
+                        <tr><td><div class="star">
+                          <% for(var i=0; i<value.review_score; i++) { %>
+                            <img src="/img/starrate.png">
+                          <% } %>
+                          <% for(var i=0; i<5-value.review_score; i++) { %>
+                            <img src="/img/starrate.png" style="background-color: #f0f0f0;">
+                          <% } %>
+                        </div></td></tr>
                         <tr><td><%= value.review_content %></td></tr>
                       </table>
                     </div>
