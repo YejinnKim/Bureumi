@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-  <title> Bureumi Team Project </title>
+  <title>부름이 회원 조회</title>
   
   <!--css-->
-  <link href="css/top_navbar.css" rel="stylesheet">
-  <link href="css/profile.css" rel="stylesheet">
-  <link href="css/bottom_navbar.css" rel="stylesheet">
+  <link href="/css/top_navbar.css" rel="stylesheet">
+  <link href="/css/profile.css" rel="stylesheet">
+  <link href="/css/bottom_navbar.css" rel="stylesheet">
   <script>
   </script>
   <!--icon cdn-->
@@ -82,13 +82,12 @@
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="avatar">
-                <img src="img/logo2.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                <img src="/img/logo2.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
               </div>
               <div class="name">
                 <!--data-->
                 <h3 class="title"><%=id%></h3>
                 <h6><%= userinfo[0].user_location %> | <%= userinfo[0].user_level %> 회원 | 평점 <%= userscore %>점</h6>
-                <input type="button" class='gpsAuth' value="현재 위치 업데이트">
               </div>
             </div>
           </div>
@@ -213,7 +212,7 @@
   <!--Juery cdn-->
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
-  <script src="js/jquery-latest.min.js"></script>
+  <script src="/js/jquery-latest.min.js"></script>
 
   <!--Bootstrap cdn-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -224,8 +223,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
   <!-- javascript -->
-  <script src="js/profile.js" type="text/javascript"></script>
-  <script src="js/bottom.js" type="text/javascript"></script>
+  <script src="/js/profile.js" type="text/javascript"></script>
+  <script src="/js/bottom.js" type="text/javascript"></script>
   
 </body>
 

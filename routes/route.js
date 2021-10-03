@@ -30,6 +30,12 @@ const notice_content = require('./notice/notice_content');
 const address_update = require('./join/address_update.js');
 const chatting = require('./chatting/chatting.js');
 const matching = require('./matching/matching.js');
+const review = require('./review/review.js');
+const review_list = require('./review/review_list.js');
+const review_content = require('./review/review_content.js');
+const faq = require('./faq/faq');
+const faq_content = require('./faq/faq_content');
+const faq_question = require('./faq/faq_question');
 
 //url 라우팅
 router.get('/', function(req, res){
@@ -67,6 +73,11 @@ router.use('/address_join',address_join); */
 router.use('/address_update',address_update);
 router.use('/chatting',chatting);
 router.use('/matching',matching);
-
+router.use('/review',review);
+router.use('/review_list',review_list);
+router.use('/review_content',review_content);
+router.use('/faq', faq);
+router.use('/faq', faq_content);
+router.use('/faq', faq_question);
 
 module.exports = router;

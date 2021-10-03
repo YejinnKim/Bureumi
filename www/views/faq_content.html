@@ -2,16 +2,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-  <title>부름이 요청 조회</title>
+  <title>부름이 FAQ</title>
   
   <!--css-->
-  <link href="../css/top_navbar.css" rel="stylesheet">
-  <link href="../css/category.css" rel="stylesheet">
-  <link href="../css/bottom_navbar.css" rel="stylesheet">
+  <link href="/css/top_navbar.css" rel="stylesheet">
+  <link href="/css/notice_content.css" rel="stylesheet">
+  <link href="/css/bottom_navbar.css" rel="stylesheet">
 
   <!--icon cdn-->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-  
+
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -73,71 +73,50 @@
     </div>
   </nav>
     
-  <div class="page-header header-filter" data-parallax="true"></div>
-  <div class="main main-raised">
+    <div class="page-header header-filter" data-parallax="true"></div>
+    <div class="main main-raised">
         <div class="tab-content tab-space">
             <div class="container">
-                <div class="inquiry_form">
-                    <h3>카테고리</h3>
-                    <div id="category">
-                        <select id="category_opt">
-                            <option name="배달">배달</option>
-                            <option name="편의점">편의점</option>
-                            <option name="설치조립">설치조립</option>
-                            <option name="장보기">장보기</option>
-                            <option name="줄서기">줄서기</option>
-                            <option name="우체국">우체국</option>
-                            <option name="청소">청소</option>
-                            <option>기타</option>
-                        </select>
-                    </div>
-                    
-
-                    <div id="request">
+                <div class="request_form">
+                    <div class="request_content">
+                      <h2>FAQ</h2>
                       <table>
-                        <% search.forEach(function (value) { %>
-                        <tr>
-                          <td class="category" rowspan="2"><%= value.category %></td>
-                          <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                        </tr>
-                        
-                        
-                        <tr>
-                          <td class="price"><%= value.request_price %></td>
-                        </tr>
-                        <% }); %>
+                        <tr><td>Q. <%= value.question %></td></tr>
+                        <tr><td><% if(value.answer == null) { %>
+                          아직 답변되지 않았습니다.
+                        <% } else { %>
+                          A. <%= value.answer %>
+                        <% } %></td></tr>
                       </table>
                     </div>
-        
                 </div>
             </div>
-          </div>
-      </div>
+        </div>
     </div>
 
     <!--하단 네비-->
     <section class="bottom_nav">
-      <div class="item" onclick="location.href='/profile'">
-          <div class="nav-item">
-              <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
-          </div>
-      </div>
-      <div class="item" onclick="location.href='/search'">
-          <div class="nav-item">
-              <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
-          </div>
-      </div>
-      <div class="item" onclick="location.href='/request'">
-          <div class="nav-item">
-              <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
-          </div>
-      </div>
-      <div class="item">
-          <div class="nav-item">
-              <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
-          </div>
-      </div>
-  </section>
+        <div class="item" onclick="location.href='/profile'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item" onclick="location.href='/search'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item" onclick="location.href='/request'">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
+            </div>
+        </div>
+        <div class="item">
+            <div class="nav-item">
+                <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
+            </div>
+        </div>
+    </section>
 
   <footer class="footer">
     <div class="container">
@@ -161,9 +140,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   
     <!-- javascript -->
-    <script src="../js/category.js" type="text/javascript"></script>
-    <script src="../js/profile.js" type="text/javascript"></script>
-    <script src="../js/bottom.js" type="text/javascript"></script>
+    <script src="/js/profile.js" type="text/javascript"></script>
   </body>
 
 </html>

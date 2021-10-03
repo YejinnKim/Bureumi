@@ -4,84 +4,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부름이 요청 조회</title>
+  <title>부름이 후기 작성</title>
 
   <!--css-->
-  <link href="css/top_navbar.css" rel="stylesheet">
-  <link href="css/score.css" rel="stylesheet">
-  <link href="css/bottom_navbar.css" rel="stylesheet">
+  <link href="../css/top_navbar.css" rel="stylesheet">
+  <link href="../css/score.css" rel="stylesheet">
+  <link href="../css/bottom_navbar.css" rel="stylesheet">
   
   <!--icon cdn-->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   
-  <script src="js/inquiry.js" type="text/javascript"></script>
+  <script src="../js/inquiry.js" type="text/javascript"></script>
 </head>
   <body class="profile-page">
-    <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-      <div class="container">
-        <div class="navbar-translate">
-          <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-          <a class="navbar-logo" href="/profile"><img src="img/bureumi_logo.png"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="toggle-icon">토글 네비</span>
-            <!--햄버거 메뉴바-->
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="dropdown nav-item">
-              <a href="index" class="dropdown-toggle2 nav-link">부름이 소개</a>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/search" class="dropdown-item">요청조회</a>
-                <a href="/category/배달" class="dropdown-item">카테고리</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="#" class="dropdown-item">후기조회</a>
-                <a href="/score" class="dropdown-item">후기작성</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
-              <div class="dropdown-menu dropdown-with-icons"> 
-                <a href="/notice" class="dropdown-item">공지사항</a>
-                <a href="#" class="dropdown-item">FAQ</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/profile" class="dropdown-item">프로필 설정</a>
-                <a href="/pass_check" class="dropdown-item">회원정보수정</a>
-                <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
-              </div>
-            </li>
-            <li class="dropdown nav-item">
-              <a href="/logout" class="dropdown-toggle2 nav-link">로그아웃</a>
-            </li>
-          </ul>
-        </div>
+    <!--top navbar-->
+  <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        <a class="navbar-logo" href="profile"><img src="img/bureumi_logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="toggle-icon">토글 네비</span>
+          <!--햄버거 메뉴바-->
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-    </nav>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="dropdown nav-item">
+            <a href="/index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/search" class="dropdown-item">요청조회</a>
+              <a href="/category/배달" class="dropdown-item">카테고리</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/review_list" class="dropdown-item">후기조회</a>
+              <a href="/review" class="dropdown-item">후기작성</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
+            <div class="dropdown-menu dropdown-with-icons"> 
+              <a href="/notice" class="dropdown-item">공지사항</a>
+              <a href="/faq" class="dropdown-item">FAQ</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="/profile" class="dropdown-item">프로필 설정</a>
+              <a href="/pass_check" class="dropdown-item">회원정보수정</a>
+              <a href="" class="dropdown-item">부름이인증</a>
+            </div>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="/logout" class="dropdown-toggle2 nav-link">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     
     <div class="page-header header-filter" data-parallax="true"></div>
     <div class="main main-raised">
       <div class="profile-content">
           <div class="tab-content tab-space">
             <div class="request_form">
-                <form method="post" action="" name="request_form">
+                <form method="post" action="/score/<%= mcode %>/data" name="request_form">
                     <div class="title">
                         <h1>평점작성</h1>
                     </div>
-        <form name="reviewform" class="reviewform" method="post" action="/save">
+        <form name="reviewform" class="reviewform" method="post" action="/score/<%= mcode %>/data">
             <input type="hidden" name="rate" id="rate" value="0"/>
             <p class="title_star" style="text-align: center;">상대의 점수를 별점으로 남겨주세요.</p>
   
@@ -103,10 +104,10 @@
             </div>
             <div class="review_contents">
                 <div class="warning_msg">내용은 최소 5글자 이상입니다.</div>
-                <textarea rows="10" class="review_textarea"></textarea>
+                <textarea rows="10" class="review_textarea" name="content"></textarea>
             </div>   
             <div class="cmd">
-                <input type="button" name="save" id="save" value="작성">
+                <button type="submit">작성</button>
             </div>
         </form>
         </form>
@@ -159,8 +160,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   
     <!-- javascript -->
-    <script src="js/profile.js" type="text/javascript"></script>
-    <script src="js/score.js" type="text/javascript"></script>
+    <script src="../js/profile.js" type="text/javascript"></script>
+    <script src="../js/score.js" type="text/javascript"></script>
   </body>
 
 </html>

@@ -2,12 +2,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-  <title>부름이 요청 조회</title>
+  <title>부름이 요청 수정</title>
   
   <!--css-->
-  <link href="../css/top_navbar.css" rel="stylesheet">
-  <link href="../css/category.css" rel="stylesheet">
-  <link href="../css/bottom_navbar.css" rel="stylesheet">
+  <link href="/css/top_navbar.css" rel="stylesheet">
+  <link href="/css/request.css" rel="stylesheet">
+  <link href="/css/bottom_navbar.css" rel="stylesheet">
 
   <!--icon cdn-->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -76,45 +76,59 @@
   <div class="page-header header-filter" data-parallax="true"></div>
   <div class="main main-raised">
         <div class="tab-content tab-space">
-            <div class="container">
-                <div class="inquiry_form">
-                    <h3>카테고리</h3>
-                    <div id="category">
-                        <select id="category_opt">
-                            <option name="배달">배달</option>
-                            <option name="편의점">편의점</option>
-                            <option name="설치조립">설치조립</option>
-                            <option name="장보기">장보기</option>
-                            <option name="줄서기">줄서기</option>
-                            <option name="우체국">우체국</option>
-                            <option name="청소">청소</option>
-                            <option>기타</option>
-                        </select>
+          <div class="request_form">
+              <form method="post" action="/request/<%= value.request_code %>/update/data" name="request_form">
+                  <div class="title">
+                      <h1>요청작성</h1>
+                  </div>
+                  <div>
+                    <div>
+                      <p>카테고리</p>
+                        <input type="text" class="input" value="<%= value.category %>" readonly/>
                     </div>
-                    
-
-                    <div id="request">
-                      <table>
-                        <% search.forEach(function (value) { %>
-                        <tr>
-                          <td class="category" rowspan="2"><%= value.category %></td>
-                          <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                        </tr>
-                        
-                        
-                        <tr>
-                          <td class="price"><%= value.request_price %></td>
-                        </tr>
-                        <% }); %>
-                      </table>
+                    <div class="alert">
+                        <div id="alert_category" class="text_alert"></div>
                     </div>
-        
-                </div>
+                  </div>
+  
+                  <div>
+                      <div>
+                        <p>제목</p>
+                          <input type="text" name="title" placeholder="제목을 입력하세요" class="input" value="<%= value.request_title %>"/>
+                      </div>
+                      <div class="alert">
+                          <div id="alert_title" class="text_alert"></div>
+                      </div>
+                  </div>
+  
+                  <div>
+                    <p>가격</p>
+                      <div>
+                          <input type="text" name="price" placeholder="가격을 입력하세요" class="input" value="<%= value.request_price %>"/>
+                      </div>
+                      <div class="alert">
+                          <div id="alert_price" class="text_alert"></div>
+                      </div>
+                  </div>
+  
+                  <div>
+                    <p>내용</p>
+                      <div>
+                          <input type="text" name="content" placeholder="내용을 입력하세요" class="input_content" value="<%= value.request_content %>"/>
+                      </div>
+                      <div class="alert">
+                          <div id="alert_content" class="text_alert"></div>
+                      </div>
+                  </div>
+  
+                  <div>
+                      <button type="submit" class="request_button">수정</button>
+                  </div>
+              </form>
             </div>
           </div>
       </div>
     </div>
-
     <!--하단 네비-->
     <section class="bottom_nav">
       <div class="item" onclick="location.href='/profile'">
@@ -150,7 +164,7 @@
     <!--Juery cdn-->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
-    <script src="js/jquery-latest.min.js"></script>
+    <script src="/js/jquery-latest.min.js"></script>
   
     <!--Bootstrap cdn-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -161,9 +175,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   
     <!-- javascript -->
-    <script src="../js/category.js" type="text/javascript"></script>
-    <script src="../js/profile.js" type="text/javascript"></script>
-    <script src="../js/bottom.js" type="text/javascript"></script>
+    <script src="/js/profile.js" type="text/javascript"></script>
+    <script src="/js/request.js" type="text/javascript"></script>
   </body>
 
 </html>
