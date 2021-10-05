@@ -97,7 +97,6 @@ passport.use('local-join', new LocalStrategy({
                         return done(null, false, { message: 'your userid is already used' })
                     }
                     else {       
-                         //console.log(sql)
                             req.session.user ={
                                 user_id: userid,
                                 user_password: password,

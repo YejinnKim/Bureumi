@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var connection = require('../connection');
-const haversine = require('haversine'); // 9.27 gps-distance 모듈에서 변경
+const haversine = require('haversine');
 
 router.get('/', function (req, res) {
     var id = req.user;
@@ -10,16 +10,9 @@ router.get('/', function (req, res) {
     var data = [req.session.user_info.user_id]
     var sql = 'select * from request where not writer_id = ? order by length(request_code) desc';
 
-    let flag = req.query.data;
-    if (flag === undefined) flag = true;
-
     connection.query(sql, data, function (err, result) {
         if (err) throw err;
         var count = 0;
-        /*                      test 9.25 
-             req.session.user_info에 저장된 로그인한 사용자의 경도와 위도와 request테이블에서 불러온 요청글에 저장된 경도와 위도를 비교하여 
-             비교값이 작은 순으로 재배열 한 후 render해줌(DB결과값인 result를 sorted_by_gps_result라는 변수로 복사하여 사용)
-        */
         const start = {
             latitude: req.session.user_info.addressLat,
             longitude: req.session.user_info.addressLon
@@ -27,7 +20,7 @@ router.get('/', function (req, res) {
 
         var sorted_by_gps_result = [];
         var end = [];
-        for (var n = 0; n < result.length; n++) // sorted_by_gps_result에 distance라는 변수를 추가하고 유저와의 거리를 저장
+        for (var n = 0; n < result.length; n++) 
         {
             end[n] = {
                 latitude: result[n].latitude,
@@ -36,7 +29,7 @@ router.get('/', function (req, res) {
 
             result[n].distance = haversine(start, end[n])
 
-            if (result[n].distance < 6) // 거리 설정 가능
+            if (result[n].distance < 5) // 거리 설정
             {
                 sorted_by_gps_result[count] = result[n]
                 count++;
@@ -67,22 +60,11 @@ router.get('/', function (req, res) {
 
         }
 
-        console.log(sorted_all);
         res.render('search', {
             search: sorted_by_gps_result,
-            list: sorted_all,
-            flag: flag
+            list: sorted_all
         });
-
-
-
-        //-------------------
-
     });
-
-
-
-
 });
 
 module.exports = router;

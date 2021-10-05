@@ -7,7 +7,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 var passport = require('passport')
 var session=require('express-session');
 var connection = require('../../join/connection');
-//
 const Vonage = require('@vonage/server-sdk')
 
 const APIKEY = process.env.APIKEY 
@@ -16,8 +15,6 @@ const vonage = new Vonage({
   apiKey: APIKEY,
   apiSecret: APISECRET
 }) 
-
-//
 
 router.get('/',(req,res)=>{
   console.log(req.session.user)
@@ -34,7 +31,6 @@ router.post('/verify',(req,res) =>{
         } else {
           console.log(result);
           if(result.status == 0){
-              //user_info 세션에 업데이트된 update_user_info 데이터를 덮어씀
             var user_id = req.session.user_info.user_id
             var user_password = req.session.update_user_info.password
             var user_name = req.session.update_user_info.user_name
@@ -50,8 +46,6 @@ router.post('/verify',(req,res) =>{
                 req.logout();
                 req.session.destroy()
                 res.redirect('/update_success');
-                
-
             }) 
           }
           else{
