@@ -18,7 +18,7 @@ const logout = require('./login/logout');
 const profile = require('./profile/profile');
 const map =require('./join/gps');
 const location_save =require('./join/save');
-const pass_check = require('./profile/password_check'); // 개인정보 수정시 비밀번호 체크
+const pass_check = require('./profile/password_check'); 
 const userinfo = require('./profile/info');
 const userinfo_update = require('./profile/info_update');
 const userinfo_sms = require('./profile/infro_sms');
@@ -36,7 +36,7 @@ const review_content = require('./review/review_content.js');
 const faq = require('./faq/faq');
 const faq_content = require('./faq/faq_content');
 const faq_question = require('./faq/faq_question');
-
+const search_list = require('./search/search_list');
 //url 라우팅
 router.get('/', function(req, res){
     // console.log('indexjs / path loaded')
@@ -79,5 +79,6 @@ router.use('/review_content',review_content);
 router.use('/faq', faq);
 router.use('/faq', faq_content);
 router.use('/faq', faq_question);
+router.use('/search_list',search_list);
 
 module.exports = router;

@@ -76,11 +76,14 @@
   </nav>
     
     <div class="page-header header-filter" data-parallax="true"></div>
-    <div class="search">
-      <div class="search-box">
-      <input type="text" placeholder="키워드를 입력하세요">
+    <form id="search_box" action="/search_list" method="get"> 
+      <div class="search">
+        <div class="search-box">
+        <input type="text" name="search_box" placeholder="제목을 입력하세요" >
+        <button>검색</button><!--스타일 필요-->
+        </div>
       </div>
-    </div>
+     </form>
     <div class="main main-raised">
         <div class="container">
           <div class="tab-content tab-space">
@@ -137,8 +140,7 @@
 
             <div id="request">
               <h3>실시간요청</h3>
-              <!-- 위치 기반 조회, 기능 미구현 -->
-              <!-- <div class="row">
+               <div class="row">
                 <div class="col-md-6 ml-auto mr-auto">
                   <div class="profile-tabs">
                     <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
@@ -155,7 +157,6 @@
               <script type="text/javascript"></script>
               <script>
 
-                
               </script>
               <form>
               <table id = "table1">
@@ -169,6 +170,8 @@
                 </tr>
                 <% }); %> 
               </table>
+              </form>
+              <form>
               <table id="table2">
                 <% list.forEach(function (value) { %>
                 <tr>
