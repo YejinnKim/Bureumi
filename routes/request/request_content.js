@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var connection = require('../connection');
 
 router.get('/:request_code', function (req, res) {
@@ -8,9 +9,11 @@ router.get('/:request_code', function (req, res) {
     var mvalue = null;
     var matching;
     var request;
+    var img;
     var sql1 = 'select * from matching where request_code = ?';
     var sql2 = 'select * from request where request_code = ?';
     var sql3 = 'select * from review where matching_code in (select matching_code from matching where request_code = ?)';
+    var sql4 = 'select image from user where user_id in (select writer_id from request where request_code = ?)';
 
     connection.query(sql1, rcode, function(err, result) {
         if (err) throw err;
@@ -21,10 +24,14 @@ router.get('/:request_code', function (req, res) {
         if (err) throw err;
         request = result;
     });
+    connection.query(sql4, rcode, function(err, result) {
+        if (err) throw err;
+        img = result;
+    });
     connection.query(sql3, rcode, function(err, result) {
         if (err) throw err;
         var i = result.length;
-        res.render('request_content', {'id' : id, review : result, request : request[0], matching : matching[0], mvalue : mvalue, i : i});
+        res.render('request_content', {'id' : id, review : result, request : request[0], matching : matching[0], mvalue : mvalue, i : i, img : img[0].image, moment : moment});
     });
 });
 

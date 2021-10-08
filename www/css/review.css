@@ -275,10 +275,6 @@ footer .copyright {
     margin: 0 auto;
 }
 
-a{
-    color: #222222;
-}
-
 h3 {
     margin : 10px auto;
     width: 90%;
@@ -288,6 +284,10 @@ table {
     margin: 10px auto;
     border: 1px solid #eaeaea;
     width: 90%;
+}
+
+table a{
+    color: #222222;
 }
 
 .avg {

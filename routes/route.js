@@ -37,6 +37,8 @@ const faq = require('./faq/faq');
 const faq_content = require('./faq/faq_content');
 const faq_question = require('./faq/faq_question');
 const search_list = require('./search/search_list');
+const upload = require('./upload/upload');
+
 //url 라우팅
 router.get('/', function(req, res){
     // console.log('indexjs / path loaded')
@@ -80,5 +82,6 @@ router.use('/faq', faq);
 router.use('/faq', faq_content);
 router.use('/faq', faq_question);
 router.use('/search_list',search_list);
+router.use('/upload', upload);
 
 module.exports = router;
