@@ -72,13 +72,19 @@
       </div>
     </div>
   </nav>
-    
-  <div class="page-header header-filter" data-parallax="true"></div>
-  <div class="main main-raised">
-        <div class="tab-content tab-space">
-            <div class="container">
-                <div class="inquiry_form">
-                    <h3>카테고리</h3>
+    <div class="page-header header-filter" data-parallax="true"></div>
+    <div class="main main-raised">
+      <div class="tab-content tab-space">
+        <div class="container">
+          <div class="inquiry_form">
+            <h3>카테고리</h3>
+            <div>
+              <form method="get" action="/category/<%= category %>">
+                <input style="display:none;" type='text' id="cag" name="cag" > <!--스타일 필요-->
+                <button type="submit" id="real" onclick="inputZero()">실시간</button><!--스타일 필요-->
+                <button type="submit" id="gps" onclick="inputGPS()">위치중심</button>
+              </form>
+                    </div>
                     <div id="category">
                         <select id="category_opt">
                             <option name="배달">배달</option>
@@ -91,22 +97,61 @@
                             <option>기타</option>
                         </select>
                     </div>
-                    
+                    <script language="javascript">
+                      function inputZero(){
+                      document.getElementById("cag").value=0
+                      }
+                      function inputGPS(){
+                        document.getElementById("cag").value=1
+                      }
+
+                    </script>
 
                     <div id="request">
                       <table>
-                        <% search.forEach(function (value) { %>
-                        <tr>
-                          <td class="category" rowspan="2"><%= value.category %></td>
-                          <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                        </tr>
-                        
-                        
-                        <tr>
-                          <td class="price"><%= value.request_price %></td>
-                        </tr>
-                        <% }); %>
+                        <% var page_num=5 
+                        for(var i=(page * page_num) - page_num; i < (page * page_num); i++) { 
+                          if(i> length){
+                            i++;
+                          }else{
+                            var data = search[i]
+                          %>
+                          <tr>
+                            <td class="category" rowspan="2">
+                              <%= search[i].category %>
+                            </td>
+                            <td class="title"><a href="/request/<%= search[i].request_code %>">
+                                <%= search[i].request_title %>
+                              </a></td>
+                          </tr>
+                          <!--<tr> address 표시용 css 필요
+                            <td class="price"> 
+                              <%= search[i].address %>
+                            </td>
+                          </tr>-->
+                          <tr>
+                            <td class="price">
+                              <%= search[i].request_price %>
+                            </td>
+                          </tr>
+                          <% } } %>
                       </table>
+                      <tr>
+                        <td colspan="6">
+                          <% var j = page;
+                             var k = 0; 
+                             if(j==1){ j++; } 
+                             if(search.length == 0)   k = 5
+                             for( k ; k < 5 ; k++){
+                                if(j==total_page+1){ k=5 }
+                          %>
+                            [<a href="/<%= category %>/<%= j-1  %>"> <!--스타일 필요-->
+                              <%= j-1 %>
+                            </a>]
+                    
+                            <% j++; } %>
+                        </td>
+                      </tr>
                     </div>
         
                 </div>
