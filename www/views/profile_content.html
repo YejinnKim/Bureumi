@@ -82,7 +82,13 @@
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="avatar">
-                <img src="/img/logo2.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                <img src="
+                  <% if(userinfo[0].image) { %>
+                    https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= id %>
+                  <% } else { %>
+                    /img/logo2.jpg
+                  <% } %>
+                  " alt="Circle Image" class="img-raised rounded-circle img-fluid">
               </div>
               <div class="name">
                 <!--data-->
