@@ -6,7 +6,7 @@
   
   <!--css-->
   <link href="../css/top_navbar.css" rel="stylesheet">
-  <link href="../css/request_content.css" rel="stylesheet">
+  <link href="../css/notice_content.css" rel="stylesheet">
   <link href="../css/bottom_navbar.css" rel="stylesheet">
 
   <!--icon cdn-->
@@ -15,12 +15,14 @@
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
+<body>
   <!--top navbar-->
   <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="/profile"><img src="../img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="/profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
           <!--햄버거 메뉴바-->
@@ -32,7 +34,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="dropdown nav-item">
-            <a href="index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+            <a href="/index" class="dropdown-toggle2 nav-link">부름이 소개</a>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
@@ -44,22 +46,22 @@
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a href="#" class="dropdown-item">후기조회</a>
-              <a href="/score" class="dropdown-item">후기작성</a>
+              <a href="/review_list" class="dropdown-item">후기조회</a>
+              <a href="/review" class="dropdown-item">후기작성</a>
             </div>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
             <div class="dropdown-menu dropdown-with-icons"> 
               <a href="/notice" class="dropdown-item">공지사항</a>
-              <a href="#" class="dropdown-item">FAQ</a>
+              <a href="/faq" class="dropdown-item">FAQ</a>
             </div>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/profile" class="dropdown-item">프로필 설정</a>
-              <a href="/userinfo" class="dropdown-item">회원정보수정</a>
+              <a href="/pass_check" class="dropdown-item">회원정보수정</a>
               <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
             </div>
           </li>
@@ -77,10 +79,10 @@
             <div class="container">
                 <div class="request_form">
                     <div class="request_content">
+                      <h2>공지사항</h2>
                       <table>
-                        <tr><td>작성자</td><td><div></div><p><%= value.admin_id %></p></td></tr>
-                        <tr><td>제목</td><td><%= value.notice_title %></td></tr>
-                        <tr><td>내용</td><td><%= value.notice_content %></td></tr>
+                        <tr><td><%= value.notice_title %></td></tr>
+                        <tr><td><%= value.notice_content %></td></tr>
                       </table>
                     </div>
                 </div>

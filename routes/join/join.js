@@ -56,6 +56,7 @@ passport.use('local-join', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, userid, password, done) {
+    req.session.userid = user
     phone_number = req.body.phonenumber
     user_name = req.body.username
     user_birth_year = req.body.datebirth
@@ -96,7 +97,6 @@ passport.use('local-join', new LocalStrategy({
                         return done(null, false, { message: 'your userid is already used' })
                     }
                     else {       
-                         //console.log(sql)
                             req.session.user ={
                                 user_id: userid,
                                 user_password: password,

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부름이 관리자페이지</title>
     <link rel="stylesheet" href="../../css/admin_index_nav.css" type="text/css" />
-    <link rel="stylesheet" href="../../css/admin_userinfo.css" type="text/css" />
+    <link rel="stylesheet" href="../../css/admin_userinfo_content.css" type="text/css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
@@ -47,60 +47,83 @@
         <div class="right_content">
             <h2>회원관리 > 회원정보관리 > 회원정보상세</h2>
             <hr>
-            <table id='user_box'>
-                <tr><td colspan="2">회원정보</td></tr>
+            <table>
                 <tr>
-                    <td>회원코드</td>
-                    <td><%= user.user_code %></td>
+                    <th colspan="5">회원정보</th>
                 </tr>
                 <tr>
-                    <td>아이디</td>
-                    <td><%= user.user_id %></td>
-                </tr>
-                <tr>
-                    <td>닉네임</td>
-                    <td><%= user.user_name %></td>
-                </tr>
-                <tr>
-                    <td>회원등급</td>
-                    <td><%= user.user_level %></td>
-                </tr>
-                <tr>
-                    <td>생년월일</td>
-                    <td><%= moment(user.date_birth).format('YYYY-MM-DD') %></td>
-                </tr>
-                <tr>
-                    <td>성별</td>
-                    <td><%= user.user_gender %></td>
-                </tr>
-                <tr>
-                    <td>직업</td>
-                    <td><%= user.user_job %></td>
-                </tr>
-                <tr>
-                    <td>핸드폰번호</td>
-                    <td><%= user.phone_number %></td>
+                    <!--프로필 이미지-->
+                    <td class="td-img"><img src="../../img/logo.png"></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="td-one">회원코드</td>
+                                <td class="td-two"><%= user.user_code %></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-one">아이디</td>
+                                <td class="td-two"><%= user.user_id %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">닉네임</td>
+                                <td class="td-two"><%= user.user_name %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">회원등급</td>
+                                <td class="td-two"><%= user.user_level %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">생년월일</td>
+                                <td class="td-two"><%= moment(user.date_birth).format('YYYY-MM-DD') %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">성별</td>
+                                <td class="td-two"><%= user.user_gender %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">직업</td>
+                                <td class="td-two"><%= user.user_job %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">핸드폰번호</td>
+                                <td class="td-two"><%= user.phone_number %></td>
+                            </tr>
+                            
+                            
+                        </table>
+                        
+                    </td>
+                    
                 </tr>
             </table>
-            <table>
-                <tr><td colspan="2">부름이정보</td></tr>
+            <table class="bureumi_info">
+                <th colspan="5">부름이 정보</th>
                 <% if(!bureumi) { %>
-                    <tr><td>부름이코드</td><td>해당없음</td></tr>
+                    <tr>
+                        <td class="td-one">부름이코드</td>
+                        <td>해당없음</td>
+                    </tr>
                 <% } else { %>
-                <tr>
-                    <td>부름이코드</td>
-                    <td><%= bureumi.bureumi_code %></td>
-                </tr>
-                <tr>
-                    <td>진행상태</td>
-                    <td><%= bureumi.state %></td>
-                </tr>
-                <tr>
-                    <td>부름이승인</td>
-                    <td><input type="button" value="승인" onClick="location.href='/admin/bureumi_approval/<%= bureumi.user_id %>'"></td>
-                </tr>
+                    <tr>
+                        <td class="td-one">부름이코드</td>
+                        <td><%= bureumi.bureumi_code %></td>
+                    </tr>
+                    <tr>
+                        <td class="td-one">진행상태</td>
+                        <td><%= bureumi.state %></td>
+                    </tr>
+                    <tr>
+                        <td class="td-one">부름이승인</td>
+                        <td><input type="button" value="승인" onClick="location.href='/admin/bureumi_approval/<%= bureumi.user_id %>'"></td>
+                    </tr>
                 <% } %>
             </table>
+            <div class="btn">
+                <div class="btn1"><input type="button" value="새로고침" onClick="javascript:location.reload()"></div>
+                <div class="btn2"></div><input type="button" value="목록보기" onclick="location.href='/admin/userinfo'"></div>
+            </div>
+            
         </div>
     </div>
 

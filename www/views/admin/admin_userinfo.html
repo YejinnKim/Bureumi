@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="../css/admin_index_nav.css" type="text/css" />
     <link rel="stylesheet" href="../css/admin_userinfo.css" type="text/css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script>
+        function clickCheck(target) {
+            document.querySelectorAll(`input[type=checkbox]`)
+                .forEach(el => el.checked = false);
+
+            target.checked = true;
+        }
+    </script>
 </head>
 <body>
     <nav class="leftsidebar">
@@ -47,29 +55,51 @@
         <div class="right_content">
             <h2>회원관리 > 회원정보관리</h2>
             <hr>
-            <table id='user_box'>
+            <div class="user_search">
+                <div class="search-1">
+                    <p>회원등급</p>
+                    <input type="checkbox" id="check1">
+                    <label for="check1">일반</label>
+                    <input type="checkbox" id="check2">
+                    <label for="check2">회원</label>
+                    <input type="checkbox" id="check3">
+                    <label for="check3">부름이</label>
+                    <input type="checkbox" id="check4">
+                    <label for="check4">관리자</label>
+                </div>
+                <div class="search-2">
+                    <p>검색</p>
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <label for="check" class="icon">
+                        <i class="fas fa-search"></i>
+                    </label>
+                </div>
+            </div>
+            <table>
                 <tr>
-                    <td>회원번호</td>
-                    <td>아이디</td>
-                    <td>닉네임</td>
-                    <td>회원등급</td>
-                    <td>생년월일</td>
-                    <td>핸드폰번호</td>
-                    <td>상세</td>
+                    <th>No</th>
+                    <th>회원번호</th>
+                    <th>아이디</th>
+                    <th>닉네임</th>
+                    <th>회원등급</th>
+                    <th>생년월일</th>
+                    <th>핸드폰번호</th>
+                    <th>상세</th>
                 </tr>
+                
                 <% user.forEach(function (value) { %>
-                    <tr>
-                        <td><%= value.user_code %></td>
-                        <td><%= value.user_id %></td>
-                        <td><%= value.user_name %></td>
-                        <td><%= value.user_level %></td>
-                        <td><%= moment(value.date_birth).format('YYYY-MM-DD') %></td>
-                        <td><%= value.phone_number %></td>
-                        <td><input type="button" value="자세히" onClick="location.href='/admin/userinfo/<%= value.user_id %>'"></td>
-                    </tr>
+                <tr>
+                    <td><!--uid-->No</td>
+                    <td><%= value.user_code %></td>
+                    <td><%= value.user_id %></td>
+                    <td><%= value.user_name %></td>
+                    <td><%= value.user_level %></td>
+                    <td><%= moment(value.date_birth).format('YYYY-MM-DD') %></td>
+                    <td><%= value.phone_number %></td>
+                    <td><input type="button" value="자세히" onClick="location.href='/admin/userinfo/<%= value.user_id %>'"></td>
+                </tr>
                 <% }); %>
             </table>
-        </div>
     </div>
 
     <!--Juery cdn-->

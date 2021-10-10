@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+.dropmenu2-show li:nth-child(4){
+    background: #326cff;
+}
+.container{
+    width: 100%;
+}
+.right_content{
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: 1500px;
+    height: 100%;
+}
+.right_content h2{
+    margin-top: 120px;
+}
+.right_content hr{
+    border: 1px solid #282b32;
+    border-radius: 5px;
+    margin: 20px 0;
+    opacity: 40%;
+}
+
+.right_content table{
+    min-width: 1000px !important;
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0 10px;
+    text-align: center;
+    box-shadow: 0px 10px 20px -100px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+}
+.right_content table tr{
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+    box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+}
+.right_content table tr:nth-child(2n){
+    background-color: #f7f7f7;
+}
+.right_content table th{
+    background-color: #282b32;
+    color: white;
+    border: none;
+    padding:30px;
+    font-size: 14px;
+}
+.right_content table tr td a{
+    color: #222222;
+}
+.right_content table th:nth-child(1){
+    border-radius: 5px 0 0 5px;
+}
+.right_content table th:nth-child(8){
+    border-radius: 0 5px 5px 0;
+}
+.right_content table td{
+    border: none;
+    padding:30px;
+    font-size: 14px;
+    /* background: white; */
+}
+
+.right_content table tr td input{
+    background-color: #326cff;
+    border: none;
+    border-radius: 2px;
+    color: #f2f2f2;
+    padding: 10px;
+    width: 100%;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: 600;
+}
+.right_content table tr td input:hover{
+    background-color: #205fff;
+}
+
+.user_search{
+    width: 100%;
+    background-color: #f7f7f7;
+    border: 2px solid #f2f2f2;
+    border-radius: 5px;
+}
+.user_search .search-1,
+.user_search .search-2{
+    margin: 10px;
+    padding: 10px;
+}
+.user_search .search-1 p,
+.user_search .search-2 p{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: 600;
+}
+input[type="checkbox"] + label{
+    padding: 5px;
+    margin-right: 15px;
+}
+.user_search .search-2 input{
+    width: 50%;
+    padding: 15px;
+    /* margin: 10px; */
+    border-radius: 5px;
+    border: 2px solid #f2f2f2;
+}
+.user_search .search-2 label{
+    background-color: white;
+    padding: 15px;
+    padding-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #f2f2f2;
+    cursor: pointer;
+}
+
+#request_box{
+
+}

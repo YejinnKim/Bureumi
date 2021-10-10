@@ -15,12 +15,14 @@
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
+<body>
   <!--top navbar-->
   <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="/profile"><img src="../img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="/profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
           <!--햄버거 메뉴바-->
@@ -32,7 +34,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="dropdown nav-item">
-            <a href="index" class="dropdown-toggle2 nav-link">부름이 소개</a>
+            <a href="/index" class="dropdown-toggle2 nav-link">부름이 소개</a>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
@@ -44,22 +46,22 @@
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">후기조회</a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a href="#" class="dropdown-item">후기조회</a>
-              <a href="/score" class="dropdown-item">후기작성</a>
+              <a href="/review_list" class="dropdown-item">후기조회</a>
+              <a href="/review" class="dropdown-item">후기작성</a>
             </div>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
             <div class="dropdown-menu dropdown-with-icons"> 
               <a href="/notice" class="dropdown-item">공지사항</a>
-              <a href="#" class="dropdown-item">FAQ</a>
+              <a href="/faq" class="dropdown-item">FAQ</a>
             </div>
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">마이페이지</a>
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/profile" class="dropdown-item">프로필 설정</a>
-              <a href="/userinfo" class="dropdown-item">회원정보수정</a>
+              <a href="/pass_check" class="dropdown-item">회원정보수정</a>
               <a href="/bureumi_auth" class="dropdown-item">부름이인증</a>
             </div>
           </li>
@@ -77,16 +79,40 @@
             <div class="container">
                 <div class="request_form">
                     <div class="request_content">
-                      <div>
+                      <div class="update">
                         <% if(request.writer_id == id) { %>
                         <button type="button" onclick="location.href='/request/<%= request.request_code %>/update'">수정</button>
                         <button type="button" onclick="location.href='/request/<%= request.request_code %>/delete'">삭제</button>
                         <% } %>
                       </div>
                       <table>
-                        <tr><td colspan="2"><%= request.request_title %></td></tr>
-                        <tr><td><%= request.writer_id %></td><td><%= request.request_location %></td></tr>
-                        <tr><td colspan="2"><%= request.request_content %></td></tr>
+                        <tr><td colspan="2"><%= request.request_title %>
+                          <div class="time">
+                            <img src="/img/category-icon<% switch(request.category) { 
+                              case '배달' : %>1<% break;
+                              case '편의점': %>2<% break;
+                              case '설치조립': %>3<% break;
+                              case '장보기': %>4<% break;
+                              case '줄서기': %>5<% break;
+                              case '우체국': %>6<% break;
+                              case '청소': %>7<% break;
+                              case '기타': %>8<% break;
+                            } %>_80.png" width="40px"></div></td></tr>
+                        <tr><td colspan="2"><%= request.request_price %>원
+                          <div class="time"><%= moment(request.request_date).format('YYYY-MM-DD hh:mm:ss') %></div></td></tr>
+                        <tr><td><a href="/profile/<%= request.writer_id %>"><img src="
+                          <% if(img) { %>
+                            https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= request.writer_id %>
+                          <% } else { %>
+                            ../img/logo2.jpg
+                          <% } %>
+                          " width="25"/> <%= request.writer_id %></a></td>
+                            <td><%= request.address %></td></tr>
+                        <tr><td colspan="2">
+                          <% if(request.request_img) { %>
+                            <img src="<%= request.request_img %>" width="350"/>
+                          <% } %>
+                          <%= request.request_content %></td></tr>
                         <% if(mvalue) { %>
                           <tr><td colspan="2" class="chat"><div>
                             <% if(matching.requester_id != id && matching.bureumi_id != id) { %>
@@ -98,7 +124,6 @@
                               진행 중인 
                             <% } %>
                             요청입니다.</div></td></tr>
-    
                             <!-- 부름이 진행 (1) -->
                             <% if(matching.requester_id == id && matching.matching_progress == '매칭요청') { %>
                               <tr><td colspan="2"><%= matching.bureumi_id %>님의 부름이 지원 
@@ -117,12 +142,27 @@
                             <% } %>
                             <!-- 부름이 진행 (4), 후기 작성 -->
                             <% if((matching.requester_id == id || matching.bureumi_id == id) && matching.matching_progress == '완료') { %>
-                              <tr><td colspan="2"><% if(matching.requester_id == id) { %>
+                              <tr><td colspan="2"><b><% if(matching.requester_id == id) { %>
                                   <%= matching.bureumi_id %>
                                 <% } else { %>
                                   <%= matching.requester_id %>
-                                <% } %>님의 후기
-                                <button type="button" onclick="location.href='#'">작성</button></td></tr>
+                                <% } %></b>님의 후기
+                                  
+                                <% if(review.length > 0) { %>
+                                  <% review.forEach(function (review) { %>
+                                    <% if(review.review_writer == id) { %>
+                                      <button type="button" onclick="location.href='/review_content/<%= matching.matching_code %>/<%= id %>'">작성완료</button>
+                                    <% } else if(i != 2) { %>
+                                      <button type="button" onclick="location.href='/score/<%= matching.matching_code %>'">작성</button>
+                                    <% } %>
+                                    <% if(review.review_writer != id) { %>
+                                      <button type="button" onclick="location.href='/review_content/<%= matching.matching_code %>/<%= review.review_writer %>'">조회</button>
+                                    <% } %>
+                                  <% }); %>
+                                <% } else { %>
+                                  <button type="button" onclick="location.href='/score/<%= matching.matching_code %>'">작성</button>
+                                <% } %>
+                                </td></tr>
                             <% } %>
                         <% } else { %>
                         <tr><td colspan="2" class="chat"><a href='/chatting/<%= request.request_code %>'><div>채팅하기</div></a></td></tr>

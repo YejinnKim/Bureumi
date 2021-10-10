@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<!--회원정보 수정 내용 입력받는 페이지-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="join_form">
-            <form method="post" action="/user_info_update" name="join_form">
+            <form method="post" action="/userinfo_update" name="join_form">
                 <div class="title">
                     <h1>회원정보</h1>
                 </div>
@@ -26,7 +26,7 @@
                         <a class="form_name">아이디</a>
                     </div>
                     <div>
-                        <input type="text" name="userid"  class="input" value="#{id}"  readonly/> 
+                        <input type="text" name="userid"  class="input" value=<%= user_id %>  readonly/> 
                     </div>
                     <div class="alert">
                         <div id="alert_userid" class="text_alert"></div>
@@ -38,7 +38,7 @@
                         <a class="form_name">비밀번호</a>
                     </div>
                     <div>
-                        <input type="password" name="password"  class="input" value="#{user_password}" />
+                        <input type="password" name="password"  class="input" value=<%=user_password %> />
                     </div>
                     <div class="alert">
                         <div id="alert_password" class="text_alert"></div>
@@ -50,7 +50,7 @@
                         <a class="form_name">비밀번호 확인</a>
                     </div>
                     <div>
-                        <input type="password" name="password2" onfocus="" class="input" value="#{user_password}" />
+                        <input type="password" name="password2" onfocus="" class="input" value=<%=user_password %> />
                     </div>
                     <div class="alert">
                         <div id="alert_password2" class="text_alert"></div>
@@ -64,7 +64,7 @@
                         <a class="form_name">닉네임</a>
                     </div>
                     <div>
-                        <input type="text" name="username" class="input" value="#{user_name}"/>
+                        <input type="text" name="username" class="input" value=<%=user_name %>>
                     </div>
                     <div class="alert">
                         <div id="alert_username" class="text_alert"></div>
@@ -77,13 +77,13 @@
                     </div>
                     <div id="bir">
                         <div id="bir_yy">
-                            <input type="text" name="year" maxlength="4"  class="input_yy" value="#{year}"> 
+                            <input type="text" name="year" maxlength="4"  class="input_yy" value= <%=year %>> 
                         </div>
                         <div id="bir_mm">
-                            <input type="text" name="month"  maxlength="2"  class="input_dd" value="#{month}"> 
+                            <input type="text" name="month"  maxlength="2"  class="input_dd" value=<%=month %>> 
                         </div>
                         <div id="bir_dd">
-                                <input type="text" name="day"  maxlength="2"  class="input_dd" value="#{day}"> 
+                                <input type="text" name="day"  maxlength="2"  class="input_dd" value=<%=day %>> 
                         </div>
                     </div>
                     <div class="alert">
@@ -94,7 +94,7 @@
                     <div>
                         <a class="form_name">전화번호</a>
                     </div>
-                    <input type="text" name="phonenumber" maxlength="16"  class="input" value="#{phone_number}" > 
+                    <input type="text" name="phonenumber" maxlength="16"  class="input" value=<%=phone_number %> > 
 
                     <div class="alert">
                         <div id="alert_phone" class="text_alert"></div>
@@ -102,8 +102,7 @@
                 </div>
                 <!--submit 부분 주의. js 안먹힘-->
                 <div>
-                <input type="button" class="join_button"  onClick="location.href='map.html'" value="부름이 인증하기"></button>
-                    <input type="submit" class="join_button"  value="정보수정하기"></button>
+                <input type="submit" class="join_button"  value="정보수정하기"></button>
                     
                 </div>
             </form>

@@ -36,21 +36,16 @@ passport.use('local-login', new LocalStrategy({
         if(rows.length){
             console.log('existed user')
 
-            //
-                req.session.user={
-                    user_id: userid
-                }
-            //
-
-            //사용자 정보 세션처리
-            req.session.user_info={
+            req.session.user_info={ // 사용자 정보
                 user_id : userid,
                 user_password : rows[0].user_password,
                 user_phonnumber : rows[0].phone_number,
                 user_address : rows[0].user_location,
                 user_level : rows[0].user_level,
                 user_name : rows[0].user_name,
-                birth_date : rows[0].date_birth
+                birth_date : rows[0].date_birth,
+                addressLat : rows[0].latitude,
+                addressLon : rows[0].longitude
             }
             return done(null, {'id' : userid, 'userid' : userid, 'password' : password})
             

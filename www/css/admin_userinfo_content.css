@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+}
+.right_content{
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: 1500px;
+    height: 100%;
+}
+.right_content h2{
+    margin-top: 120px;
+}
+.right_content hr{
+    border: 2px solid #282b32;
+    border-radius: 5px;
+    margin: 20px 0;
+    opacity: 40%;
+}
+/* .right_content table{
+    text-align: center;
+}
+.right_content table tr{
+    background-color: #f2f2f2;
+    text-align: center;
+}
+.right_content table tr:nth-child(1){
+    background-color: #282b32;
+    text-align: center;
+    color: #f2f2f2;
+}
+.right_content table tr td{
+    padding: 15px;
+    width: 150px;
+}
+table {
+    float:left;
+} */
+
+.right_content table{
+    min-width: 800px !important;
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0 5px;
+    text-align: center;
+}
+.right_content table tr{
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+    box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+}
+.right_content table th{
+    background-color: #282b32;
+    color: white;
+    border: none;
+    padding: 30px;
+    font-size: 14px;
+}
+.right_content table th:nth-child(1){
+    border-radius: 5px;
+}
+.right_content table th:nth-child(8){
+    border-radius: 0 5px 5px 0;
+}
+.right_content table td{
+    border: none;
+    padding:30px;
+    font-size: 14px;
+    /* background: white; */
+}
+
+
+.right_content table tr td input{
+    background-color: #326cff;
+    border: none;
+    border-radius: 2px;
+    color: #f2f2f2;
+    padding: 10px;
+    width: 100%;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    /* overflow: hidden; */
+    cursor: pointer;
+    font-weight: 600;
+}
+.right_content table tr td input:hover{
+    background-color: #205fff;
+}
+
+.td-img{
+    width: 50%;
+    padding: 20px;
+    margin: 20px;
+}
+.td-img img{
+    width: 30%;
+}
+.td-one{
+    background-color: #f7f7f7;
+    width: 30%;
+    border-radius: 3px;
+}
+
+.right_content input{
+    background-color: #326cff;
+    border: none;
+    border-radius: 3px;
+    color: #f2f2f2;
+    padding: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 15px;
+    width: 200px;
+}
+.btn{
+    width: 500px;
+    margin: 50px auto;
+    height: 150px;
+}
+.btn1{
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+}
+.btn2{
+    float: right;
+    box-sizing: border-box;
+    width: 50%;
+}

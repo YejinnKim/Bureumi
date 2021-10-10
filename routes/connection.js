@@ -6,7 +6,7 @@ const HOST = process.env.HOST
 , PASSWORD = process.env.PASSWORD
 , PORT = process.env.PORT
 
- var connection = mysql.createConnection({ 
+var connection = mysql.createConnection({ 
 	host:HOST,
 	user: "admin", //dotenv를 적용하면 오류발생
 	database:DATABASE,
@@ -14,4 +14,5 @@ const HOST = process.env.HOST
 	port: PORT
 
 }); 
+
 module.exports = connection; 

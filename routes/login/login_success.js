@@ -7,7 +7,7 @@ var session=require('express-session')  ;
 var path = require('path');
 
 router.get('/',function(req,res){
-    res.sendFile(path.join(__dirname,'../../www/login_success.html'));
+    res.sendFile(path.join(__dirname,'../../www/views/login_success.html'));
 });
 
 module.exports = router;

@@ -9,6 +9,7 @@ const index = require('./index/index');
 const sms = require('./join/sms');
 const join_success = require('./join/join_success');
 const login_success = require('./login/login_success');
+const update_success = require('./profile/update_success')
 const search = require('./search/search');
 const request = require('./request/request');
 const category = require('./category/category');
@@ -17,7 +18,7 @@ const logout = require('./login/logout');
 const profile = require('./profile/profile');
 const map =require('./join/gps');
 const location_save =require('./join/save');
-const pass_check = require('./profile/password_check'); // 개인정보 수정시 비밀번호 체크
+const pass_check = require('./profile/password_check'); 
 const userinfo = require('./profile/info');
 const userinfo_update = require('./profile/info_update');
 const userinfo_sms = require('./profile/infro_sms');
@@ -29,6 +30,14 @@ const notice_content = require('./notice/notice_content');
 const address_update = require('./join/address_update.js');
 const chatting = require('./chatting/chatting.js');
 const matching = require('./matching/matching.js');
+const review = require('./review/review.js');
+const review_list = require('./review/review_list.js');
+const review_content = require('./review/review_content.js');
+const faq = require('./faq/faq');
+const faq_content = require('./faq/faq_content');
+const faq_question = require('./faq/faq_question');
+const search_list = require('./search/search_list');
+const upload = require('./upload/upload');
 
 //url 라우팅
 router.get('/', function(req, res){
@@ -43,6 +52,7 @@ router.use('/index', index);
 router.use('/sms',sms);
 router.use('/join_success',join_success);
 router.use('/login_success', login_success);
+router.use('/update_success',update_success)
 router.use('/search', search);
 router.use('/request', request);
 router.use('/request', request_content);
@@ -65,6 +75,13 @@ router.use('/address_join',address_join); */
 router.use('/address_update',address_update);
 router.use('/chatting',chatting);
 router.use('/matching',matching);
-
+router.use('/review',review);
+router.use('/review_list',review_list);
+router.use('/review_content',review_content);
+router.use('/faq', faq);
+router.use('/faq', faq_content);
+router.use('/faq', faq_question);
+router.use('/search_list',search_list);
+router.use('/upload', upload);
 
 module.exports = router;

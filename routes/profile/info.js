@@ -15,7 +15,7 @@ router.get('/', function (req, res) { // 개인정보 출력
         day = birth_date.substring(8, 10)
 
     res.render('join_update', {
-        'id': id,
+        'user_id': id,
         'user_password': password,
         'user_name': user_name,
         'phone_number': phone_number,
