@@ -12,14 +12,15 @@
   <link href="../css/bottom_navbar.css" rel="stylesheet">
 
   <!--icon cdn-->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>  
-  
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-  <body>
-    <!--top navbar-->
+<body>
+  <!--top navbar-->
   <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
@@ -54,7 +55,7 @@
           </li>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">고객센터</a>
-            <div class="dropdown-menu dropdown-with-icons"> 
+            <div class="dropdown-menu dropdown-with-icons">
               <a href="/notice" class="dropdown-item">공지사항</a>
               <a href="/faq" class="dropdown-item">FAQ</a>
             </div>
@@ -74,189 +75,208 @@
       </div>
     </div>
   </nav>
-    
-    <div class="page-header header-filter" data-parallax="true"></div>
-    <form id="search_box" action="/search_list" method="get"> 
-      <div class="search">
-        <div class="search-box">
-        <input type="text" name="search_box" placeholder="제목을 입력하세요" >
-        <button>검색</button><!--스타일 필요-->
-        </div>
+
+  <div class="page-header header-filter" data-parallax="true"></div>
+  <form id="search_box" action="/search_list" method="get">
+    <div class="search">
+      <div class="search-box">
+        <input type="text" name="search_box" placeholder="제목을 입력하세요">
+        <select name="search_req">
+          <option value="real_time">실시간</option>
+          <option value="nearby">가까운순</option>
+        </select>
+        <button>검색</button>
+        <!--스타일 필요-->
       </div>
-     </form>
-    <div class="main main-raised">
-        <div class="container">
-          <div class="tab-content tab-space">
-            <div class="inquiry_form">
-              <div id="recommend">
-                <ul>
-                  <li>#택배</li>
-                  <li>#택배</li>
-                  <li>#맛집 웨이팅</li>
-                </ul>
-              </div>
-              <div id=""></div>
-              <div id="category">
-                <h3>카테고리</h3>
-                <table>
-                  <tr>
-                    <td>
-                      <div class="category-box" onclick="location.href='/category/배달'"></div><br>
-                      <a href="/category/배달">배달</a>
-                    </td>
-                    <td>
-                      <div class="category-box2" onclick="location.href='/category/편의점'"></div><br>
-                      <a href="/category/편의점">편의점</a>
-                    </td>
-                    <td>
-                      <div class="category-box3" onclick="location.href='/category/설치조립'"></div><br>
-                      <a href="/category/설치조립">설치조립</a>
-                    </td>
-                    <td>
-                      <div class="category-box4" onclick="location.href='/category/장보기'"></div><br>
-                      <a href="/category/장보기">장보기</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="category-box5" onclick="location.href='/category/줄서기'"></div><br>
-                      <a href="/category/줄서기">줄서기</a>
-                    </td>
-                    <td>
-                      <div class="category-box6" onclick="location.href='/category/우체국'"></div><br>
-                      <a href="/category/우체국">우체국</a>
-                    </td>
-                    <td>
-                      <div class="category-box7" onclick="location.href='/category/청소'"></div><br>
-                      <a href="/category/청소">청소</a>
-                    </td>
-                    <td>
-                      <div class="category-box8" onclick="location.href='/category/기타'"></div><br>
-                      <a href="/category/기타">기타</a>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-            <div id="request">
-              <h3>실시간요청</h3>
-               <div class="row">
-                <div class="col-md-6 ml-auto mr-auto">
-                  <div class="profile-tabs">
-                    <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
-                      <li class="nav-item">
-                        <a id= "tab_gps"class="nav-link active" href="#gps" role="tab" data-toggle="tab">위치 기반 조회</a>
-                      </li>
-                      <li class="nav-item">
-                        <a id = "tab_all"class="nav-link" href="#all" role="tab" data-toggle="tab">모두 조회</a>
-                      </li>
-                    </ul>
-                  </div>
+    </div>
+  </form>
+  <div class="main main-raised">
+    <div class="container">
+      <div class="tab-content tab-space">
+        <div class="inquiry_form">
+          <div id="recommend">
+            <ul>
+              <li>#택배</li>
+              <li>#택배</li>
+              <li>#맛집 웨이팅</li>
+            </ul>
+          </div>
+          <div id=""></div>
+          <div id="category">
+            <h3>카테고리</h3>
+            <table>
+              <tr>
+                <td>
+                  <div class="category-box" onclick="location.href='/category/delivery'"></div><br>
+                  <a href="/category/배달">배달</a>
+                </td>
+                <td>
+                  <div class="category-box2" onclick="location.href='/category/convince'"></div><br>
+                  <a href="/category/편의점">편의점</a>
+                </td>
+                <td>
+                  <div class="category-box3" onclick="location.href='/category/installation'"></div><br>
+                  <a href="/category/설치조립">설치조립</a>
+                </td>
+                <td>
+                  <div class="category-box4" onclick="location.href='/category/shopping'"></div><br>
+                  <a href="/category/장보기">장보기</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="category-box5" onclick="location.href='/category/lineup'"></div><br>
+                  <a href="/category/줄서기">줄서기</a>
+                </td>
+                <td>
+                  <div class="category-box6" onclick="location.href='/category/postoffice'"></div><br>
+                  <a href="/category/우체국">우체국</a>
+                </td>
+                <td>
+                  <div class="category-box7" onclick="location.href='/category/cleanup'"></div><br>
+                  <a href="/category/청소">청소</a>
+                </td>
+                <td>
+                  <div class="category-box8" onclick="location.href='/category/etc'"></div><br>
+                  <a href="/category/기타">기타</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="request">
+            <h3>실시간요청</h3>
+            <div class="row">
+              <div class="col-md-6 ml-auto mr-auto">
+                <div class="profile-tabs">
+                  <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                    <li class="nav-item">
+                      <a id="tab_gps" class="nav-link active" href="#gps" role="tab" data-toggle="tab">가까운 순</a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="tab_all" class="nav-link" href="#all" role="tab" data-toggle="tab">최신순</a>
+                    </li>
+                  </ul>
                 </div>
+                <form method="get" action="/search">
+                  <input style="display:none;" type='text' id="cag" name="cag">
+                  <!--스타일 필요-->
+                  <button type="submit" id="real" onclick="inputZero()">위치중심</button> <!-- 처음 접속하는 search.html 은 위치중심으로 요청 정리 -->
+                  <!--스타일 필요-->
+                  <button type="submit" id="gps" onclick="inputGPS()">실시간</button>
+                </form>
               </div>
-              <script type="text/javascript"></script>
-              <script>
-
-              </script>
-              <form>
-              <table id = "table1">
-                <% search.forEach(function (value) { %>
-                <tr>
-                  <td class="category" rowspan="2"><%= value.category %></td>
-                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                </tr>
-                <tr>
-                  <td class="price"><%= value.request_price %></td>
-                </tr>
-                <% }); %> 
-              </table>
-              </form>
-              <form>
-              <table id="table2">
-                <% list.forEach(function (value) { %>
-                <tr>
-                  <td class="category" rowspan="2"><%= value.category %></td>
-                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                </tr>
-                <tr>
-                  <td class="price"><%= value.request_price %></td>
-                </tr>
-                <% }); %> 
-              </table>
-            </form>         
             </div>
+            <script language="javascript">
+              function inputZero() {
+                document.getElementById("cag").value = 0
+              }
+              function inputGPS() {
+                document.getElementById("cag").value = 1
+              }
+
+            </script>
+                     <div id="request">
+                      <table>
+                        <% var page_num=5 
+                        for(var i=(page * page_num) - page_num; i < (page * page_num); i++) { 
+                          if(i> length){
+                            i++;
+                          }else{
+                            var data = search[i]
+                          %>
+                          <tr>
+                            <td class="category" rowspan="2">
+                              <%= search[i].category %>
+                            </td>
+                            <td class="title"><a href="/request/<%= search[i].request_code %>">
+                                <%= search[i].request_title %>
+                              </a></td>
+                          </tr>
+                          <!--<tr> address 표시용 css 필요
+                            <td class="price"> 
+                              <%= search[i].address %>
+                            </td>
+                          </tr>-->
+                          <tr>
+                            <td class="price">
+                              <%= search[i].request_price %>
+                            </td>
+                          </tr>
+                          <% } } %>
+                      </table>
+                      <tr>
+                        <td colspan="6">
+                          <% var j = page;
+                             var k = 0; 
+                             if(j==1){ j++; } 
+                             if(search.length == 0)   k = 5
+                             for( k ; k < 5 ; k++){
+                                if(j==total_page+1){ k=5 }
+                          %>
+                            [<a href="/search/<%= j-1  %>">
+                              <%= j-1 %>
+                            </a>]
+                    
+                            <% j++; } %>
+                        </td>
+                      </tr>
+                    </div>
           </div>
         </div>
       </div>
     </div>
-    <script type="text/javascript">
-      window.onload = function() {
-
-          $("#table1").show();
-          $("#table2").hide();
-      }
-      $(document).ready(function() {
-          $("#tab_all").click(function() {
-
-              $("#table2").show();
-              $("#table1").hide();
-          })
-          $("#tab_gps").click(function() {
-
-              $("#table1").show();
-              $("#table2").hide();
-          })
-      })
-  </script>
+  </div>
 
   <!--하단 네비-->
   <section class="bottom_nav">
     <div class="item" onclick="location.href='profile'">
-        <div class="nav-item">
-            <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
-        </div>
+      <div class="nav-item">
+        <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
+      </div>
     </div>
     <div class="item" onclick="location.href='/search'">
-        <div class="nav-item">
-            <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
-        </div>
+      <div class="nav-item">
+        <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
+      </div>
     </div>
     <div class="item" onclick="location.href='/request'">
-        <div class="nav-item">
-            <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
-        </div>
+      <div class="nav-item">
+        <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
+      </div>
     </div>
     <div class="item">
-        <div class="nav-item">
-            <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
-        </div>
+      <div class="nav-item">
+        <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
+      </div>
     </div>
-</section>
+  </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="copyright float-center">
-      &copy; 2021 TeamProject_Bureumi
+  <footer class="footer">
+    <div class="container">
+      <div class="copyright float-center">
+        &copy; 2021 TeamProject_Bureumi
+      </div>
     </div>
-  </div>
-</footer>
-  
-    <!--Juery cdn-->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
+  </footer>
+
+  <!--Juery cdn-->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!--build시 jquery 불러가지고 올 수 없어서 파일소스를 가지고 옴-->
   <script src="js/jquery-latest.min.js"></script>
-  
-    <!--Bootstrap cdn-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  
-    <!--날짜 관련 api cdn-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-  
-    <!-- javascript -->
-    <script src="js/profile.js" type="text/javascript"></script>
-    <script src="js/bottom.js" type="text/javascript"></script>
-  </body>
+
+  <!--Bootstrap cdn-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!--날짜 관련 api cdn-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
+    type="text/javascript"></script>
+
+  <!-- javascript -->
+  <script src="js/profile.js" type="text/javascript"></script>
+  <script src="js/bottom.js" type="text/javascript"></script>
+</body>
 
 </html>
