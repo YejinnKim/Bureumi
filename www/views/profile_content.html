@@ -22,7 +22,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="profile"><img src="/img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="/profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
           <!--햄버거 메뉴바-->
@@ -82,7 +82,13 @@
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="avatar">
-                <img src="/img/logo2.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                <img src="
+                  <% if(userinfo[0].image) { %>
+                    https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= id %>
+                  <% } else { %>
+                    /img/logo2.jpg
+                  <% } %>
+                  " alt="Circle Image" class="img-raised rounded-circle img-fluid">
               </div>
               <div class="name">
                 <!--data-->

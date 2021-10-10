@@ -87,11 +87,32 @@
                       </div>
                       <table>
                         <tr><td colspan="2"><%= request.request_title %>
-                          <div class="time">n분전<!-- 수정필요 --><img src="/img/category-icon1_80.png" width="40px"></div><!-- 수정필요 --></td></tr>
-                        <tr><td colspan="2"><%= request.request_price %>원</td></tr>
-                        <tr><td><a href="/profile/<%= request.writer_id %>"><img src="../img/logo.png" width="25"/> <%= request.writer_id %></a></td>
-                            <td>서울특별시 강서구<!-- 수정필요 --></td></tr>
-                        <tr><td colspan="2"><%= request.request_content %></td></tr>
+                          <div class="time">
+                            <img src="/img/category-icon<% switch(request.category) { 
+                              case '배달' : %>1<% break;
+                              case '편의점': %>2<% break;
+                              case '설치조립': %>3<% break;
+                              case '장보기': %>4<% break;
+                              case '줄서기': %>5<% break;
+                              case '우체국': %>6<% break;
+                              case '청소': %>7<% break;
+                              case '기타': %>8<% break;
+                            } %>_80.png" width="40px"></div></td></tr>
+                        <tr><td colspan="2"><%= request.request_price %>원
+                          <div class="time"><%= moment(request.request_date).format('YYYY-MM-DD hh:mm:ss') %></div></td></tr>
+                        <tr><td><a href="/profile/<%= request.writer_id %>"><img src="
+                          <% if(img) { %>
+                            https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= request.writer_id %>
+                          <% } else { %>
+                            ../img/logo2.jpg
+                          <% } %>
+                          " width="25"/> <%= request.writer_id %></a></td>
+                            <td><%= request.address %></td></tr>
+                        <tr><td colspan="2">
+                          <% if(request.request_img) { %>
+                            <img src="<%= request.request_img %>" width="350"/>
+                          <% } %>
+                          <%= request.request_content %></td></tr>
                         <% if(mvalue) { %>
                           <tr><td colspan="2" class="chat"><div>
                             <% if(matching.requester_id != id && matching.bureumi_id != id) { %>

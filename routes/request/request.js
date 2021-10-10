@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('../connection');
+var upload = require('./s3');
 var rcode;
 
 router.get('/', function (req, res) {
@@ -23,26 +24,28 @@ router.get('/', function (req, res) {
     res.render('request', {value : null});
 });
 
-router.post('/data', function(req, res) {
+router.post('/data', upload.single('image'), function(req, res) {
     var code = rcode;
     var id = req.session.user_info.user_id;
     var category = req.body.category;
     var title = req.body.title;
     var content = req.body.content;
     var price = req.body.price;
+    var image;
+    if (req.file) {
+        image = req.file.location;
+    } else {
+        image = null;
+    }
 
     //9.24 DB에 경도와 위도를 저장할 칼럼을 추가하여 요청을 저장할 때 같이 저장하려고 함 - 완료
     var latitude = req.session.user_info.addressLat;
     var longitude = req.session.user_info.addressLon;
     var address = req.session.user_info.user_address;
-    var datas = [code, id, category, title, content, price, attach,latitude,longitude,address];
+    
+    var datas = [code, id, category, title, content, price, image ,latitude,longitude,address];
     var sql = 'insert into request values (concat(\'r\', lpad(?, 3, \'0\')), ?, ?, ?, ?, ?, now(), ?,?,?,?)';
-    //9.24 --------------------------------------
-
-    var attach = null; //첨부파일 기능, 나중에 추가
-  /*   var datas = [code, id, category, title, content, price, date, attach];
-    var sql = 'insert into request values (concat(\'r\', lpad(?, 3, \'0\')), ?, ?, ?, ?, ?, ?, ?)'; */
-
+    
     if (code) {
         connection.query(sql, datas, function(err, result) {
             if (err) throw err;
