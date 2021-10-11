@@ -25,7 +25,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a href="javascript:history.back()"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <a class="navbar-logo" href="profile"><img src="/img/bureumi_logo.png"></a>
+        <a class="navbar-logo" href="/profile"><img src="/img/bureumi_logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
           aria-label="Toggle navigation">
           <span class="toggle-icon">토글 네비</span>
@@ -81,8 +81,12 @@
   <form id="search_box" action="/search_list" method="get">
     <div class="search">
       <div class="search-box">
-        <input type="text" name="search_box" placeholder="제목을 입력하세요">
-        <button><i class="fas fa-search fa-2x"></i></button>
+        <input type="text" name="search_box" placeholder=" <%=search_content %>" >
+        <select name="search_req" >
+          <option value="real_time">실시간</option>
+          <option value="nearby">가까운순</option>
+        </select>
+        <button>검색</button>
         <!--스타일 필요-->
       </div>
     </div>
@@ -97,37 +101,37 @@
             <table>
               <tr>
                 <td>
-                  <div class="category-box" onclick="location.href='/category/배달'"></div><br>
+                  <div class="category-box" onclick="location.href='/category/delivery'"></div><br>
                   <a href="/category/배달">배달</a>
                 </td>
                 <td>
-                  <div class="category-box2" onclick="location.href='/category/편의점'"></div><br>
+                  <div class="category-box2" onclick="location.href='/category/convince'"></div><br>
                   <a href="/category/편의점">편의점</a>
                 </td>
                 <td>
-                  <div class="category-box3" onclick="location.href='/category/설치조립'"></div><br>
+                  <div class="category-box3" onclick="location.href='/category/installation'"></div><br>
                   <a href="/category/설치조립">설치조립</a>
                 </td>
                 <td>
-                  <div class="category-box4" onclick="location.href='/category/장보기'"></div><br>
+                  <div class="category-box4" onclick="location.href='/category/shopping'"></div><br>
                   <a href="/category/장보기">장보기</a>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="category-box5" onclick="location.href='/category/줄서기'"></div><br>
+                  <div class="category-box5" onclick="location.href='/category/lineup'"></div><br>
                   <a href="/category/줄서기">줄서기</a>
                 </td>
                 <td>
-                  <div class="category-box6" onclick="location.href='/category/우체국'"></div><br>
+                  <div class="category-box6" onclick="location.href='/category/postoffice'"></div><br>
                   <a href="/category/우체국">우체국</a>
                 </td>
                 <td>
-                  <div class="category-box7" onclick="location.href='/category/청소'"></div><br>
+                  <div class="category-box7" onclick="location.href='/category/cleanup'"></div><br>
                   <a href="/category/청소">청소</a>
                 </td>
                 <td>
-                  <div class="category-box8" onclick="location.href='/category/기타'"></div><br>
+                  <div class="category-box8" onclick="location.href='/category/etc'"></div><br>
                   <a href="/category/기타">기타</a>
                 </td>
               </tr>
@@ -150,6 +154,11 @@
                       <%= search[i].request_title %>
                     </a></td>
                 </tr>
+                <!--<tr> address 표시용 css 필요
+                  <td class="price"> 
+                    <%= search[i].address %>
+                  </td>
+                </tr>-->
                 <tr>
                   <td class="price">
                     <%= search[i].request_price %>

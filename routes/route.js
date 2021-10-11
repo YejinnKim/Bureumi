@@ -37,6 +37,14 @@ const faq = require('./faq/faq');
 const faq_content = require('./faq/faq_content');
 const faq_question = require('./faq/faq_question');
 const search_list = require('./search/search_list');
+const delivery = require('./category/delivery')
+const convince = require('./category/convince');
+const installation = require('./category/installation');
+const shopping = require('./category/shopping');
+const lineup = require('./category/lineup');
+const postoffice = require('./category/postoffice');
+const cleanup = require('./category/cleanup');
+const etc = require('./category/etc')
 const upload = require('./upload/upload');
 
 //url 라우팅
@@ -82,6 +90,14 @@ router.use('/faq', faq);
 router.use('/faq', faq_content);
 router.use('/faq', faq_question);
 router.use('/search_list',search_list);
+router.use('/delivery',delivery);
+router.use('/convince',convince);
+router.use('/installation',installation);
+router.use('/shopping',shopping);
+router.use('/lineup',lineup);
+router.use('/postoffice',postoffice);
+router.use('/cleanup',cleanup);
+router.use('/etc',etc);
 router.use('/upload', upload);
 
 module.exports = router;
