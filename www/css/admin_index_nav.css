@@ -63,13 +63,17 @@ nav ul li.active a{
     color: #326cff;
     background: #22252b;
 }
+nav ul li ul li.active a{
+    color: #326cff;
+    background: #22252b;
+}
 nav ul ul{
     position: static;
-    display: none;
+    /* display: none; */
 }
 nav ul  .dropmenu-show.show, 
 nav ul  .dropmenu2-show.show{
-    display: block;
+    display: none;
 }
 nav ul ul li{
     line-height: 42px;

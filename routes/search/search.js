@@ -9,17 +9,16 @@ router.get('/', function (req, res) {
 
     var id = req.user;
     if (!id) res.render('login');
-
     var data = [req.session.user_info.user_id]
     var sql = 'select * from request where not writer_id = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc';
 
     connection.query(sql, data, function (err, result) {
         if (err) throw err;
-
         const start = {
             latitude: req.session.user_info.addressLat,
             longitude: req.session.user_info.addressLon
         }
+
         var sorted_by_gps_result = [];
         var end = [];
         for (var n = 0; n < result.length; n++) {

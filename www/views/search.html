@@ -19,6 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
+
 <body>
   <!--top navbar-->
   <nav class="navbar navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
@@ -165,6 +166,33 @@
                   <button type="submit" id="gps" onclick="inputGPS()">실시간</button>
                 </form>
               </div>
+              
+              <form>
+              <table id = "table1">
+                <% search.forEach(function (value) { %>
+                <tr>
+                  <td class="category" rowspan="2"><%= value.category %></td>
+                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
+                </tr>
+                <tr>
+                  <td class="price"><%= value.request_price %></td>
+                </tr>
+                <% }); %> 
+              </table>
+              </form>
+              <form>
+              <table id="table2">
+                <% list.forEach(function (value) { %>
+                <tr>
+                  <td class="category" rowspan="2"><%= value.category %></td>
+                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
+                </tr>
+                <tr>
+                  <td class="price"><%= value.request_price %></td>
+                </tr>
+                <% }); %> 
+              </table>
+            </form>         
             </div>
             <script language="javascript">
               function inputZero() {
@@ -225,7 +253,25 @@
         </div>
       </div>
     </div>
-  </div>
+    <script type="text/javascript">
+      window.onload = function() {
+
+          $("#table1").show();
+          $("#table2").hide();
+      }
+      $(document).ready(function() {
+          $("#tab_all").click(function() {
+
+              $("#table2").show();
+              $("#table1").hide();
+          })
+          $("#tab_gps").click(function() {
+
+              $("#table1").show();
+              $("#table2").hide();
+          })
+      })
+  </script>
 
   <!--하단 네비-->
   <section class="bottom_nav">

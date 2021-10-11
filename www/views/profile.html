@@ -78,6 +78,7 @@
   <div class="main main-raised">
     <div class="profile-content">
       <div class="container">
+        
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
@@ -91,19 +92,45 @@
                   <% } %>
                   " alt="Circle Image" class="img-raised rounded-circle img-fluid">
                 </a>
-                </div>
+              </div>
+              
+
               <div class="name">
                 <!--data-->
-                <h3 class="title"><%=id%></h3>
-                <h6><%= userinfo[0].user_location %> | <%= userinfo[0].user_level %> 회원 | 평점 <%= userscore %>점</h6>
-                <input type="button" class='gpsAuth' value="현재 위치 업데이트">
+                <h3 class="title"><%=id%> 님</h3>
+                <div class="comment">
+                  <img src="../img/profile-tack.png">
+                  <p>안녕하세요 <%= userinfo[0].user_name %>입니다</p>
+                </div>
+                <div class="user_info">
+                  <table>
+                    <tr><th><i class="fas fa-map-marker-alt"></i> 위치정보</th></tr>
+                    <tr><td><%= userinfo[0].user_location %></td></tr>
+                    <tr>
+                      <td><input type="button" class='gpsAuth' value="현재 위치 업데이트"></td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <th colspan="2">부름이 정보</th>
+                    </tr>
+                    <tr>
+                      <td><%= userinfo[0].user_level %> 회원</td>
+                      <td>평점 <%= userscore %>점</td>
+                    </tr>
+                    <tr>
+                      <td><input type="button" value="부름이 인증 정보 확인"></td>
+                      <td><input type="button" value="평점 확인"></td>
+                    </tr>
+                  </table>
+                  
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="description text-center">
-          <p>안녕하세요 <%= userinfo[0].user_name %>입니다</p>
-        </div>
+        
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile-tabs">

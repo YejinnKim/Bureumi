@@ -46,16 +46,16 @@
     <div class="container">
         <div class="right_content">
             <div class="userinfo">
-                <h2>Home</h2>
+                <h2>관리자 Home</h2>
                 <hr>
                 <!--가입최신순 3개 나열-->
                 <p><a href='/admin/userinfo'>신규회원</a></p>
                 <table>
                     <tr>
-                        <td>회원코드</td>
-                        <td>아이디</td>
-                        <td>닉네임</td>
-                        <td>회원등급</td>
+                        <th>회원코드</th>
+                        <th>아이디</th>
+                        <th>닉네임</th>
+                        <th>회원등급</th>
                     </tr>
                     <!--데이터 불러오기-->
                     <% user.forEach(function (value) { %>
@@ -75,10 +75,10 @@
                 <p><a href='/admin/bureumiinfo'>최근부름이신청</a></p>
                 <table>
                     <tr>
-                        <td>부름이코드</td>
-                        <td>아이디</td>
-                        <td>상태</td>
-                        <td>상세</td>
+                        <th>부름이코드</th>
+                        <th>아이디</th>
+                        <th>상태</th>
+                        <th>상세</th>
                     </tr>
                     <!--데이터 불러오기-->
                     <% bureumi.forEach(function (value) { %>

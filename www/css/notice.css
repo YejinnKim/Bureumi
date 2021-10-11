@@ -13,7 +13,6 @@ body {
   text-align: left;
 }
 
-
 /*모든 container 속성*/
 .container {
   width: 100%;
@@ -249,27 +248,45 @@ body {
   color: white;
 }
 
-.notice table {
+
+/* .notice table {
   margin: 5px auto;
   border: 0px;
   width: 100%;
 }
+.notice table th{
+  margin: 5px auto;
+  border: 0px;
+  width: 100%;
+} */
 
-.notice table tr td:nth-child(1) {
-  border-bottom: 1px solid #eaeaea;
-  text-align: center;
-  font-weight: 500;
-  font-size: 13px;
+.notice table{
+  width: 100%;
 }
-
-.notice table tr td:nth-child(2) {
-  border-bottom: 1px solid #eaeaea;
+.notice table th{
+  background-color: #282b32;
+  color: white;
+  border: none;
+  padding: 20px 0;
+  font-size: 14px;
+  border-radius: 5px;
   text-align: center;
-  padding: 15px;
 }
-
-
-
+.notice table tr{
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+  -moz-box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+  box-shadow: 0px 5px 12px -12px rgba(0,0,0,0.29);
+}
+.notice table tr:nth-child(2n){
+  background-color: #f7f7f7;
+}
+.notice table tr td{
+  padding: 15px 10px;
+}
+.notice table tr td:nth-child(1){
+  text-align: center;
+}
 
 /*footer*/
 footer {

@@ -70,7 +70,6 @@ router.get('/:page', function (req, res) {
                 page: page,
                 length: result.length - 1
             });
-
         }
 
     });

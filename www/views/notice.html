@@ -84,6 +84,10 @@
             <div class="notice">
               <h2>공지사항</h2>
               <table>
+                <tr>
+                  <th>No</th>
+                  <th>제목</th>
+                </tr>
                 <% notice.forEach(function (value) { %>
                 <tr>
                   <td><%= (value.notice_code).substr(1) %></td>

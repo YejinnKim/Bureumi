@@ -5,6 +5,9 @@
     list-style: none;
     box-sizing: border-box;
 }
+.dropmenu2-show li:nth-child(4){
+    background: #326cff;
+}
 .container{
     width: 100%;
 }
@@ -18,18 +21,11 @@
 .right_content h2{
     margin-top: 120px;
 }
-
 .right_content hr{
     border: 1px solid #282b32;
     border-radius: 5px;
     margin: 20px 0;
     opacity: 40%;
-}
-.right_content a{
-    color: #222222;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 10px 0;
 }
 
 .right_content table{

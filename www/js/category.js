@@ -33,5 +33,4 @@ $(function() {
         }
         location.href='/category/'+__category;
     });
-
 });
