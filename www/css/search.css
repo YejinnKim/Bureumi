@@ -159,7 +159,7 @@ body {
 }
 
 .nav-pills .nav-item .nav-link.active {
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #326cff;
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(50, 108, 255, 0.6);
 }
@@ -230,17 +230,30 @@ body {
 
 
 .search-box{
-  width: 400px;
+  width: 87%;
   position: absolute;
   top: 250px; left: 50%;
   z-index: 1;
   transform: translate(-50%, -50%);
 }
 .search-box > input{
-  padding: 15px;
+  padding: 20px 15px 13px 15px;
   border-radius: 10px;
-  width: 93%;
+  width: 75%;
 }
+.search-box button{
+  width: 60px;
+  padding: 15px 10px;
+  display: inline-block;
+  border-radius: 10px;
+  border: none;
+  background-color: #326cff;
+  cursor: pointer;
+}
+.search-box button i{
+  color: #f2f2f2;
+}
+
 .inquiry_form {
   width: 100%;
 }
@@ -348,6 +361,7 @@ body {
 }
 
 .category {
+  width: 100px;
   border-bottom: 1px solid #eaeaea;
   background: #3f3d56;
   text-align: center;
@@ -364,13 +378,6 @@ body {
   font-weight: bold;
   padding: 15px;
 }
-
-
-
-
-
-
-
 
 
 /*footer*/
@@ -399,6 +406,11 @@ footer .copyright {
     top: 250px; left: 50%;
     z-index: 1;
     transform: translate(-50%, -50%);
+  }
+  .search-box > input{
+    padding: 20px 15px 13px 15px;
+    border-radius: 10px;
+    width: 87%;
   }
   #recommend{
     width: 780px;

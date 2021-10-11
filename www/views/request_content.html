@@ -165,7 +165,15 @@
                                 </td></tr>
                             <% } %>
                         <% } else { %>
-                        <tr><td colspan="2" class="chat"><a href='/chatting/<%= request.request_code %>'><div>채팅하기</div></a></td></tr>
+                          <tr>
+                            <td colspan="2" class="chat">
+                              <a href='/chatting/<%= request.request_code %>'>
+                                <div>
+                                 채팅하기
+                                </div>
+                              </a>
+                            </td>
+                          </tr>
                         <% } %>
                       </table>
                     </div>

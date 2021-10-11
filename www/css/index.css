@@ -229,9 +229,9 @@ body {
   background-size: 500px;
   background-position: center;
 }
-.index_img{
-  width: 500px;
-  margin: 0 auto;
+.index_img img{
+  width: 100%;
+  margin-bottom: 50px;
 }
 
 .header-filter .container {
@@ -239,33 +239,6 @@ body {
   position: relative;
 }
 
-
-
-.profile {
-  text-align: center;
-}
-
-.profile img {
-  max-width: 160px;
-  width: 100%;
-  margin: 0 auto;
-  -webkit-transform: translate3d(0, -50%, 0);
-  transform: translate3d(0, -50%, 0);
-}
-
-.profile .name {
-  margin-top: -80px;
-}
-
-.my_info {
-  margin-top: 3.213rem;
-  padding-bottom: 50px;
-}
-
-.my_info img {
-  width: 100%;
-  margin-bottom: 2.142rem;
-}
 
 /*footer*/
 footer {
