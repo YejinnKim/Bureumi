@@ -9,13 +9,17 @@ var session=require('express-session')  ;
 var path = require('path');
 const { Session } = require('inspector');
 
-router.get('/', (req, res) => {
+router.get('/',async (req, res) => {
     var msg;
     var errMsg=req.flash('error');
     if(errMsg) msg = errMsg;
-    res.render('login', {'message' : msg});
-});
+    await login_check(req.session.user_info);
 
+    function login_check(info){
+        if(info != undefined)  res.send('<script type="text/javascript">alert("이미 로그인 하셨습니다."); window.history.go(-1)</script>');
+        else res.render('login', {'message' : msg});
+    }   
+});
 passport.serializeUser(function(user, done){
     console.log('passport session save : ', user.id);
     done(null, user.id);

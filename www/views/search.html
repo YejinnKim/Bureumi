@@ -145,56 +145,34 @@
             </table>
           </div>
           <div id="request">
-            <h3>실시간요청</h3>
+            <h3 id = "search_option">실시간요청</h3>
             <div class="row">
               <div class="col-md-6 ml-auto mr-auto">
                 <div class="profile-tabs">
+                  <form method="get" action="/search">
+                    <input style="display:none;" type='text' id="cag" name="cag">
                   <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
                     <li class="nav-item">
-                      <a id="tab_gps" class="nav-link active" href="#gps" role="tab" data-toggle="tab">가까운 순</a>
+                      <button type="submit" id="real"class="nav-link active" role="tab" onclick="inputZero()">위치중심</button>
                     </li>
                     <li class="nav-item">
-                      <a id="tab_all" class="nav-link" href="#all" role="tab" data-toggle="tab">최신순</a>
+                      <button type="submit" class="nav-link" id="gps" role="tab" onclick="inputGPS()">실시간</button>
                     </li>
                   </ul>
+                </form>
                 </div>
-                <form method="get" action="/search">
-                  <input style="display:none;" type='text' id="cag" name="cag">
+                
+                  
                   <!--스타일 필요-->
-                  <button type="submit" id="real" onclick="inputZero()">위치중심</button> <!-- 처음 접속하는 search.html 은 위치중심으로 요청 정리 -->
+                   <!-- 처음 접속하는 search.html 은 위치중심으로 요청 정리 -->
                   <!--스타일 필요-->
-                  <button type="submit" id="gps" onclick="inputGPS()">실시간</button>
+                  
                 </form>
               </div>
-              
-              <form>
-              <table id = "table1">
-                <% search.forEach(function (value) { %>
-                <tr>
-                  <td class="category" rowspan="2"><%= value.category %></td>
-                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                </tr>
-                <tr>
-                  <td class="price"><%= value.request_price %></td>
-                </tr>
-                <% }); %> 
-              </table>
-              </form>
-              <form>
-              <table id="table2">
-                <% list.forEach(function (value) { %>
-                <tr>
-                  <td class="category" rowspan="2"><%= value.category %></td>
-                  <td class="title"><a href="/request/<%= value.request_code %>" ><%= value.request_title %></a></td>
-                </tr>
-                <tr>
-                  <td class="price"><%= value.request_price %></td>
-                </tr>
-                <% }); %> 
-              </table>
-            </form>         
+                   
             </div>
             <script language="javascript">
+              document.getElementById("search_option").value = "d"
               function inputZero() {
                 document.getElementById("cag").value = 0
               }
