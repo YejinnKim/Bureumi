@@ -8,12 +8,12 @@ router.get('/', function (req, res) {
     var flag = req.query.cag;
 
     var id = req.user;
-    if (!id) res.render('login');
+    if (req.session.user_info == undefined) res.redirect('/error/info');
     var data = [req.session.user_info.user_id]
     var sql = 'select * from request where not writer_id = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc';
 
     connection.query(sql, data, function (err, result) {
-        if (err) throw err;
+        if (err) {console.error(err); res.redirect('/error/connect')}
         const start = {
             latitude: req.session.user_info.addressLat,
             longitude: req.session.user_info.addressLon
@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
             else if (a.request_code > b.request_code) return -1;
             else return 0;
         })
-        if (flag == undefined || flag == 0)  req.session.search_main = sorted_by_gps_result;
+        if (flag == undefined || flag == 0) req.session.search_main = sorted_by_gps_result;
         else req.session.search_main = result;
 
         res.redirect('/search/1');
@@ -51,17 +51,20 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:page', function (req, res) {
-    var page = req.params.page
-    var id = req.session.user_info.user_id;
-    var total_page = Math.ceil(req.session.search_main.length / 5)
-    if (!id) res.render('login');
-    
-    res.render('search', {
-        search: req.session.search_main,
-        total_page: total_page,
-        page: page,
-        length: req.session.search_main.length - 1
-    });
+    if (req.session.user_info == undefined) res.redirect('/error/info');
+    else {
+        var page = req.params.page
+        var id = req.session.user_info.user_id;
+        var total_page = Math.ceil(req.session.search_main.length / 5)
+
+
+        res.render('search', {
+            search: req.session.search_main,
+            total_page: total_page,
+            page: page,
+            length: req.session.search_main.length - 1
+        });
+    }
 });
 
 

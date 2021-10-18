@@ -26,13 +26,15 @@ function lpad(str, padLen, padStr) {
 };
 
 router.get('/', (req, res) => {
+    
     var msg;
     var errMsg = req.flash('error');
     if (errMsg) msg = errMsg;
 
     var sql = 'select user_code from user order by length(user_code) desc, user_code desc limit 1';
     connection.query(sql, function(err, result) {
-        if (err) throw err;
+        if (err) {console.error(err); res.redirect('/error/connect')}
+        req.session.destroy();
         ucode = result[0].user_code;
         ucode = String(parseInt(ucode.substr(1)) + 1);
     })
@@ -63,7 +65,7 @@ passport.use('local-join', new LocalStrategy({
     user_birth_month = req.body.birth_mm
     user_birth_date = req.body.dd
     user_birth = user_birth_year + '-' + user_birth_month + '-' + user_birth_date
-    user_level = '일반'
+    user_level = '회원'
     user_code = 'u'.concat(lpad(ucode, 3, '0'))
     var sub_number = phone_number.substring(0, 3)
     var number_length = phone_number.length

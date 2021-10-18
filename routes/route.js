@@ -46,6 +46,7 @@ const postoffice = require('./category/postoffice');
 const cleanup = require('./category/cleanup');
 const etc = require('./category/etc')
 const upload = require('./upload/upload');
+const error = require('./error')
 
 //url 라우팅
 router.get('/', function(req, res){
@@ -99,5 +100,6 @@ router.use('/postoffice',postoffice);
 router.use('/cleanup',cleanup);
 router.use('/etc',etc);
 router.use('/upload', upload);
+router.use('/error',error)
 
 module.exports = router;

@@ -13,10 +13,16 @@ router.get('/',async (req, res) => {
     var msg;
     var errMsg=req.flash('error');
     if(errMsg) msg = errMsg;
-    await login_check(req.session.user_info);
 
+    try{
+    await login_check(req.session.user_info);
+    }
+    catch(error){
+        console.error(error);
+         res.send('<script type="text/javascript">alert("오류가 발생했습니다.");window.location.href="/index"</script>');
+    }
     function login_check(info){
-        if(info != undefined)  res.send('<script type="text/javascript">alert("이미 로그인 하셨습니다."); window.history.go(-1)</script>');
+        if(info != undefined)  res.send('<script type="text/javascript">alert("이미 로그인 하셨습니다."); window.location.href="/profile"</script>');
         else res.render('login', {'message' : msg});
     }   
 });
@@ -62,7 +68,7 @@ passport.use('local-login', new LocalStrategy({
 router.post('/', function(req, res, next){
     passport.authenticate('local-login', function(err, user, info){
         if(err) res.status(500).json(err);
-        if(!user) return res.status(401).json(info.message);  
+        if(!user) return res.send('<script type="text/javascript">alert("아이디, 비밀번호를 확인하세요");window.location.href="/login"</script>');
         
         req.logIn(user, function(err){
             if(err) {return next(err); }
