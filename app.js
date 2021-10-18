@@ -11,6 +11,8 @@ var flash = require('connect-flash')
 var path = require('path');
 var pug = require('pug')
 var cors = require('cors'); //cors 사용 (클라이언트에서 ajax 요청시 cors 지원)
+const { setTimeout } = require('timers-promises');
+const errorController = require('./controllers/errorControllers')
 //test
 
 var port = 3000;
@@ -75,6 +77,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(router);
+app.use(errorController.pageNotFoundError);
+app.use(errorController.respondInternalError);
+
+ process.on('uncaughtException',(err) =>{
+	console.error('예기치 못한 에러',err);
+})
+
+
 
 const send = async(option) =>
 {

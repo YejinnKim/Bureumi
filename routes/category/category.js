@@ -4,42 +4,45 @@ var path = require('path');
 var connection = require('../../join/connection');
 const haversine = require('haversine');
 
-router.get('/:category', function (req, res) {
+router.get('/:category', async function (req, res) {
     var category = req.params.category;
     var flag = req.query.cag;
-
-    switch (category) {
-        case 'delivery':
-            var __category = "배달";
-            break;
-        case 'convince':
-            var __category = "편의점";
-            break;
-        case 'installation':
-            var __category = "설치조립";
-            break;
-        case 'shopping':
-            var __category = "장보기";
-            break;
-        case 'lineup':
-            var __category = "줄서기";
-            break;
-        case 'postoffice':
-            var __category = "우체국";
-            break;
-        case 'cleanup':
-            var __category = "청소";
-            break;
-        case 'etc':
-            var __category = "기타";
-            break;
+    if (req.session.user_info == undefined) {
+        res.redirect('/error/info')   
     }
-    var sql = 'select * from request where category = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc, request_code desc';
+    else {
 
-    connection.query(sql, __category, function (err, result) {
-        if (err) throw err;
+        switch (category) {
+            case 'delivery':
+                var __category = "배달";
+                break;
+            case 'convince':
+                var __category = "편의점";
+                break;
+            case 'installation':
+                var __category = "설치조립";
+                break;
+            case 'shopping':
+                var __category = "장보기";
+                break;
+            case 'lineup':
+                var __category = "줄서기";
+                break;
+            case 'postoffice':
+                var __category = "우체국";
+                break;
+            case 'cleanup':
+                var __category = "청소";
+                break;
+            case 'etc':
+                var __category = "기타";
+                break;
+        }
+        var sql = 'select * from request where category = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc, request_code desc';
 
- 
+        connection.query(sql, __category, function (err, result) {
+            if (err) {console.error(err); res.redirect('/error/connect')}
+
             const start = {
                 latitude: req.session.user_info.addressLat,
                 longitude: req.session.user_info.addressLon
@@ -61,16 +64,17 @@ router.get('/:category', function (req, res) {
                         sorted_by_gps_result[j - 1] = sorted_by_gps_result[j];
                         sorted_by_gps_result[j] = temp;
                     }
+                }
             }
-        }
 
-        if(flag == undefined || flag == 0) req.session.search_category = result;
-        else req.session.search_category = sorted_by_gps_result
-        req.session.category_page = category
+            if (flag == undefined || flag == 0) req.session.search_category = result;
+            else req.session.search_category = sorted_by_gps_result
+            req.session.category_page = category
 
-        res.redirect('/' + category + '/1');
+            res.redirect('/' + category + '/1');
 
-    });
+        });
+    }
 });
 
 

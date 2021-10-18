@@ -16,14 +16,13 @@ const vonage = new Vonage({
   apiSecret: APISECRET
 }) 
 router.get('/',(req,res)=>{
-  console.log(req.session.user)
     res.sendFile(path.join(__dirname,'../../www/views/sms.html'));
 });
 
 router.post('/verify',(req,res) =>{
 
   var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
-    if (err) throw err
+    if (err) {console.error(err); res.redirect('/error/connect')}
     else{
       console.log('본인인증 성공')
       res.redirect('/gps')
@@ -39,7 +38,7 @@ router.post('/verify',(req,res) =>{
           console.log(result);
           if(result.status == 0){
               var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
-                if (err) throw err
+                 if (err) {console.error(err); res.redirect('/error/connect')}
                 else{
                   console.log('본인인증 성공')
                   res.redirect('/gps')
