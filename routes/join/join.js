@@ -65,7 +65,7 @@ passport.use('local-join', new LocalStrategy({
     user_birth_month = req.body.birth_mm
     user_birth_date = req.body.dd
     user_birth = user_birth_year + '-' + user_birth_month + '-' + user_birth_date
-    user_level = '회원'
+    user_level = '일반'
     user_code = 'u'.concat(lpad(ucode, 3, '0'))
     var sub_number = phone_number.substring(0, 3)
     var number_length = phone_number.length

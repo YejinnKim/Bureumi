@@ -29,16 +29,26 @@
             </li>
             
             <li>
-                <a href="#" class="dropmenu2-btn">글관리
+                <a href="#" class="dropmenu2-btn">요청관리
                     <span class="fas fa-caret-down second"></span>
                 </a>
             </li>
             <li>    
                 <ul class="dropmenu2-show">
-                    <li><a href="/admin/request">요청글관리</a></li>
-                    <li><a href="/admin/score">평점글관리</a></li>
-                    <li><a href="/admin/matching">요청진행(매칭)관리</a></li>
-                    <li><a href="/admin/notice">공지관리</a></li>
+                    <li><a href="/admin/request">요청글</a></li>
+                    <li><a href="/admin/matching">요청진행(매칭)</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" class="dropmenu3-btn">공지관리
+                    <span class="fas fa-caret-down third"></span>
+                </a>
+            </li>
+            <li>    
+                <ul class="dropmenu3-show">
+                    <li><a href="/admin/notice">공지작성</a></li>
+                    <li><a href="/admin/faq">FAQ</a></li>
                 </ul>
             </li>
         </ul>
@@ -49,27 +59,25 @@
             <hr>
             <table>
                 <tr>
-                    <th>회원번호</th>
-                    <th>아이디</th>
-                    <th>닉네임</th>
-                    <th>생년월일</th>
-                    <th>핸드폰번호</th>
-                    <th>회원등급</th>
-                    <th>평점</th>
-                    <th>이메일</th>
-                    <th>상세</th>
+                    <th>매칭코드</th>
+                    <th>요청제목</th>
+                    <th>요청회원</th>
+                    <th>부름이</th>
+                    <th>매칭날짜</th>
+                    <th>진행상황</th>
                 </tr>
                 <!--데이터 불러오기-->
                 <tr>
-                    <td>useruid</td>
-                    <td>userid</td>
-                    <td>username</td>
-                    <td>datebirth</td>
-                    <td>phonenumber</td>
-                    <td>userlevel</td>
-                    <td>score</td>
-                    <td>email</td>
-                    <td><input type="button" value="확인"></td>
+                    <% matching.forEach(function (value) { %>
+                        <tr>
+                            <td><%= value.matching_code %></td>
+                            <td><a href="/request/<%= value.reqeust_code %>"><%= value.request_title %></a></td>
+                            <td><%= value.requester_id %></td>
+                            <td><%= value.bureumi_id %></td>
+                            <td><%= moment(value.matching_date).format('YYYY-MM-DD') %></td>
+                            <td><%= value.matching_progress %></td>
+                        </tr>
+                    <% }); %>
                 </tr>
             </table>
         </div>
