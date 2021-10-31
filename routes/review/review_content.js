@@ -1,6 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
+
+
 
 router.get('/:matching_code/:writer', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
@@ -14,11 +18,11 @@ router.get('/:matching_code/:writer', function (req, res) {
         var sql2 = 'select * from review where matching_code=? and review_writer=?';
 
         connection.query(sql1, mcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {console.error(err); logger.error('경로 : '+__dirname +'  message: '+err); res.redirect('/error/connect')}
             request = result;
         });
         connection.query(sql2, datas, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {console.error(err); logger.error('경로 : '+__dirname +'  message: '+err); res.redirect('/error/connect')}
             res.render('review_content', { id: id, request: request[0], value: result[0] });
         });
     }

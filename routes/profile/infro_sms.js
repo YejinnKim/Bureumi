@@ -1,13 +1,14 @@
-var express = require('express')
-var app = express()
-var router = express.Router();
-var bodyParser = require('body-parser');
-var path = require('path');
+const express = require('express')
+const app = express()
+const router = express.Router();
+const bodyParser = require('body-parser');
+const path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
-var passport = require('passport')
-var session = require('express-session');
-var connection = require('../../join/connection');
+const passport = require('passport')
+const session = require('express-session');
+const connection = require('../../join/connection');
 const Vonage = require('@vonage/server-sdk')
+const logger = require('../../config/logger');
 
 const APIKEY = process.env.APIKEY
   , APISECRET = process.env.APISECRET
@@ -33,6 +34,7 @@ router.post('/verify', (req, res) => {
     }, (err, result) => {
       if (err) {
         console.error(err);
+        logger.error('경로 : ' + __dirname + '  message: ' + err);
       } else {
         console.log(result);
         if (result.status == 0) {
@@ -45,15 +47,21 @@ router.post('/verify', (req, res) => {
           var data = [user_password, user_name, birth_date, phone_number, user_id]
 
           connection.query(sql, data, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect'); }
+            if (err) {
+              console.error(err);
+              logger.error('경로 : ' + __dirname + '  message: ' + err);
+              res.redirect('/error/connect');
+            }
             else {
-              console.log('정보 수정 성공')
+              console.log('정보 수정 성공');
+              logger.info('<PROFILE-profile update> [id] : ' + req.session.user_info.user_id);
               res.redirect('/update_success');
             }
           })
         }
         else {
           console.log('sms 코드 불일치');
+          logger.info('<PROFILE-sms mismatch> [id] : '+user_id);
           res.send('<script type="text/javascript">alert("코드가 일치하지 않습니다."); window.history.go(-1)</script>');
         }
       }

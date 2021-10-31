@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": " pm2 start app.js -i -1"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@vonage/server-sdk": "^2.10.8",
+    "app-root-path": "^3.0.0",
     "authy": "^1.4.0",
     "aws-sdk": "^2.1002.0",
     "bcrypt": "^5.0.1",
@@ -45,24 +46,30 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "haversine": "^1.1.1",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
     "http-status-codes": "^2.1.4",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "morgan": "^1.10.0",
     "multer": "^1.4.3",
     "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
     "nstore": "^0.5.2",
     "oauth": "^0.9.15",
-    "pug": "^3.0.2",
+    "pm2": "^5.1.2",
     "request": "^2.88.2",
     "request-params": "0.0.1",
     "socket.io": "^4.1.2",
     "speakeasy": "^2.0.0",
     "timers-promises": "^1.0.1",
-    "uid": "^2.0.0"
+    "uid": "^2.0.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   }
 }

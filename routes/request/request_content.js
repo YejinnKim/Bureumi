@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var moment = require('moment');
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const moment = require('moment');
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
 
 router.get('/:request_code', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
@@ -18,20 +20,36 @@ router.get('/:request_code', function (req, res) {
         var sql4 = 'select image from user where user_id in (select writer_id from request where request_code = ?)';
 
         connection.query(sql1, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             if (result != '') mvalue = 1;
             matching = result;
         });
         connection.query(sql2, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             request = result;
         });
         connection.query(sql4, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             img = result;
         });
         connection.query(sql3, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             var i = result.length;
             res.render('request_content', { 'id': id, review: result, request: request[0], matching: matching[0], mvalue: mvalue, i: i, img: img[0].image, moment: moment });
         });
@@ -46,8 +64,12 @@ router.get('/:request_code/update', function (req, res) {
         var sql = 'select * from request where request_code = ?';
 
         connection.query(sql, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
-            res.render('request_update', { 'id': id, value: result[0] });
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            else res.render('request_update', { 'id': id, value: result[0] });
         });
     }
 });
@@ -63,8 +85,15 @@ router.post('/:request_code/update/data', function (req, res) {
         var sql = 'update request set request_title=?, request_content=?, request_price=? where request_code=?';
 
         connection.query(sql, datas, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<REQUEST-request update> [request code]: ' + rcode + ' [id] : ' + req.session.user_info.user_id);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });
@@ -76,8 +105,15 @@ router.get('/:request_code/delete', function (req, res) {
         var sql = 'delete from request where request_code = ?'
 
         connection.query(sql, rcode, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
-            res.redirect('/profile');
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<REQUEST-request delete> [request code] : ' + rcode + ' [id] : ' + req.session.user_info.user_id);
+                res.redirect('/profile');
+            }
         });
     }
 });

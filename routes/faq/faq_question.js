@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
 var fcode;
 
 router.get('/question', function (req, res) {
@@ -8,7 +10,11 @@ router.get('/question', function (req, res) {
     else {
         var sql = 'select faq_code from faq order by length(faq_code) desc, faq_code desc limit 1';
         connection.query(sql, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect'); 
+            }
             fcode = result[0].faq_code;
             fcode = parseInt(fcode.substr(1)) + 1;
         });
@@ -18,6 +24,7 @@ router.get('/question', function (req, res) {
 });
 
 router.post('/question/data', function (req, res) {
+
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
         var code = fcode;
@@ -27,8 +34,13 @@ router.post('/question/data', function (req, res) {
 
         if (code) {
             connection.query(sql, datas, function (err, result) {
-                if (err) { console.error(err); res.redirect('/error/connect') }
-                res.redirect('/faq')
+                if (err) { 
+                    console.error(err); 
+                    logger.error('경로 : '+__dirname +'  message: '+err); 
+                    res.redirect('/error/connect') ;
+                }
+                logger.info('<FAQ-fag write> [fag code] : '+code+' [id] : '+req.session.user_info.user_id);
+                res.redirect('/faq');
             });
         }
     }

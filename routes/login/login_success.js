@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var crypto = require('crypto');
-var LocalStrategy = require('passport-local').Strategy;
-var session = require('express-session');
-var path = require('path');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+const path = require('path');
 
 router.get('/', function (req, res) {
     if (req.session.user_info == undefined) {

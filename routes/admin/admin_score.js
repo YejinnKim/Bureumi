@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const connection = require('../connection');
+const logger = require('../../config/logger');
 
 router.get('/score', function (req, res) {
     var id = req.user;

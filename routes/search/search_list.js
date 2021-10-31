@@ -4,6 +4,7 @@ const path = require('path');
 const connection = require('../connection');
 const haversine = require('haversine');
 const { connect } = require('http2');
+const logger = require('../../config/logger');
 
 router.get('/', function (req, res, next) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
@@ -11,7 +12,6 @@ router.get('/', function (req, res, next) {
         search_req = req.query.search_req;
     req.session.search = search
     req.session.search_req = search_req // search_list.html 검색창 드롭박스
-
     res.redirect('search_list/1');
 })
 
@@ -25,7 +25,11 @@ router.get('/:page', function (req, res) {
         var sql = 'select * from request where request_title like ? and not exists(select * from matching where request.request_code = matching.request_code)  order by request_code desc';
 
         connection.query(sql, ["%" + searching + "%"], function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             else {
                 if (req.session.search_req == 'real_time') {
                     var final_result = result;
@@ -35,7 +39,6 @@ router.get('/:page', function (req, res) {
                     const start = {
                         latitude: req.session.user_info.addressLat,
                         longitude: req.session.user_info.addressLon
-
                     }
                     var sorted_by_gps_result = [];
                     var end = [];
@@ -48,7 +51,6 @@ router.get('/:page', function (req, res) {
                         result[n].distance = haversine(start, end[n])
 
                         sorted_by_gps_result[n] = result[n]
-
                     }
                     for (var i = 0; i < sorted_by_gps_result.length - 1; i++) {
                         for (var j = 1; j < sorted_by_gps_result.length - i; j++) {
@@ -56,7 +58,6 @@ router.get('/:page', function (req, res) {
                                 var temp = sorted_by_gps_result[j - 1];
                                 sorted_by_gps_result[j - 1] = sorted_by_gps_result[j];
                                 sorted_by_gps_result[j] = temp;
-
                             }
                         }
                     }
@@ -72,10 +73,8 @@ router.get('/:page', function (req, res) {
                     length: result.length - 1
                 });
             }
-
         });
     }
-
 });
 
 module.exports = router;

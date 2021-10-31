@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const logger = require('../config/logger');
 
 router.get('/:problem', async function (req, res) {
     try {
         await errHendler(req.params.problem)
     } catch (error) {
-        console.error()
+        console.error(error);
+        logger.error('경로 : '+__dirname +'  '+error);
     }
 
     function errHendler(err) { //회원정보 없이 index와 공지사항 이외의 페이지에 접근한 경우
@@ -50,6 +52,7 @@ router.get('/:problem', async function (req, res) {
                 break;
             default:
                 console.error(err);
+                logger.error('경로 : '+__dirname +'  '+err);
         }
 
     }
