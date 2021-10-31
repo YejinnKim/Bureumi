@@ -29,16 +29,26 @@
             </li>
             
             <li>
-                <a href="#" class="dropmenu2-btn">글관리
+                <a href="#" class="dropmenu2-btn">요청관리
                     <span class="fas fa-caret-down second"></span>
                 </a>
             </li>
             <li>    
                 <ul class="dropmenu2-show">
-                    <li><a href="/admin/request">요청글관리</a></li>
-                    <li><a href="/admin/score">평점글관리</a></li>
-                    <li><a href="/admin/matching">요청진행(매칭)관리</a></li>
-                    <li><a href="/admin/notice">공지관리</a></li>
+                    <li><a href="/admin/request">요청글</a></li>
+                    <li><a href="/admin/matching">요청진행(매칭)</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" class="dropmenu3-btn">공지관리
+                    <span class="fas fa-caret-down third"></span>
+                </a>
+            </li>
+            <li>    
+                <ul class="dropmenu3-show">
+                    <li><a href="/admin/notice">공지작성</a></li>
+                    <li><a href="/admin/faq">FAQ</a></li>
                 </ul>
             </li>
         </ul>
@@ -53,7 +63,15 @@
                 </tr>
                 <tr>
                     <!--프로필 이미지-->
-                    <td class="td-img"><img src="../../img/logo.png"></td>
+                    <td class="td-img">
+                        <img src="
+                        <% if(user.image) { %>
+                            https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= user.user_id %>
+                        <% } else { %>
+                            /img/logo2.jpg
+                        <% } %>
+                        " alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                    </td>
                     <td>
                         <table>
                             <tr>
@@ -72,6 +90,10 @@
                             <tr>
                                 <td class="td-one">회원등급</td>
                                 <td class="td-two"><%= user.user_level %></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">평점</td>
+                                <td class="td-two"><%= score %></td>
                             </tr>
                             <tr>
                                 <td class="td-one">생년월일</td>
@@ -113,10 +135,12 @@
                         <td class="td-one">진행상태</td>
                         <td><%= bureumi.state %></td>
                     </tr>
+                    <% if(bureumi.state != '승인완료') { %>
                     <tr>
                         <td class="td-one">부름이승인</td>
                         <td><input type="button" value="승인" onClick="location.href='/admin/bureumi_approval/<%= bureumi.user_id %>'"></td>
                     </tr>
+                    <% } %>
                 <% } %>
             </table>
             <div class="btn">

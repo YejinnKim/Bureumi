@@ -72,7 +72,8 @@ nav ul ul{
     /* display: none; */
 }
 nav ul  .dropmenu-show.show, 
-nav ul  .dropmenu2-show.show{
+nav ul  .dropmenu2-show.show,
+nav ul  .dropmenu3-show.show{
     display: none;
 }
 nav ul ul li{

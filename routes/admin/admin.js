@@ -1,7 +1,9 @@
+
 const express = require('express');
 const router = express.Router();
 const path = require('path');
 const connection = require('../connection');
+
 const bureumi = require('./admin_bureumi');
 const user = require('./admin_user');
 const request = require('./admin_request');
@@ -9,6 +11,8 @@ const notice = require('./admin_notice');
 const notice_write = require('./admin_notice_write');
 const score = require('./admin_score');
 const matching = require('./admin_matching');
+const faq = require('./admin_faq');
+const faq_write = require('./admin_faq_write');
 
 //moment(data.date_birth).format('YYYY-MM-DD') 날짜 형식 지정
 
@@ -41,5 +45,7 @@ router.use(notice);
 router.use(notice_write);
 router.use(score);
 router.use(matching);
+router.use(faq);
+router.use(faq_write);
 
 module.exports = router;
