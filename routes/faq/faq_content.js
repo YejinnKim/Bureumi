@@ -11,7 +11,11 @@ router.get('/content/:faq_code', function (req, res) {
         var sql = 'select * from faq where faq_code = ?';
 
         connection.query(sql, fcode, function (err, result) {
-            if (err) { console.error(err); logger.error('경로 : '+__dirname +'  message: '+err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect') 
+            }
             res.render('faq_content', { value: result[0] });
         });
     }

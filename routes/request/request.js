@@ -61,7 +61,7 @@ router.post('/data', upload.single('image'), async function (req, res) {
                     console.error(err); res.redirect('/error/connect');
                 }
                 else {
-                    logger.info('<REQUEST-request write> [request code] : ' + code + ' [id] : ' + id);
+                    logger.info('<REQUEST-request write> [request code] : r' + code + ' [id] : ' + id);
                     res.redirect('/search');
                 }
             });

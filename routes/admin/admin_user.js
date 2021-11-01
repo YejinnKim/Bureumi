@@ -45,7 +45,11 @@ router.get('/userinfo/search', function (req, res) {
         sql += 'order by length(user_code) desc, user_code desc'
 
         connection.query(sql, datas, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err); 
+                res.redirect('/error/connect') 
+            }
             res.render('admin/admin_userinfo', { 'id': id, user: result, moment: moment });
         });
     }
@@ -73,7 +77,11 @@ router.get('/userinfo/:user_id', function (req, res) {
             binfo = result;
         });
         connection.query(sql3, uid, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect') 
+            }
             result.forEach(element => {
                 score = score + element.review_score;
             });
