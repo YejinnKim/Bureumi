@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
 var userid;
 
 router.get('/:matching_code', async (req, res) => {
@@ -13,7 +15,11 @@ router.get('/:matching_code', async (req, res) => {
 
 
         await connection.query(sql, datas, function (err, result) {
-            if (err) { console.error(); res.redirect('/error/connect') }
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             userid = result[0];
             if (userid == undefined) res.redirect('/error/connect')
             else {
@@ -34,9 +40,17 @@ router.post('/:matching_code/data', (req, res) => {
     var datas = [mcode, id, score, content, userid];
     var sql = 'insert into review values (?, ?, ?, ?, ?)';
 
+
     connection.query(sql, datas, function (err, result) {
-        if (err) {console.error(err); res.redirect('/error/connect')}
-        res.redirect('/review_list');
+        if (err) {
+            console.error(err);
+            logger.error('경로 : ' + __dirname + '  message: ' + err);
+            res.redirect('/error/connect')
+        }
+        else {
+            logger.info('<SCORE-review write> [maching code] : ' + mcode + ' [id] : ' + id);
+            res.redirect('/review_list');
+        }
     });
 });
 

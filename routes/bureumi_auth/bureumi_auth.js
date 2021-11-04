@@ -1,10 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var connection = require('../connection');
-var moment = require('moment');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const connection = require('../connection');
+const moment = require('moment');
 const { connect } = require('../connection');
+const logger = require('../../config/logger');
+
 var bcode;
+
 
 router.get('/', function (req, res) {
     var id = req.user;
@@ -13,7 +16,11 @@ router.get('/', function (req, res) {
         var sql = 'select * from bureumi where user_id = ?';
 
         connection.query(sql, id, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             if (result.length == 0) {
                 result = [{ "state": "미인증", "bureumi_code": "X" }]
             }
@@ -29,7 +36,11 @@ router.get('/form', function (req, res) {
         var sql = '(select bureumi_code from bureumi) order by length(bureumi_code) desc, bureumi_code desc limit 1';
 
         connection.query(sql, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             bcode = result[0].bureumi_code;
             bcode = parseInt(bcode.substr(1)) + 1;
         })
@@ -54,11 +65,19 @@ router.post('/data', function (req, res) {
 
         if (code) {
             connection.query(sql1, datas1, function (err, result) {
-                if (err) { console.error(err); res.redirect('/error/connect') }
+                if (err) {
+                    console.error(err);
+                    logger.error('경로 : ' + __dirname + '  message: ' + err);
+                    res.redirect('/error/connect')
+                }
             });
 
             connection.query(sql2, datas2, function (err, result) {
-                if (err) { console.error(err); res.redirect('/error/connect') }
+                if (err) {
+                    console.error(err);
+                    logger.error('경로 : ' + __dirname + '  message: ' + err);
+                    res.redirect('/error/connect')
+                }
                 res.redirect('/bureumi_auth/result');
             });
         }
@@ -72,7 +91,12 @@ router.get('/result', function (req, res) {
         var sql = 'select * from user where user_id = ?';
 
         connection.query(sql, id, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            logger.info('<BUREUMI_AUTH-bureumi proposal> [id] : ' + id);
             res.render('bureumi_auth_result', { value: result, moment: moment });
         })
     }

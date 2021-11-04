@@ -1,6 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
+
 var mcode;
 var requester;
 
@@ -12,12 +15,13 @@ router.get('/:request_code', function (req, res) {
         var sql2 = 'select writer_id from request where request_code = ?'
 
         connection.query(sql1, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             mcode = result[0].matching_code;
             mcode = parseInt(mcode.substr(1)) + 1;
         });
         connection.query(sql2, rcode, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
+    
             requester = result[0].writer_id;
 
             if (req.session.user_info.user_level != '부름이')
@@ -42,8 +46,15 @@ router.get('/:request_code/data', function (req, res) {
         var sql2 = 'insert into matching values (concat(\'m\', lpad(?, 3, \'0\')), ?, ?, ?, ?, ?, ?)';
 
         connection.query(sql2, datas, function (err, result) {
-            if (err) throw err;
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<MATCHING-matching propose> [matching code] : ' + code + ' [request code] : ' + rcode + ' [requester id] : ' + rid + ' [bureumi id] : ' + id);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });
@@ -57,8 +68,15 @@ router.get('/:request_code/accept', function (req, res) {
         var datas = [progress, rcode];
 
         connection.query(sql, datas, function (err, result) {
-            if (err) throw err;
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect');
+            }
+            else {
+                logger.info('<MATCHING-matching success> [request code] : ' + rcode);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });
@@ -70,8 +88,14 @@ router.get('/:request_code/accept_refusal', function (req, res) {
         var rcode = req.params.request_code;
 
         connection.query(sql, rcode, function (err, result) {
-            if (err) throw err;
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err); res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<MATCHING-matching refuse> [request code] : ' + rcode);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });
@@ -85,8 +109,15 @@ router.get('/:request_code/complete_req', function (req, res) {
         var datas = [progress, rcode];
 
         connection.query(sql, datas, function (err, result) {
-            if (err) throw err;
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err); 
+                res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<MATCHING-confirm request> [request id] : ' + rcode);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });
@@ -100,8 +131,15 @@ router.get('/:request_code/complete', function (req, res) {
         var datas = [progress, rcode];
 
         connection.query(sql, datas, function (err, result) {
-            if (err) throw err;
-            res.redirect('/request/' + rcode);
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err); 
+                res.redirect('/error/connect');
+            }
+            else {
+                logger.info('<MATCHING-all complete> [request id] : ' + rcode);
+                res.redirect('/request/' + rcode);
+            }
         });
     }
 });

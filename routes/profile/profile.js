@@ -1,9 +1,10 @@
-var express = require('express');
-var app = express()
-var router = express.Router() //라우터 메서드
-var path = require('path')  //상대경로는 path 사용
-var connection = require('../connection');
-var introduce = null;
+const express = require('express');
+const app = express();
+const router = express.Router();
+const path = require('path') ;
+const connection = require('../connection');
+const logger = require('../../config/logger');
+const introduce = null;
 
 //profile page는 login이 될 때만 접근 가능!! 세션에 정보가 있을때!!
 router.get('/', function (req, res) {
@@ -25,11 +26,11 @@ router.get('/', function (req, res) {
         var ids = [id, id]
 
         connection.query(sql1, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             userinfo = result;
         });
         connection.query(sql5, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             result.forEach(element => {
                 userscore = userscore + element.review_score;
             });
@@ -43,15 +44,15 @@ router.get('/', function (req, res) {
             } 
         });
         connection.query(sql2, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             matching = result;
         });
         connection.query(sql3, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             matching_cmplt = result;
         });
         connection.query(sql4, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             res.render('profile', { 'id': id, userinfo: userinfo, userscore: userscore, intrd: intrd, matching: matching, matching_cmplt: matching_cmplt, search: result });
         });
     }
@@ -76,11 +77,11 @@ router.get('/:user_id', function (req, res) {
         var ids = [id, id]
 
         connection.query(sql1, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             userinfo = result;
         });
         connection.query(sql5, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             result.forEach(element => {
                 userscore = userscore + element.review_score;
             });
@@ -91,15 +92,15 @@ router.get('/:user_id', function (req, res) {
             if(result) intrd = result[0];
         });
         connection.query(sql2, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             matching = result;
         });
         connection.query(sql3, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             matching_cmplt = result;
         });
         connection.query(sql4, ids, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             res.render('profile_content', { id: id, userinfo: userinfo, userscore: userscore, intrd: intrd, matching: matching, matching_cmplt: matching_cmplt, search: result });
         });
     }

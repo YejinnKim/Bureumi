@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var connection = require('../../join/connection');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const connection = require('../../join/connection');
 const haversine = require('haversine');
+const logger = require('../../config/logger');
 
 router.get('/:category', async function (req, res) {
     var category = req.params.category;
@@ -37,11 +38,19 @@ router.get('/:category', async function (req, res) {
             case 'etc':
                 var __category = "기타";
                 break;
+            default:
+                var __category = "배달"
+                category = "delivery";
+                break;
         }
         var sql = 'select * from request where category = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc, request_code desc';
 
         connection.query(sql, __category, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect')
+            }
 
             const start = {
                 latitude: req.session.user_info.addressLat,
@@ -49,7 +58,7 @@ router.get('/:category', async function (req, res) {
             }
             var sorted_by_gps_result = [];
             var end = [];
-            for (var n = 0; n < result.length; n++) {
+            for (var n = 0; n < result.length ; n++) {
                 end[n] = {
                     latitude: result[n].latitude,
                     longitude: result[n].longitude

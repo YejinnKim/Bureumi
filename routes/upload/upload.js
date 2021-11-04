@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var upload = require('./s3');
-var aws = require('aws-sdk');
-var s3 = new aws.S3();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const upload = require('./s3');
+const aws = require('aws-sdk');
+const s3 = new aws.S3();
+const connection = require('../connection');
+const logger = require('../../config/logger');
+const path = require('path');
 
 router.get('/', (req, res) => {
     if (req.session.user_info == undefined) res.redirect('/error/info');
@@ -18,10 +20,16 @@ router.get('/', (req, res) => {
 
 router.post('/', upload.single('image'), (req, res) => {
     sql = 'update user set image = 1 where user_id = ?'
-
     connection.query(sql, req.user, function (err, result) {
-        if (err) {console.error(err); res.redirect('/error/connect')}
-        res.redirect('/profile');
+        if (err) {
+            console.error(err);
+            logger.error('경로 : ' + __dirname + '  message: ' + err);
+            res.redirect('/error/connect')
+        }
+        else {
+            logger.info('<UPLOAD-profile image update> [id] : ' + req.user);
+            res.redirect('/profile');
+        }
     });
 });
 
@@ -36,8 +44,15 @@ router.get('/del', (req, res) => {
         sql = 'update user set image = null where user_id = ?'
 
         connection.query(sql, req.user, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
-            res.redirect('/profile');
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
+            else {
+                logger.info('<UPLOAD-profile image delete> [id] : ' + req.user);
+                res.redirect('/profile');
+            }
         });
     }
 });

@@ -1,19 +1,27 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
-var upload = require('./s3');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const upload = require('./s3');
+const path = require('path');
+const logger = require('../../config/logger');
+
 var rcode;
 
 router.get('/', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
-    else if (req.session.user_info.addressLat == 0 && req.session.user_info.addressLon == 0) 
-    {res.send('<script type="text/javascript">alert("위치인증을 해주세요");window.location.href="/profile"</script>');}
+    else if (req.session.user_info.addressLat == 0 && req.session.user_info.addressLon == 0) { res.send('<script type="text/javascript">alert("위치인증을 해주세요");window.location.href="/profile"</script>'); }
     else {
         var sql = 'select request_code from request order by length(request_code) desc, request_code desc limit 1';
         connection.query(sql, function (err, result) {
-            if (err) { console.error(); res.redirect('/error/connect') }
-            rcode = result[0].request_code;
-            rcode = parseInt(rcode.substr(1)) + 1;
+            if (err) {
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                console.error();
+                res.redirect('/error/connect')
+            }
+            else {
+                rcode = result[0].request_code;
+                rcode = parseInt(rcode.substr(1)) + 1;
+            }
         })
 
         res.render('request', { value: null });
@@ -46,15 +54,19 @@ router.post('/data', upload.single('image'), async function (req, res) {
 
         var datas = [code, id, category, title, content, price, image, latitude, longitude, address];
         var sql = 'insert into request values (concat(\'r\', lpad(?, 3, \'0\')), ?, ?, ?, ?, ?, now(), ?,?,?,?)';
-
         if (code) {
             connection.query(sql, datas, function (err, result) {
-                if (err) { console.error(err); res.redirect('/error/connect') }
-                res.redirect('/search');
+                if (err) {
+                    logger.error('경로 : ' + __dirname + '  message: ' + err);
+                    console.error(err); res.redirect('/error/connect');
+                }
+                else {
+                    logger.info('<REQUEST-request write> [request code] : r' + code + ' [id] : ' + id);
+                    res.redirect('/search');
+                }
             });
         }
     }
-
 });
 
 module.exports = router;
