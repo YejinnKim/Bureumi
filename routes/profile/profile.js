@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require('path') ;
 const connection = require('../connection');
 const logger = require('../../config/logger');
-const introduce = null;
+var introduce = null;
 
 //profile page는 login이 될 때만 접근 가능!! 세션에 정보가 있을때!!
 router.get('/', function (req, res) {
@@ -37,7 +37,7 @@ router.get('/', function (req, res) {
             userscore = Math.round((userscore / result.length) * 100) / 100;
         });
         connection.query(sql6, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             if(result) {
                 intrd = result[0];
                 introduce = 1;
@@ -74,6 +74,7 @@ router.get('/:user_id', function (req, res) {
         var userscore = 0;
         var matching;
         var matching_cmplt;
+        var intrd = null;
         var ids = [id, id]
 
         connection.query(sql1, id, function (err, result) {
@@ -88,7 +89,7 @@ router.get('/:user_id', function (req, res) {
             userscore = Math.round((userscore / result.length) * 100) / 100;
         });
         connection.query(sql6, id, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             if(result) intrd = result[0];
         });
         connection.query(sql2, ids, function (err, result) {
@@ -121,7 +122,7 @@ router.post('/intrd', function (req, res) {
         }
         
         connection.query(sql, datas, function (err, result) {
-            if (err) throw err;
+            if (err) logger.error('경로 : ' + __dirname + '  message: ' + err);
             res.redirect('/profile');
         });
     }
