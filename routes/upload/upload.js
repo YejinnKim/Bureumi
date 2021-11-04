@@ -10,7 +10,11 @@ const path = require('path');
 router.get('/', (req, res) => {
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
-        res.render('upload');
+        sql = 'select * from user where user_id = ?'
+        connection.query(sql, req.user, function (err, result) {
+            if (err) {console.error(err); res.redirect('/error/connect')}
+            res.render('upload', {userinfo : result});
+        });
     }
 });
 

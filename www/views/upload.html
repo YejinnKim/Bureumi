@@ -81,14 +81,21 @@
           <div class="tab-content tab-space">
             <div class="inquiry_form">
               <div id=""></div>
-            <div class="notice">
-              <h2>프로필 이미지</h2>
-              업로드
+            <div class="notice" style="text-align: center;">
+              <h3>현재 프로필 이미지</h3>
+              <img src="
+                  <% if(userinfo[0].image) { %>
+                    https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= userinfo[0].user_id %>
+                  <% } else { %>
+                    img/logo2.jpg
+                  <% } %>
+                  " alt="Circle Image" class="img-raised rounded-circle img-fluid" width=300px>
+              <br><br>
               <form method="POST" action="/upload" enctype="multipart/form-data">
                 <input type="file" name="image"/>
                 <input type="submit"/>
               </form>
-              <br>삭제<br>
+              <br>
               <input type="button" value ="기본 이미지로 변경" onclick="location.href='/upload/del'"/>
             </div>
           </div>

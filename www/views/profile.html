@@ -99,8 +99,16 @@
                 <!--data-->
                 <h3 class="title"><%=id%> 님</h3>
                 <div class="comment">
-                  <img src="../img/profile-tack.png">
-                  <p>안녕하세요 <%= userinfo[0].user_name %>입니다</p>
+                  <a href="javascript:void(0);'" onclick="CreateTextBox();" class="img">
+                    <img src="../img/profile-tack.png">
+                  </a>
+                  <p id="tbox">
+                    <% if(intrd) { %>
+                      <%= intrd.content %>
+                    <% } else { %>
+                      안녕하세요 <%= userinfo[0].user_name %>입니다
+                    <% } %>
+                  </p>
                 </div>
                 <div class="user_info">
                   <table>
@@ -110,7 +118,6 @@
                       <td><input type="button" class='gpsAuth' value="현재 위치 업데이트"></td>
                     </tr>
                   </table>
-
                   <table>
                     <tr>
                       <th colspan="2">부름이 정보</th>
@@ -120,11 +127,11 @@
                       <td>평점 <%= userscore %>점</td>
                     </tr>
                     <tr>
-                      <td><input type="button" value="부름이 인증 정보 확인"></td>
-                      <td><input type="button" value="평점 확인"></td>
+                      <!-- input 안됨..ㅠ -->
+                      <td><input type="button" class='bureumiAuth' value="부름이 인증 정보 확인"></td>
+                      <td><input type="button" class='reviewList' value="평점 확인"></td>
                     </tr>
                   </table>
-                  
                 </div>
               </div>
             </div>
@@ -154,6 +161,7 @@
               <div class="col-md-3 ml-auto"></div>
               <div class="col-md-3 mr-auto">
                 <table>
+                  <% if(!matching[0]) { %><tr><td colspan="3">진행 중인 요청이 없습니다.</td></tr><% } %>
                   <% matching.forEach(function (value) { %>
                   <tr>
                     <td rowspan="2" class="rcategory"><%= value.category %></td>
@@ -172,6 +180,7 @@
             <div class="row">
               <div class="col-md-3 ml-auto">
                 <table>
+                  <% if(!search[0]) { %><tr><td colspan="3">대기 중인 요청이 없습니다.</td></tr><% } %>
                   <% search.forEach(function (value) { %>
                   <tr>
                     <td class="rcategory" rowspan="2"><%= value.category %></td>
@@ -189,6 +198,7 @@
             <div class="row">
               <div class="col-md-3 ml-auto">
                 <table>
+                  <% if(!matching_cmplt[0]) { %><tr><td colspan="3">완료된 요청이 없습니다.</td></tr><% } %>
                   <% matching_cmplt.forEach(function (value) { %>
                   <tr>
                     <td rowspan="2" class="rcategory"><%= value.category %></td>
@@ -242,6 +252,12 @@
   <script>
     document.querySelector('.gpsAuth').addEventListener('click',function(){
       window.location.href="/address_update"
+    })
+    document.querySelector('.bureumiAuth').addEventListener('click',function(){
+      window.location.href="/bureumi_auth"
+    })
+    document.querySelector('.reviewList').addEventListener('click',function(){
+      window.location.href="/review_list"
     })
   </script>
 

@@ -204,3 +204,14 @@ var BrowserDetect = {
 };
 
 var better_browser = '<div class="container"><div class="better-browser row"><div class="col-md-2"></div><div class="col-md-8"><h3>We are sorry but it looks like your Browser doesn\'t support our website Features. In order to get the full experience please download a new version of your favourite browser.</h3></div><div class="col-md-2"></div><br><div class="col-md-4"><a href="https://www.mozilla.org/ro/firefox/new/" class="btn btn-warning">Mozilla</a><br></div><div class="col-md-4"><a href="https://www.google.com/chrome/browser/desktop/index.html" class="btn ">Chrome</a><br></div><div class="col-md-4"><a href="http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages" class="btn">Internet Explorer</a><br></div><br><br><h4>Thank you!</h4></div></div>';
+
+
+function CreateTextBox()
+{
+    var txt = '<form method="post" action="/profile/intrd">';
+    txt += "<input type='text' name='content' size='35' style='text-align:center; height:40px;'/>";
+    txt += "<br><input type='submit' value='변경' style='border: none; border-radius:5px; background-color:#326cff; color:#f2f2f2; cursor:pointer; margin-top:10px;'>";
+    txt += "<input type='button' value='취소' onclick='window.location.reload()' style='border: none; border-radius:5px; background-color:#326cff; color:#f2f2f2; cursor:pointer; margin-top:10px; margin-left:5px;'></form>";
+    document.getElementById("tbox").innerHTML = "";
+    document.getElementById("tbox").innerHTML += txt;
+}
