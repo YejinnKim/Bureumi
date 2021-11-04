@@ -240,6 +240,10 @@ body {
     transform: translate3d(0, -50%, 0);
 }
 
+.img:hover {
+    opacity: 80%;
+}
+
 .profile .name {
     margin-top: -80px;
     

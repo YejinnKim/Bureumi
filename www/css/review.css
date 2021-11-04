@@ -296,7 +296,7 @@ table a{
     background-color: #eaeaea;
     padding: 6px;
     width: 87%;
-    margin-left: 26.5px;
+    margin: 0 auto;
 }
 
 /* #request table td{

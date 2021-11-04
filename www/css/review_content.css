@@ -252,7 +252,7 @@ footer .copyright {
 
 
 
-a {
+.request_content table a {
     color: black;
 }
 
@@ -260,7 +260,7 @@ a {
     width: 100%;
 }
 .request_content{
-    width: 380px;
+    width: 95%;
     margin: 30px auto;
     font-size: 14px;
 }
@@ -303,6 +303,10 @@ a {
     margin-top: 3px;
     font-size: 15px;
     display: flex;
+}
+.request_content table tr:nth-child(3) td{
+    display: inline-flex;
+    width: 340px;
 }
 .request_content table tr:nth-child(4){
     height: 200px;

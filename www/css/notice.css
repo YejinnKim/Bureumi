@@ -228,7 +228,7 @@ body {
 
 
 .notice{
-  width: 350px;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -248,6 +248,18 @@ body {
   color: white;
 }
 
+.notice input {
+  border: none;
+  border-radius: 5px;
+  background-color: #326cff;
+  color: #f2f2f2;
+  cursor: pointer;
+  padding: 5px;
+}
+.notice input[type="file"] {
+  background-color: #f2f2f2;
+  color: black;
+}
 
 /* .notice table {
   margin: 5px auto;

@@ -3,6 +3,7 @@ var app = express()
 var router = express.Router() //라우터 메서드
 var path = require('path')  //상대경로는 path 사용
 var connection = require('../connection');
+var introduce = null;
 
 //profile page는 login이 될 때만 접근 가능!! 세션에 정보가 있을때!!
 router.get('/', function (req, res) {
@@ -15,10 +16,12 @@ router.get('/', function (req, res) {
         var sql3 = 'select * from request where request_code in (select request_code from matching where (requester_id = ? or bureumi_id = ?) and matching_progress = \'완료\')';
         var sql4 = 'select * from request where writer_id = ? and request_code not in (select request_code from matching where requester_id = ?) order by length(request_code) desc, request_code desc';
         var sql5 = 'select review_score from review where user_id = ?';
+        var sql6 = 'select * from introduce where user_id = ?'
         var userinfo;
         var userscore = 0;
         var matching;
         var matching_cmplt;
+        var intrd = null;
         var ids = [id, id]
 
         connection.query(sql1, id, function (err, result) {
@@ -32,6 +35,13 @@ router.get('/', function (req, res) {
             });
             userscore = Math.round((userscore / result.length) * 100) / 100;
         });
+        connection.query(sql6, id, function (err, result) {
+            if (err) throw err;
+            if(result) {
+                intrd = result[0];
+                introduce = 1;
+            } 
+        });
         connection.query(sql2, ids, function (err, result) {
             if (err) throw err;
             matching = result;
@@ -42,7 +52,7 @@ router.get('/', function (req, res) {
         });
         connection.query(sql4, ids, function (err, result) {
             if (err) throw err;
-            res.render('profile', { 'id': id, userinfo: userinfo, userscore: userscore, matching: matching, matching_cmplt: matching_cmplt, search: result });
+            res.render('profile', { 'id': id, userinfo: userinfo, userscore: userscore, intrd: intrd, matching: matching, matching_cmplt: matching_cmplt, search: result });
         });
     }
 
@@ -58,6 +68,7 @@ router.get('/:user_id', function (req, res) {
         var sql3 = 'select * from request where request_code in (select request_code from matching where (requester_id = ? or bureumi_id = ?) and matching_progress = \'완료\')';
         var sql4 = 'select * from request where writer_id = ? and request_code not in (select request_code from matching where requester_id = ?) order by length(request_code) desc, request_code desc';
         var sql5 = 'select review_score from review where user_id = ?';
+        var sql6 = 'select * from introduce where user_id = ?'
         var userinfo;
         var userscore = 0;
         var matching;
@@ -75,6 +86,10 @@ router.get('/:user_id', function (req, res) {
             });
             userscore = Math.round((userscore / result.length) * 100) / 100;
         });
+        connection.query(sql6, id, function (err, result) {
+            if (err) throw err;
+            if(result) intrd = result[0];
+        });
         connection.query(sql2, ids, function (err, result) {
             if (err) throw err;
             matching = result;
@@ -85,7 +100,28 @@ router.get('/:user_id', function (req, res) {
         });
         connection.query(sql4, ids, function (err, result) {
             if (err) throw err;
-            res.render('profile_content', { id: id, userinfo: userinfo, userscore: userscore, matching: matching, matching_cmplt: matching_cmplt, search: result });
+            res.render('profile_content', { id: id, userinfo: userinfo, userscore: userscore, intrd: intrd, matching: matching, matching_cmplt: matching_cmplt, search: result });
+        });
+    }
+});
+
+router.post('/intrd', function (req, res) {
+    var id = req.user;
+    if (req.session.user_info == undefined) res.redirect('/error/info')
+    else {
+        var sql;
+        var datas;
+        if (introduce) {
+            sql = 'update introduce set content = ? where user_id = ?';
+            datas = [req.body.content, id]
+        } else {
+            sql = 'insert into introduce values (?, ?)';
+            datas = [id, req.body.content]
+        }
+        
+        connection.query(sql, datas, function (err, result) {
+            if (err) throw err;
+            res.redirect('/profile');
         });
     }
 });
