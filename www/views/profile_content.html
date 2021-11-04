@@ -99,7 +99,13 @@
           </div>
         </div>
         <div class="description text-center">
-          <p>안녕하세요 <%= userinfo[0].user_name %>입니다</p>
+          <p id="tbox">
+            <% if(intrd) { %>
+              <%= intrd.content %>
+            <% } else { %>
+              안녕하세요 <%= userinfo[0].user_name %>입니다
+            <% } %>
+          </p>
         </div>
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
