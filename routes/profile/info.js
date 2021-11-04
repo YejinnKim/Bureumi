@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var path = require('path');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const path = require('path');
 
 router.get('/', function (req, res) { // 개인정보 출력
     if (req.session.user_info == undefined) res.redirect('/error/info')

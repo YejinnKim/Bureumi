@@ -1,56 +1,73 @@
-var express = require('express')
-var app = express()
-var router = express.Router();
-var bodyParser = require('body-parser');
-var path = require('path');
-app.use(bodyParser.urlencoded({extended:true}));
-var connection = require('../../join/connection');
-var passport = require('passport')
-var session=require('express-session');
-require('dotenv').config(); 
+const express = require('express')
+const app = express()
+const router = express.Router();
+const bodyParser = require('body-parser');
+const path = require('path');
+app.use(bodyParser.urlencoded({ extended: true }));
+const connection = require('../../join/connection');
+const passport = require('passport')
+const session = require('express-session');
 const Vonage = require('@vonage/server-sdk')
-const APIKEY = process.env.APIKEY 
-,APISECRET = process.env.APISECRET
+const logger = require('../../config/logger');
+
+require('dotenv').config();
+
+const APIKEY = process.env.APIKEY
+  , APISECRET = process.env.APISECRET
 const vonage = new Vonage({
   apiKey: APIKEY,
   apiSecret: APISECRET
-}) 
-router.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../../www/views/sms.html'));
+})
+
+
+
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../www/views/sms.html'));
 });
 
-router.post('/verify',(req,res) =>{
-
+router.post('/verify', (req, res) => {
+  var userid = req.session.user.user_id;
   var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
-    if (err) {console.error(err); res.redirect('/error/connect')}
-    else{
+    if (err) {
+      console.error(err);
+      logger.error('경로 : ' + __dirname + '  message: ' + err);
+      res.redirect('/error/connect');
+    }
+    else {
       console.log('본인인증 성공')
       res.redirect('/gps')
-    }});
-/*    //휴대폰 sms 인증
-        vonage.verify.check({
-        request_id: verifyRequestId,
-        code: req.body.code
-      }, (err, result) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(result);
-          if(result.status == 0){
-              var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
-                 if (err) {console.error(err); res.redirect('/error/connect')}
-                else{
-                  console.log('본인인증 성공')
-                  res.redirect('/gps')
-                }
-            }) 
+    }
+  });
+  /*    //휴대폰 sms 인증
+          vonage.verify.check({
+          request_id: verifyRequestId,
+          code: req.body.code
+        }, (err, result) => {
+          if (err) {
+            console.error(err);
+            logger.error('경로 : '+__dirname +'  message: '+err); 
+          } else {
+            console.log(result);
+            if(result.status == 0){
+                var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
+                   if (err) {
+                     console.error(err); 
+                     logger.error('경로 : '+__dirname +'  message: '+err); 
+                     res.redirect('/error/connect')}
+                  else{
+                    console.log('본인인증 성공')
+                    logger.info('<JOIN-sms success> [id] : '+ userid);
+                    res.redirect('/gps')
+                  }
+              }) 
+            }
+            else{
+              logger.info('<JOIN-sms fail> [id] : '+ userid)
+              console.log('본인인증 실패');
+              res.redirect('/sms')
+            }
           }
-          else{
-            console.log('본인인증 실패');
-            res.redirect('/sms')
-          }
-        }
-      });  */
+        });  */
 })
 
 

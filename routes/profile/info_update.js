@@ -1,15 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var path = require('path');
-var connection = require('../../join/connection');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const path = require('path');
+const connection = require('../../join/connection');
 const Vonage = require('@vonage/server-sdk');
+const logger = require('../../config/logger');
+
 const APIKEY = process.env.APIKEY
     , APISECRET = process.env.APISECRET
 const vonage = new Vonage({
     apiKey: APIKEY,
     apiSecret: APISECRET
 })
+
 /*개인정보 업데이트 */
 router.post('/', (req, res) => {
     if (req.session.user_info == undefined) res.redirect('/error/info')
@@ -45,6 +48,7 @@ router.post('/', (req, res) => {
                             }, (err, result) => {
                                 if (err) {
                                     console.error(err);
+                                    logger.error('경로 : ' + __dirname + '  message: ' + err);
                                     res.send('<script type="text/javascript">alert("오류가 발생했습니다.");window.history.go(-1)</script>');
                                 } else {
                                     const verifyRequestId = result.request_id;
@@ -82,17 +86,25 @@ router.post('/', (req, res) => {
                 var data = [user_password, user_name, birth_date, user_id]
 
                 connection.query(sql, data, function (err, result) {
-                    if (err) {console.error(err); res.redirect('/error/connect')}
-                    console.log('정보 수정 성공')
-                    req.logout();
-                    req.session.destroy()
-                    res.redirect('/update_success');
+                    if (err) {
+                        console.error(err);
+                        logger.error('경로 : ' + __dirname + '  message: ' + err);
+                        res.redirect('/error/connect')
+                    }
+                    else {
+                        console.log('정보 수정 성공')
+                        logger.info('<PROFILE-profile update> [id] : ' + user_id);
+                        req.logout();
+                        req.session.destroy()
+                        res.redirect('/update_success');
+                    }
 
                 })
             }
         }
         else {
             console.log('비밀번호 불일치');
+            logger.info('<PROFILE-password mismatch> [id] : '+user_id);
             res.send('<script type="text/javascript">alert("비밀번호가 정확하지 않습니다."); window.history.go(-1)</script>');
         }
     }

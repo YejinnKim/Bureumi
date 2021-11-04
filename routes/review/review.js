@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var connection = require('../connection');
+const express = require('express');
+const router = express.Router();
+const connection = require('../connection');
+const path = require('path');
+const logger = require('../../config/logger');
 
 router.get('/', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
@@ -10,7 +12,11 @@ router.get('/', function (req, res) {
         var ids = [id, id, id];
 
         connection.query(sql, ids, function (err, result) {
-            if (err) {console.error(err); res.redirect('/error/connect')}
+            if (err) {
+                console.error(err);
+                logger.error('경로 : ' + __dirname + '  message: ' + err);
+                res.redirect('/error/connect')
+            }
             res.render('review', { id: id, value: result });
         });
     }

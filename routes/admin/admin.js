@@ -1,17 +1,19 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var connection = require('../connection');
 
-var bureumi = require('./admin_bureumi');
-var user = require('./admin_user');
-var request = require('./admin_request');
-var notice = require('./admin_notice');
-var notice_write = require('./admin_notice_write');
-var score = require('./admin_score');
-var matching = require('./admin_matching');
-var faq = require('./admin_faq');
-var faq_write = require('./admin_faq_write');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const logger = require('../../config/logger');
+const connection = require('../connection');
+
+const bureumi = require('./admin_bureumi');
+const user = require('./admin_user');
+const request = require('./admin_request');
+const notice = require('./admin_notice');
+const notice_write = require('./admin_notice_write');
+const score = require('./admin_score');
+const matching = require('./admin_matching');
+const faq = require('./admin_faq');
+const faq_write = require('./admin_faq_write');
 
 //moment(data.date_birth).format('YYYY-MM-DD') 날짜 형식 지정
 
@@ -26,11 +28,19 @@ router.get('/', function (req, res) {
         var user;
 
         connection.query(sql1, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect') 
+            }
             user = result;
         });
         connection.query(sql2, function (err, result) {
-            if (err) { console.error(err); res.redirect('/error/connect') }
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect'); 
+            }
             res.render('admin/admin_index', { 'id': id, user: user, bureumi: result });
         });
     }
