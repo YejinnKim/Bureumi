@@ -112,7 +112,32 @@
                           <% if(request.request_img) { %>
                             <img src="<%= request.request_img %>" width="350"/>
                           <% } %>
-                          <%= request.request_content %></td></tr>
+                          <%= request.request_content %>
+                        </td></tr>
+                        <tr><td colspan="2">
+                          <% if(request.writer_id == id || (mvalue && matching.bureumi_id == id)) { %>
+                            <div class="step-box">
+                            <% if(mvalue && matching.matching_progress == '매칭요청') { %>
+                            <div class="step-state step1">
+                            <% } else if(mvalue && matching.matching_progress == '진행중') { %>
+                            <div class="step-state step2-ing">
+                            <% } else if(mvalue && matching.matching_progress == '완료요청') { %>
+                              <div class="step-state step3">
+                            <% } else if(mvalue && matching.matching_progress == '완료') { %>
+                              <div class="step-state step4">
+                            <% } else { %>
+                              <div class="step-state">
+                            <% } %>
+                              <ul>
+                                <li><p>매칭 대기</p></li>
+                                <li><p>부름이 매칭</p></li>
+                                <li><p>요청 진행</p></li>
+                                <li><p>요청 완료</p></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <% } %>
+                        </td></tr>
                         <% if(mvalue) { %>
                           <tr><td colspan="2" class="chat"><div>
                             <% if(matching.requester_id != id && matching.bureumi_id != id) { %>
@@ -169,7 +194,7 @@
                             <td colspan="2" class="chat">
                               <a href='/chatting/<%= request.request_code %>'>
                                 <div>
-                                 채팅하기
+                                  채팅하기
                                 </div>
                               </a>
                             </td>

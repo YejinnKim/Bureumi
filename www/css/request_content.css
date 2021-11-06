@@ -329,17 +329,23 @@ footer .copyright {
 .request_content table tr:nth-child(4){
     height: 300px;
 }
+.request_content table tr:nth-child(5) td{
+    padding: 0px;
+}
 .request_content table tr:nth-child(6){
+    font-weight: bold;
+}
+.request_content table tr:nth-child(7){
     text-align: center;
 }
-.request_content table tr:nth-child(6) button{
+.request_content table tr:nth-child(7) button{
     border: 0px;
     border-radius: 5px;
     padding: 8px 15px;
     background-color: #326cff;
     color: white;
 }
-.request_content table tr:nth-child(6) button:hover{
+.request_content table tr:nth-child(7) button:hover{
     background-color: #f5f5f5;
     color: black;
 }
@@ -373,6 +379,100 @@ footer .copyright {
     cursor: pointer;
     margin: 0px 10px;
 
+}
+
+
+ul {
+  list-style:none;
+  padding-inline-start: 0px;
+  margin: 0;
+}
+.step-state {
+  padding:5px;
+  background:#f7f7f7
+}
+.step-state ul:after {
+  content:'';
+  display:block;
+  clear:both
+}
+.step-state ul li {
+  float:left;
+  position:relative;
+  width:25%;
+  padding-top:50px;
+  font-size:13px;
+  font-weight:bold;
+  text-align:center;
+  line-height:12px;
+  color:#666
+}
+/* 회색 진행바 생성 */
+.step-state ul li:before {
+  position:absolute;
+  top:35px;
+  left:0;
+  right:0;
+  height:3px;
+  background:#ddd;
+  content:''
+}
+.step-state ul li:nth-child(1):after {
+    background:#326cff;
+  }
+/* 첫 번째 진행바 반만 생성*/
+.step-state ul li:nth-child(1):before {
+  left:50%;
+}
+/* 마지막 진행바 반만 생성*/
+.step-state ul li:nth-child(4):before {
+  right:50%;
+}
+.step-state ul li:after {
+  position:absolute;
+  top:29px;
+  left:54%;
+  width:15px;
+  height:15px;
+  margin-left:-10px;
+  background: #ddd;
+  border-radius: 70%;
+  background-size:auto 24px;
+  background-position:0 0;
+  content:''
+}
+/* 활성화 상태바 */
+.step-state.step1 ul li:nth-child(1):before,
+.step-state.step2 ul li:nth-child(-n+2):before,
+.step-state.step2-ing ul li:nth-child(-n+2):before,
+.step-state.step3 ul li:nth-child(-n+3):before,
+.step-state.step3-ing ul li:nth-child(-n+3):before,
+.step-state.step4 ul li:nth-child(-n+4):before {
+  background:#326cff;
+}
+/* 활성화 아이콘 표시 */
+.step-state.step1 ul li:nth-child(1):after,
+.step-state.step2 ul li:nth-child(-n+2):after,
+.step-state.step2-ing ul li:nth-child(-n+2):after,
+.step-state.step3 ul li:nth-child(-n+3):after,
+.step-state.step3-ing ul li:nth-child(-n+3):after,
+.step-state.step4 ul li:nth-child(-n+4):after {
+  background-position:-20px 0;
+  background:#326cff;
+  border-radius: 70%;
+}
+/* 도전 중일 경우의 1/2 영역 비활성화 상태바 영역 */
+.step-state ul li p:before {
+  position:absolute;
+  top:35px;
+  left:50%;
+  right:0;
+  height:3px;
+  content:'';
+}
+.step-state.step2 ul li:nth-child(2) p:before,
+.step-state.step3 ul li:nth-child(3) p:before {
+  background:#ddd
 }
 
 @media screen and (max-width : 980px){
