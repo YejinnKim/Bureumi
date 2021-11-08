@@ -49,8 +49,12 @@ router.get('/', function (req, res) {
                 else if (a.request_code > b.request_code) return -1;
                 else return 0;
             })
-            if (flag == undefined || flag == 0) req.session.search_main = sorted_by_gps_result;
-            else req.session.search_main = result;
+            if (flag == undefined || flag == 0) {
+                req.session.search_main = sorted_by_gps_result; 
+                req.session.btn_col=0;}
+            else {
+                req.session.search_main = result
+                req.session.btn_col=1;}; 
 
             res.redirect('/search/1');
         });
@@ -61,7 +65,6 @@ router.get('/:page', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
         var page = req.params.page
-        var id = req.session.user_info.user_id;
         var total_page = Math.ceil(req.session.search_main.length / 5)
 
 
@@ -69,7 +72,8 @@ router.get('/:page', function (req, res) {
             search: req.session.search_main,
             total_page: total_page,
             page: page,
-            length: req.session.search_main.length - 1
+            length: req.session.search_main.length - 1,
+            btn_col : req.session.btn_col
         });
     }
 });
