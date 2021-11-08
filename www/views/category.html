@@ -40,7 +40,7 @@
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">요청조회</a>
             <div class="dropdown-menu dropdown-with-icons">
               <a href="/search" class="dropdown-item">요청조회</a>
-              <a href="/category/배달" class="dropdown-item">카테고리</a>
+              <a href="/category/delivery" class="dropdown-item">카테고리</a>
             </div>
           </li>
           <li class="dropdown nav-item">
@@ -80,32 +80,58 @@
             <h3>카테고리</h3>
             <div>
               <form method="get" action="/category/<%= category %>">
-                <input style="display:none;" type='text' id="cag" name="cag" > <!--스타일 필요-->
-                <button type="submit" id="real" onclick="inputZero()">실시간</button><!--스타일 필요-->
+                <input style="display:none;" type='text' id="cag" name="cag" > 
+                <input style="display:none;" type='text' id="cag_opt" value="<%= cag_flag %>" > 
+                <button type="submit" id="real" onclick="inputZero()">실시간</button>
                 <button type="submit" id="gps" onclick="inputGPS()">위치중심</button>
               </form>
                     </div>
-                    <div id="category">
-                        <select id="category_opt">
-                            <option name="배달">배달</option>
-                            <option name="편의점">편의점</option>
-                            <option name="설치조립">설치조립</option>
-                            <option name="장보기">장보기</option>
-                            <option name="줄서기">줄서기</option>
-                            <option name="우체국">우체국</option>
-                            <option name="청소">청소</option>
-                            <option>기타</option>
-                        </select>
-                    </div>
-                    <script language="javascript">
-                      function inputZero(){
-                      document.getElementById("cag").value=0
-                      }
-                      function inputGPS(){
-                        document.getElementById("cag").value=1
-                      }
-
-                    </script>
+                    <select id="category_opt" class="category_opt">
+                      <option id="del">배달</option>
+                      <option id="con">편의점</option>
+                      <option id="ins">설치조립</option>
+                      <option id="sho">장보기</option>
+                      <option id="lin">줄서기</option>
+                      <option id="pos">우체국</option>
+                      <option id="cle">청소</option>
+                      <option id="etc">기타</option>
+                    </select>
+                  </div>
+                  <script language="javascript">
+                    function inputZero() {
+                      document.getElementById("cag").value = 0
+                    }
+                    function inputGPS() {
+                      document.getElementById("cag").value = 1
+                    }
+        
+                    if (document.getElementById("cag_opt").value == 0) {
+                      $("#del").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 1) {
+                      $("#con").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 2) {
+                      $("#ins").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 3) {
+                      $("#sho").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 4) {
+                      $("#lin").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 5) {
+                      $("#pos").prop("selected", true)
+                    }
+                    else if (document.getElementById("cag_opt").value == 6) {
+                      $("#cle").prop("selected", true)
+                    }
+                    else if(document.getElementById("cag_opt").value == 7){
+                      $("#etc").prop("selected", true)
+                    }
+        
+        
+                  </script>
 
                     <div id="request">
                       <table>
