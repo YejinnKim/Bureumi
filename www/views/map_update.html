@@ -7,6 +7,17 @@
     <title>주소로 장소 표시하기</title>
     <!--css-->
     <style>
+         .address_select {
+            width: 60px;
+            height: 20px;
+            background-color: #326cff;
+            border: 1px;
+            border-radius: 3px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
         .address_name{
         width: 100%;
         height: 44px;
@@ -45,11 +56,11 @@
     <form  action="/save" method="post" class="mapform">
         
 
-        <input style="width:60%;float:left;text-align:center;display:none;" type='text'  id ="user_address"name="user_address" >
-        <!--9.24 추가-->
+        <input style="width:60%;float:left;text-align:center;" type='text'  id ="user_address"name="user_address" >
+        <button style="float:left;margin-left:5px  ;" type="button" class="address_select"> 검색 </button>
+
         <input style="display:none;" type='text'  id ="addressLatitude"name="addressLatitude" >
         <input style="display:none;" type='text'  id ="addressLongitude"name="addressLongitude" >
-        <!--       -->
         <div id="map" style="width:100%;height:600px;"></div>
         <p></p>
         <button type="submit" class="address_save" name="address_name">주소 저장하기</button>
@@ -71,6 +82,47 @@
 
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new kakao.maps.services.Geocoder();
+
+        //주소검색 클릭시 이벤트
+        document.querySelector('.address_select').addEventListener('click', function () {
+                var search_location = document.getElementsByName('user_address')[0].value;
+                save_location = search_location // 주소값 변수 저장
+                var data = { 'search_location': search_location }
+
+                geocoder.addressSearch(search_location, function (result, status) {
+
+                    // 정상적으로 검색이 완료됐으면 
+                    if (status === kakao.maps.services.Status.OK) {
+
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                        // 결과값으로 받은 위치를 마커로 표시합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coords
+
+                        });
+
+                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
+
+                        });
+                        infowindow.open(map, marker);
+                        document.getElementById('addressLatitude').value = coords.Ma;
+                        document.getElementById('addressLongitude').value = coords.La;
+
+                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                        map.setCenter(coords);
+
+                    }
+                    else {
+                        alert('주소를 다시 입력하세요')
+                        window.location.href = "/gps";
+                    }
+                });
+
+            });
        
         //주소 저장하기 클릭 이벤트
         document.querySelector('.address_save').addEventListener('click', function () {
