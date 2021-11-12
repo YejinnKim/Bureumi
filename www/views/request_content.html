@@ -99,7 +99,7 @@
                               case '기타': %>8<% break;
                             } %>_80.png" width="40px"></div></td></tr>
                         <tr><td colspan="2"><%= request.request_price %>원
-                          <div class="time"><%= moment(request.request_date).format('YYYY-MM-DD hh:mm:ss') %></div></td></tr>
+                          <div class="time"><%= moment(request.request_date).format('YYYY-MM-DD hh:mm:ss') %></div></td></tr> 
                         <tr><td><a href="/profile/<%= request.writer_id %>"><img src="
                           <% if(img) { %>
                             https://bureumi.s3.ap-northeast-2.amazonaws.com/profile/<%= request.writer_id %>
@@ -107,14 +107,15 @@
                             ../img/logo2.jpg
                           <% } %>
                           " width="25"/> <%= request.writer_id %></a></td>
-                            <td><%= request.address %></td></tr>
+                            <td><a href="https://map.kakao.com/link/to/<%=request.address%>,<%=request.latitude%>,<%=request.longitude%>                          
+                              "><%= request.address %></a></td></tr>
                         <tr><td colspan="2">
                           <% if(request.request_img) { %>
                             <img src="<%= request.request_img %>" width="350"/>
                           <% } %>
                           <%= request.request_content %>
                         </td></tr>
-                        <tr><td colspan="2">
+                        <tr><td colspan="2">  
                           <% if(request.writer_id == id || (mvalue && matching.bureumi_id == id)) { %>
                             <div class="step-box">
                             <% if(mvalue && matching.matching_progress == '매칭요청') { %>
