@@ -81,8 +81,11 @@ router.post('/:request_code/update/data', function (req, res) {
         var title = req.body.title;
         var content = req.body.content;
         var price = req.body.price;
-        var datas = [title, content, price, rcode];
-        var sql = 'update request set request_title=?, request_content=?, request_price=? where request_code=?';
+        var latitude = req.session.user_info.addressLat;
+        var longitude = req.session.user_info.addressLon;
+        var address = req.session.user_info.user_address;
+        var datas = [title, content, price,latitude,longitude,address, rcode];
+        var sql = 'update request set request_title=?, request_content=?, request_price=?, latitude = ?, longitude=?, address=? where request_code=?';
 
         connection.query(sql, datas, function (err, result) {
             if (err) {

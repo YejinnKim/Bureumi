@@ -55,7 +55,8 @@
     <body>
         <form action="/save" method="post" class="mapform">
 
-            <input style="width:60%;float:left;text-align:center;" type='text' id="user_address" name="user_address" class="user_address">
+            <input style="width:60%;float:left;text-align:center;" type='text' id="user_address" name="user_address"
+                class="user_address">
             <button style="float:left;margin-left:5px  ;" type="button" class="address_select"> 검색 </button>
 
             <input style="display:none;" type='text' id="addressLatitude" name="addressLatitude">
@@ -219,7 +220,11 @@
                 // 좌표로 법정동 상세 주소 정보를 요청합니다
                 geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
             }
-
+            document.addEventListener('keydown', function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                };
+            }, true);
 
         </script>
     </body>
