@@ -87,19 +87,20 @@ passport.use('local-join', new LocalStrategy({
         }
         else {
             if (sub_number == '010' && number_length == 11) { //번호가 010으로 시작하고 자릿수가 11자리인지 체크
-                /*                  vonage.verify.request({ //인증 sms 발송
-                                    number: '82' + phone_number, //01027008033
-                                    brand: "Bureumi"
-                                }, (err, result) => {
-                                    if (err) {
-                                        logger.error('경로 : ' + __dirname + '  message: ' + err); 
-                                        console.error(err);
-                                    } else {
-                                        const verifyRequestId = result.request_id;
-                                        global.verifyRequestId = result.request_id;
-                                        console.log('request_id', verifyRequestId);
-                                    }
-                                })  */
+                vonage.verify.request({ //인증 sms 발송
+                    number: '82' + phone_number, //01027008033
+                    brand: "Bureumi"
+                }, (err, result) => {
+                    if (err) {
+                        logger.error('경로 : ' + __dirname + '  message: ' + err);
+                        console.error(err);
+                    } else {
+                        logger.info('<JOIN-sms transfer> [id] : ' + userid);
+                        const verifyRequestId = result.request_id;
+                        global.verifyRequestId = result.request_id;
+                        console.log('request_id', verifyRequestId);
+                    }
+                })
                 var query = connection.query('select * from user where user_id=?', [userid], function (err, rows) {
                     if (err) {
                         logger.error('경로 : ' + __dirname + '  message: ' + err);

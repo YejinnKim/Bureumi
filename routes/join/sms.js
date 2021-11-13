@@ -27,18 +27,6 @@ router.get('/', (req, res) => {
 
 router.post('/verify', (req, res) => {
   var userid = req.session.user.user_id;
-  var query = connection.query('insert into user set ?', req.session.user, function (err, rows) {
-    if (err) {
-      console.error(err);
-      logger.error('경로 : ' + __dirname + '  message: ' + err);
-      res.redirect('/error/connect');
-    }
-    else {
-      console.log('본인인증 성공')
-      res.redirect('/gps')
-    }
-  });
-  /*    //휴대폰 sms 인증
           vonage.verify.check({
           request_id: verifyRequestId,
           code: req.body.code
@@ -67,7 +55,7 @@ router.post('/verify', (req, res) => {
               res.redirect('/sms')
             }
           }
-        });  */
+        }); 
 })
 
 

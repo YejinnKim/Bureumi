@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
         var data = [req.session.user_info.user_id]
         var sql = 'select * from request where not writer_id = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc';
 
-        connection.query(sql, data, function (err, result) {
+        connection.query(sql, data, async function (err, result) {
             if (err) {
                 console.error(err);
                 logger.error('경로 : ' + __dirname + '  message: ' + err);
@@ -43,6 +43,7 @@ router.get('/', function (req, res) {
                         sorted_by_gps_result[j] = temp;
                     }
                 }
+                
             }
             result.sort(function (a, b) {
                 if (a.request_code < b.request_code) return 1;
@@ -50,12 +51,29 @@ router.get('/', function (req, res) {
                 else return 0;
             })
             if (flag == undefined || flag == 0) {
-                req.session.search_main = sorted_by_gps_result; 
-                req.session.btn_col=0;}
+                req.session.search_main = sorted_by_gps_result;
+                req.session.btn_col = 0;
+            }
             else {
                 req.session.search_main = result
-                req.session.btn_col=1;}; 
+                req.session.btn_col = 1;
+            };
 
+            await DistanceTranslate();
+            
+            function DistanceTranslate(){
+                for(var i = 0; i<req.session.search_main.length;i++) 
+                {
+                    var temp = req.session.search_main[i].distance;
+                    if(temp.toFixed(1) < 1){
+                        temp = Math.floor(temp * 1000);
+                        req.session.search_main[i].distance = temp+"m";
+                    } 
+                    else{
+                        req.session.search_main[i].distance = temp.toFixed(1)+"km";
+                    }
+                }
+            }
             res.redirect('/search/1');
         });
     }
@@ -73,7 +91,7 @@ router.get('/:page', function (req, res) {
             total_page: total_page,
             page: page,
             length: req.session.search_main.length - 1,
-            btn_col : req.session.btn_col
+            btn_col: req.session.btn_col
         });
     }
 });
