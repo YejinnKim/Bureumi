@@ -19,7 +19,7 @@ router.get('/', function (req, res) {
         connection.query(sql2, function (err, result) {
             keyword = result;
         })
-        connection.query(sql1, data, function (err, result) {
+        connection.query(sql1, data, async function (err, result) {
             if (err) {
                 console.error(err);
                 logger.error('경로 : ' + __dirname + '  message: ' + err);
