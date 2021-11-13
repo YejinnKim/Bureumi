@@ -1,180 +1,241 @@
 <!DOCTYPE html>
 <html>
 <!--profile에서 버튼 클릭시 주소 업데이트를 위해 띄우는 페이지-->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
     <title>주소로 장소 표시하기</title>
     <!--css-->
     <style>
-        .address_name{
-        width: 100%;
-        height: 44px;
-        background-color: #326cff;
-        border: 1px;
-        border-radius: 3px;
-        color: white;
-        font-size: 17px;
-        font-weight: 500;
-        margin-top: 20px;
-        cursor: pointer;
-    }
-    .address_save{
-        width: 100%;
-        height: 44px;
-        background-color: #326cff;
-        border: 1px;
-        border-radius: 3px;
-        color: white;
-        font-size: 17px;
-        font-weight: 500;
-        margin-top: 20px;
-        cursor: pointer;
-    }
+        .address_select {
+            width: 60px;
+            height: 20px;
+            background-color: #326cff;
+            border: 1px;
+            border-radius: 3px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .address_name {
+            width: 100%;
+            height: 44px;
+            background-color: #326cff;
+            border: 1px;
+            border-radius: 3px;
+            color: white;
+            font-size: 17px;
+            font-weight: 500;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .address_save {
+            width: 100%;
+            height: 44px;
+            background-color: #326cff;
+            border: 1px;
+            border-radius: 3px;
+            color: white;
+            font-size: 17px;
+            font-weight: 500;
+            margin-top: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
-<div id="container" class="login"  style="text-align : center;">
+<div id="container" class="login" style="text-align : center;">
     <div id="logo">
-      <a href=""><img src="img/bureumi_logo.png" /></a>
+        <a href=""><img src="img/bureumi_logo.png" /></a>
     </div>
 
-<!--style="display:none;"-->
+    <!--style="display:none;"-->
 
-<body>
-    <form  action="/save" method="post" class="mapform">
-        
+    <body>
+        <form action="/save" method="post" class="mapform">
 
-        <input style="width:60%;float:left;text-align:center;display:none;" type='text'  id ="user_address"name="user_address" >
-        <!--9.24 추가-->
-        <input style="display:none;" type='text'  id ="addressLatitude"name="addressLatitude" >
-        <input style="display:none;" type='text'  id ="addressLongitude"name="addressLongitude" >
-        <!--       -->
-        <div id="map" style="width:100%;height:600px;"></div>
-        <p></p>
-        <button type="submit" class="address_save" name="address_name">주소 저장하기</button>
-    </form>
 
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2c2f6c3dbe08eea7dfe94d4e106e786&libraries=services"></script>
-    <script type="text/javascript" language="javascript">
-        var save_location
-        var my_address
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng(37.50009896024148, 126.86813660662058), // 지도의 중심좌표
-                level: 5 // 지도의 확대 레벨
-            };
+            <input style="width:60%;float:left;text-align:center;" type='text' id="user_address" name="user_address">
+            <button style="float:left;margin-left:5px  ;" type="button" class="address_select"> 검색 </button>
 
-        // 지도를 생성합니다    
-        var map = new kakao.maps.Map(mapContainer, mapOption);
+            <input style="display:none;" type='text' id="addressLatitude" name="addressLatitude">
+            <input style="display:none;" type='text' id="addressLongitude" name="addressLongitude">
+            <div id="map" style="width:100%;height:600px;"></div>
+            <p></p>
+            <button type="submit" class="address_save" name="address_name">주소 저장하기</button>
+        </form>
 
-        // 주소-좌표 변환 객체를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-       
-        //주소 저장하기 클릭 이벤트
-        document.querySelector('.address_save').addEventListener('click', function () {
-            var data = { 'save_location': save_location }
-            sendAjax('http://localhost:3000/save', data);
-        });
-        function sendAjax(url, data) {
-            data = JSON.stringify(data);
+        <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2c2f6c3dbe08eea7dfe94d4e106e786&libraries=services"></script>
+        <script type="text/javascript" language="javascript">
+            var save_location
+            var my_address
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                    center: new kakao.maps.LatLng(37.50009896024148, 126.86813660662058), // 지도의 중심좌표
+                    level: 5 // 지도의 확대 레벨
+                };
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', url);
-            xhr.setRequestHeader('Content-Type', "application/json");
-            xhr.send(data);
+            // 지도를 생성합니다    
+            var map = new kakao.maps.Map(mapContainer, mapOption);
 
-            xhr.addEventListener('load', function () {
-                var result = JSON.parse(xhr.responseText);
-                var resultDiv = document.querySelector(".result");
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
 
-                if (result.save_location) {
+            //주소검색 클릭시 이벤트
+            document.querySelector('.address_select').addEventListener('click', function () {
+                var search_location = document.getElementsByName('user_address')[0].value;
+                save_location = search_location // 주소값 변수 저장
+                var data = { 'search_location': search_location }
 
-                    console.log('성공')
-                }
-                else if (xhr.status === 401) console.log('실패')
-                else resultDiv.innerHTML = result;
+                geocoder.addressSearch(search_location, function (result, status) {
+
+                    // 정상적으로 검색이 완료됐으면 
+                    if (status === kakao.maps.services.Status.OK) {
+
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                        // 결과값으로 받은 위치를 마커로 표시합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coords
+
+                        });
+
+                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
+
+                        });
+                        infowindow.open(map, marker);
+                        document.getElementById('addressLatitude').value = coords.Ma;
+                        document.getElementById('addressLongitude').value = coords.La;
+
+                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                        map.setCenter(coords);
+
+                    }
+                    else {
+                        alert('주소를 다시 입력하세요')
+                        window.location.href = "/gps";
+                    }
+                });
+
             });
-        }
 
-        window.addEventListener('load', function () {
-            if (navigator.geolocation) {
+            //주소 저장하기 클릭 이벤트
+            document.querySelector('.address_save').addEventListener('click', function () {
+                var data = { 'save_location': save_location }
+                sendAjax('http://localhost:3000/save', data);
+            });
+            function sendAjax(url, data) {
+                data = JSON.stringify(data);
 
-                // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude, // 위도
-                        lon = position.coords.longitude; // 경도
-                    document.getElementById('addressLatitude').value=lat
-                    document.getElementById('addressLongitude').value=lon 
-                    var locPosition = new kakao.maps.LatLng(lat, lon)//마커표시위치
-                    var coord = new kakao.maps.LatLng(lat, lon);
-                    var callback = function (result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                            my_address = result[0].address.address_name
-                            my_address = String(my_address)
-                            document.getElementById('user_address').value = my_address;
-                            message = '<div style="width:330px;text-align:center;padding:3px 0;">  '+result[0].address.address_name+'</div> ';
-                            displayMarker(locPosition, message);
-                        }
-                    };
-                    
-                    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', url);
+                xhr.setRequestHeader('Content-Type', "application/json");
+                xhr.send(data);
 
+                xhr.addEventListener('load', function () {
+                    var result = JSON.parse(xhr.responseText);
+                    var resultDiv = document.querySelector(".result");
 
+                    if (result.save_location) {
+
+                        console.log('성공')
+                    }
+                    else if (xhr.status === 401) console.log('실패')
+                    else resultDiv.innerHTML = result;
                 });
-
-            } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-                var locPosition = new kakao.maps.LatLng(37.50009896024148, 126.86813660662058),
-                    message = '주소를 찾을 수 없습니다.'
-
-                displayMarker(locPosition, message);    
-                // 몇 초 후 index나 어딘가로 넘어가는 페이지 구현 필요
             }
-            
-            // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-            function displayMarker(locPosition, message) {
 
-                // 마커를 생성합니다
-                var marker = new kakao.maps.Marker({
-                    map: map,
-                    position: locPosition
-                });
+            window.addEventListener('load', function () {
+                if (navigator.geolocation) {
 
-                var iwContent = message, // 인포윈도우에 표시할 내용
-                    iwRemoveable = true;
+                    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var lat = position.coords.latitude, // 위도
+                            lon = position.coords.longitude; // 경도
+                        document.getElementById('addressLatitude').value = lat
+                        document.getElementById('addressLongitude').value = lon
+                        var locPosition = new kakao.maps.LatLng(lat, lon)//마커표시위치
+                        var coord = new kakao.maps.LatLng(lat, lon);
+                        var callback = function (result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                my_address = result[0].address.address_name
+                                my_address = String(my_address)
+                                document.getElementById('user_address').value = my_address;
+                                message = '<div style="width:330px;text-align:center;padding:3px 0;">  ' + result[0].address.address_name + '</div> ';
+                                displayMarker(locPosition, message);
+                            }
+                        };
 
-                // 인포윈도우를 생성합니다
-                var infowindow = new kakao.maps.InfoWindow({
-                    content: iwContent,
-                    removable: iwRemoveable
-                });
+                        geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
-                // 인포윈도우를 마커위에 표시합니다 
-                infowindow.open(map, marker);
 
-                // 지도 중심좌표를 접속위치로 변경합니다
-                map.setCenter(locPosition);
+                    });
+
+                } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+                    var locPosition = new kakao.maps.LatLng(37.50009896024148, 126.86813660662058),
+                        message = '주소를 찾을 수 없습니다.'
+
+                    displayMarker(locPosition, message);
+                    // 몇 초 후 index나 어딘가로 넘어가는 페이지 구현 필요
+                }
+
+                // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+                function displayMarker(locPosition, message) {
+
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: locPosition
+                    });
+
+                    var iwContent = message, // 인포윈도우에 표시할 내용
+                        iwRemoveable = true;
+
+                    // 인포윈도우를 생성합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: iwContent,
+                        removable: iwRemoveable
+                    });
+
+                    // 인포윈도우를 마커위에 표시합니다 
+                    infowindow.open(map, marker);
+
+                    // 지도 중심좌표를 접속위치로 변경합니다
+                    map.setCenter(locPosition);
+                }
+
+            })
+
+
+            function searchAddrFromCoords(coords, callback) {
+                // 좌표로 행정동 주소 정보를 요청합니다
+                geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
             }
+
+            function searchDetailAddrFromCoords(coords, callback) {
+                // 좌표로 법정동 상세 주소 정보를 요청합니다
+                geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+            }
+
             
-        })
+            document.addEventListener('keydown', function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                };
+            }, true);
 
-
-        function searchAddrFromCoords(coords, callback) {
-            // 좌표로 행정동 주소 정보를 요청합니다
-            geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
-        }
-
-        function searchDetailAddrFromCoords(coords, callback) {
-            // 좌표로 법정동 상세 주소 정보를 요청합니다
-            geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-        }
-
-
-    </script>
-</body>
-<script src="js/jquery-latest.min.js"></script>
+        </script>
+    </body>
+    <script src="js/jquery-latest.min.js"></script>
 
 
 </html>

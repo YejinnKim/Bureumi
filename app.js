@@ -73,10 +73,10 @@ app.set('views', path.join(__dirname,'www/views'));
 app.use(express.static(path.join(__dirname, 'www')));
 
 
-// 배포시에 주석처리 해제 후 사용(express 미들웨어의 취약점 방어 모듈)
-/* app.use(helmet({contentSecurityPolicy: false}));
+
+app.use(helmet({contentSecurityPolicy: false}));
 app.use(hpp());
- */
+
 
 
 /*  app.use(session({

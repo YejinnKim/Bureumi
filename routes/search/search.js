@@ -48,6 +48,7 @@ router.get('/', function (req, res) {
                         sorted_by_gps_result[j] = temp;
                     }
                 }
+                
             }
             result.sort(function (a, b) {
                 if (a.request_code < b.request_code) return 1;
@@ -55,12 +56,29 @@ router.get('/', function (req, res) {
                 else return 0;
             })
             if (flag == undefined || flag == 0) {
-                req.session.search_main = sorted_by_gps_result; 
-                req.session.btn_col=0;}
+                req.session.search_main = sorted_by_gps_result;
+                req.session.btn_col = 0;
+            }
             else {
                 req.session.search_main = result
-                req.session.btn_col=1;}; 
+                req.session.btn_col = 1;
+            };
 
+            await DistanceTranslate();
+            
+            function DistanceTranslate(){
+                for(var i = 0; i<req.session.search_main.length;i++) 
+                {
+                    var temp = req.session.search_main[i].distance;
+                    if(temp.toFixed(1) < 1){
+                        temp = Math.floor(temp * 1000);
+                        req.session.search_main[i].distance = temp+"m";
+                    } 
+                    else{
+                        req.session.search_main[i].distance = temp.toFixed(1)+"km";
+                    }
+                }
+            }
             res.redirect('/search/1');
         });
     }

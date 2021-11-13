@@ -47,7 +47,7 @@ router.get('/:category', async function (req, res) {
             }
             var sql = 'select * from request where category = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc, request_code desc';
     
-            connection.query(sql, __category, function (err, result) {
+            connection.query(sql, __category,async function (err, result) {
                 if (err) {
                     console.error(err); 
                     logger.error('경로 : '+__dirname +'  message: '+err); 
@@ -81,13 +81,26 @@ router.get('/:category', async function (req, res) {
                 if (flag == undefined || flag == 0) req.session.search_category = result;
                 else req.session.search_category = sorted_by_gps_result
                 req.session.category_page = category
-    
+                
+                await DistanceTranslate(req.session.search_category);
                 res.redirect('/' + category + '/1');
     
             });
 
         }
-
+        function DistanceTranslate(n){
+            for(var i = 0; i< n.length;i++) 
+            {
+                var temp =  n[i].distance;
+                if(temp.toFixed(1) < 1){
+                    temp = Math.floor(temp * 1000);
+                    n[i].distance = temp+"m";
+                } 
+                else{
+                    n[i].distance = temp.toFixed(1)+"km";
+                }
+            }
+        }
 
     }
 });

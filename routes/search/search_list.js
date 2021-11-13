@@ -17,14 +17,14 @@ router.get('/', function (req, res, next) {
 
 router.get('/:page', function (req, res) {
     var page = req.params.page;
-
+    var final_result
     var id = req.session.user_info.user_id;
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
         var searching = req.session.search;
         var sql = 'select * from request where request_title like ? and not exists(select * from matching where request.request_code = matching.request_code)  order by request_code desc';
 
-        connection.query(sql, ["%" + searching + "%"], function (err, result) {
+        connection.query(sql, ["%" + searching + "%"],async function (err, result) {
             if (err) {
                 console.error(err);
                 logger.error('경로 : ' + __dirname + '  message: ' + err);
@@ -32,8 +32,23 @@ router.get('/:page', function (req, res) {
             }
             else {
                 if (req.session.search_req == 'real_time') {
-                    var final_result = result;
                     var search_view = "검색어 : " + searching + "   정렬 : 최신순";
+                    const start = {
+                        latitude: req.session.user_info.addressLat,
+                        longitude: req.session.user_info.addressLon
+                    }
+                    var final_result = [];
+                    var end = [];
+                    for (var n = 0; n < result.length; n++) {
+                        end[n] = {
+                            latitude: result[n].latitude,
+                            longitude: result[n].longitude
+                        }
+
+                        result[n].distance = haversine(start, end[n])
+                        final_result[n] = result[n]
+                    }
+                    await DistanceTranslate(final_result);
                 }
                 else {
                     const start = {
@@ -61,10 +76,13 @@ router.get('/:page', function (req, res) {
                             }
                         }
                     }
+                    await DistanceTranslate(sorted_by_gps_result);
+            
                     var search_view = "검색어 : " + searching + "   정렬 : 거리순";
-                    var final_result = sorted_by_gps_result;
+                    final_result = sorted_by_gps_result;
                 }
                 var total_page = Math.ceil(result.length / 5)
+
                 res.render('search_list', {
                     search_content: search_view,
                     search: final_result,
@@ -74,6 +92,19 @@ router.get('/:page', function (req, res) {
                 });
             }
         });
+    }
+    function DistanceTranslate(n){
+        for(var i = 0; i< n.length;i++) 
+        {
+            var temp =  n[i].distance;
+            if(temp.toFixed(1) < 1){
+                temp = Math.floor(temp * 1000);
+                n[i].distance = temp+"m";
+            } 
+            else{
+                n[i].distance = temp.toFixed(1)+"km";
+            }
+        }
     }
 });
 

@@ -75,6 +75,11 @@ body {
   background-color: #326cff;
 }
 
+.distanceColor{
+  color: rgb(50, 108, 255);
+}
+
+
 .tab-content>.tab-pane {
   display: none;
   

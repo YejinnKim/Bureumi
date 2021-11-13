@@ -279,6 +279,10 @@ body {
   border-radius: 20px;
 }
 
+.distanceColor{
+  color: rgb(50, 108, 255);
+}
+
 
 #category{
   width: 350px;
