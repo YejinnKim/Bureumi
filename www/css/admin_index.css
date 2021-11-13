@@ -89,6 +89,22 @@
     background-color: #205fff;
 }
 
+.userinfo input{
+    background-color: #326cff;
+    border: none;
+    border-radius: 2px;
+    color: #f2f2f2;
+    padding: 10px;
+    width: 150px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: 600;
+}
+.userinfo input:hover{
+    background-color: #205fff;
+}
+
+
 .user_search{
     width: 100%;
     background-color: #f7f7f7;

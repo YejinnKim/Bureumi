@@ -97,9 +97,9 @@
         <div class="inquiry_form">
           <div id="recommend">
             <ul>
-              <li>#택배</li>
-              <li>#택배</li>
-              <li>#맛집 웨이팅</li>
+              <% keyword.forEach(function (value) { %>
+                <a href="/search_list?search_box=<%= value.keyword %>&search_req=real_time"><li># <%= value.keyword %></li></a>
+              <% }); %>
             </ul>
           </div>
           <div id=""></div>
