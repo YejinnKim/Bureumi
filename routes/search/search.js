@@ -4,6 +4,7 @@ const path = require('path');
 const connection = require('../connection');
 const haversine = require('haversine');
 const logger = require('../../config/logger');
+var keyword;
 
 router.get('/', function (req, res) {
     var flag = req.query.cag;
@@ -12,9 +13,13 @@ router.get('/', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
         var data = [req.session.user_info.user_id]
-        var sql = 'select * from request where not writer_id = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc';
+        var sql1 = 'select * from request where not writer_id = ? and not exists(select * from matching where request.request_code = matching.request_code) order by length(request_code) desc';
+        var sql2 = 'select * from recommend order by rand() limit 4'
 
-        connection.query(sql, data, async function (err, result) {
+        connection.query(sql2, function (err, result) {
+            keyword = result;
+        })
+        connection.query(sql1, data, function (err, result) {
             if (err) {
                 console.error(err);
                 logger.error('경로 : ' + __dirname + '  message: ' + err);
@@ -91,7 +96,7 @@ router.get('/:page', function (req, res) {
             total_page: total_page,
             page: page,
             length: req.session.search_main.length - 1,
-            btn_col: req.session.btn_col
+            btn_col : req.session.btn_col, keyword : keyword
         });
     }
 });

@@ -58,6 +58,11 @@
             <div class="userinfo">
                 <h2>관리자 Home</h2>
                 <hr>
+                <input type="button" value="요청 키워드 업데이트" onClick="location.href='/keyword'"> | 
+                <% keyword.forEach(function (value) { %>
+                    <%= value.keyword %>
+                <% }); %>
+                <hr>
                 <!--가입최신순 3개 나열-->
                 <p><a href='/admin/userinfo'>신규회원</a></p>
                 <table>

@@ -25,6 +25,8 @@ router.get('/', function (req, res) {
     else {
         var sql1 = 'select * from user order by length(user_code) desc, user_code desc limit 3';
         var sql2 = 'select * from bureumi order by length(bureumi_code) desc, bureumi_code desc limit 3';
+        var sql3 = 'select * from recommend'
+        var keyword;
         var user;
 
         connection.query(sql1, function (err, result) {
@@ -35,13 +37,21 @@ router.get('/', function (req, res) {
             }
             user = result;
         });
+        connection.query(sql3, function (err, result) {
+            if (err) { 
+                console.error(err); 
+                logger.error('경로 : '+__dirname +'  message: '+err); 
+                res.redirect('/error/connect') 
+            }
+            keyword = result;
+        });
         connection.query(sql2, function (err, result) {
             if (err) { 
                 console.error(err); 
                 logger.error('경로 : '+__dirname +'  message: '+err); 
                 res.redirect('/error/connect'); 
             }
-            res.render('admin/admin_index', { 'id': id, user: user, bureumi: result });
+            res.render('admin/admin_index', { 'id': id, user: user, bureumi: result, keyword : keyword });
         });
     }
 
