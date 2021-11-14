@@ -50,6 +50,7 @@ const upload = require('./upload/upload');
 const error = require('./error')
 const keyword = require('./search/keyword');
 const keyword2 = require('./search/keyword2');
+const chatting_list = require('./chatting/chatting_list');
 
 //url 라우팅
 router.get('/', function(req, res){
@@ -105,5 +106,6 @@ router.use('/etc',etc);
 router.use('/upload', upload);
 router.use('/error',error);
 router.use('/keyword', keyword, keyword2);
+router.use('/chatting_list', chatting_list);
 
 module.exports = router;

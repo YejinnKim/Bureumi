@@ -84,6 +84,7 @@ router.get('/:page', function (req, res) {
                 var total_page = Math.ceil(result.length / 5)
 
                 res.render('search_list', {
+                    id: id, 
                     search_content: search_view,
                     search: final_result,
                     total_page: total_page,

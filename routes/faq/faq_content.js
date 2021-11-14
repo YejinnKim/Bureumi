@@ -16,7 +16,7 @@ router.get('/content/:faq_code', function (req, res) {
                 logger.error('경로 : '+__dirname +'  message: '+err); 
                 res.redirect('/error/connect') 
             }
-            res.render('faq_content', { value: result[0] });
+            res.render('faq_content', { id: id, value: result[0] });
         });
     }
 });

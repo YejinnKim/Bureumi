@@ -17,6 +17,7 @@ const MySQLStore = require('express-mysql-session')(session); // mysql에 세션
 const logger = require('./config/logger');
 const helmet = require('helmet');
 const hpp = require('hpp');
+const connection = require('./routes/connection');
 
 require('dotenv').config();
 
@@ -32,7 +33,7 @@ var io = socketio.listen(server);
 logger.info('socket.io is ready for request');
 
 //클라이언트가 연결했을 때의 이벤트 처리
-io.on('connection', function(socket) {
+/* io.on('connection', function(socket) {
 
 	console.log('client connected, socket id: ', socket.id);
 	socket.broadcast.emit('sendMessage', 'user connection..');
@@ -41,6 +42,7 @@ io.on('connection', function(socket) {
 		//클라이언트가 message 이벤트 요청할 경우 호출
 		// console.log('server received data: '+msg);
 		// io.emit('chat message', msg);
+		console.log(msg)
 		socket.broadcast.emit('sendToAll', msg)
 	});
 
@@ -57,6 +59,46 @@ io.on('connection', function(socket) {
 	socket.on('unsubscribe', function(data) { 
 		socket.leave(data.room);
 	});
+}); */
+/* var chat = io.sockets.on('connection', function(socket) {
+
+	console.log('client connected, socket id: ', socket.id);
+	socket.broadcast.emit('sendMessage', 'user connection..');
+
+	socket.on('sendMessage', function(msg) {
+		console.log(msg)
+		//DB 저장
+		connection.query("insert into chatting values (?, ?, ?)", 
+		[msg.room, msg.user, msg.message], function() {});
+		
+		// room join
+		socket.join(msg.room);
+		// room에 메세지 전송
+		chat.to(msg.room).emit('rMessage', msg)
+		
+	});
+
+}); */
+io.on('connection', function(socket) {
+
+	console.log('client connected, socket id: ', socket.id);
+	//socket.broadcast.emit('sendMessage', 'user connection..');
+
+	socket.on('sendMessage', function(msg) {
+		//클라이언트가 message 이벤트 요청할 경우 호출
+		connection.query("insert into chatting values (?, ?, ?, default)", 
+		[msg.room, msg.user, msg.message], function() {});
+
+		socket.join(msg.room)
+		socket.to(msg.room).emit('sendToAll', msg)
+	});
+
+	socket.on('disconnect', function(){
+    	// 클라이언트 연결이 끊어졌을 때 호출
+		console.log('server disconnected, socket id: ', socket.id);
+		//socket.broadcast.emit('sendMessage', 'user disconnection..');
+	});
+	
 });
 
 app.use(express.json());

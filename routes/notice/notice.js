@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
             logger.error('경로 : ' + __dirname + '  message: ' + err);
             res.redirect('/error/connect')
         }
-        res.render('notice', { notice: result });
+        res.render('notice', { id: id, notice: result });
     });
 });
 

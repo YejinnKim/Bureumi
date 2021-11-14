@@ -65,7 +65,7 @@
     "pm2": "^5.1.2",
     "request": "^2.88.2",
     "request-params": "0.0.1",
-    "socket.io": "^4.1.2",
+    "socket.io": "^4.3.2",
     "speakeasy": "^2.0.0",
     "timers-promises": "^1.0.1",
     "uid": "^2.0.0",

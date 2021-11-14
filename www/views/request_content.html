@@ -190,10 +190,10 @@
                                 <% } %>
                                 </td></tr>
                             <% } %>
-                        <% } else { %>
+                        <% } else if(request.writer_id != id) { %>
                           <tr>
                             <td colspan="2" class="chat">
-                              <a href='/chatting/<%= request.request_code %>'>
+                              <a href='/chatting/<%= request.request_code %>/<%= id %>'>
                                 <div>
                                   채팅하기
                                 </div>
@@ -241,7 +241,7 @@
                 <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
             </div>
         </div>
-        <div class="item">
+        <div class="item" onclick="location.href='/chatting_list/<%=id%>'">
             <div class="nav-item">
                 <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
             </div>

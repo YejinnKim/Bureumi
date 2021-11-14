@@ -13,6 +13,7 @@ router.get('/:page',async function (req, res) {
     var total_page = Math.ceil(search_category.length / 5)
     var cag_flag = '4';
     res.render('category', {
+        id: id, 
         search: search_category,
         category : category_page,
         total_page: total_page,

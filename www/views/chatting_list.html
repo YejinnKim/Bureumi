@@ -2,16 +2,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
-  <title>부름이 요청 조회</title>
+  <title>부름이 채팅 목록</title>
   
   <!--css-->
   <link href="../css/top_navbar.css" rel="stylesheet">
-  <link href="../css/notice_content.css" rel="stylesheet">
+  <link href="../css/review.css" rel="stylesheet">
   <link href="../css/bottom_navbar.css" rel="stylesheet">
 
   <!--icon cdn-->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
+  
   <!--Ajax-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -73,46 +73,57 @@
     </div>
   </nav>
     
-    <div class="page-header header-filter" data-parallax="true"></div>
+  <div class="page-header header-filter" data-parallax="true"></div>
     <div class="main main-raised">
-        <div class="tab-content tab-space">
-            <div class="container">
-                <div class="request_form">
-                    <div class="request_content">
-                      <h2>공지사항</h2>
-                      <table>
-                        <tr><td><%= value.notice_title %></td></tr>
-                        <tr><td><%= value.notice_content %></td></tr>
-                      </table>
-                    </div>
-                </div>
+      <div class="profile-content">
+        <div class="container">
+          <div class="tab-content tab-space">
+            <div class="row">
+              <div class="col-md-3 ml-auto">
+                <h3>채팅 목록</h3>
+                <table>
+                  <% if(!request[0]) { %> <tr><td>진행 중인 채팅이 없습니다. </td></tr><% } %>
+                  <% request.forEach(function (value) { %>
+                    <tr>
+                      <td rowspan="2" class="rcategory"><%= value.category %></td>
+                      <td rowspan="2" class="rmatching"><% if(value.writer_id == id) { %> 부름이<br><b>요청</b> <% } else { %> 부름이<br><b>지원</b> <% } %></td>
+                      <td class="rtitle"><a href="/chatting/<%= value.room %>" ><%= value.request_title %></a></td>
+                      </tr>
+                    <tr>
+                      <td class="rprice"><%= value.request_price %></td>
+                    </tr>
+                  <% }); %>
+                </table>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!--하단 네비-->
     <section class="bottom_nav">
-        <div class="item" onclick="location.href='/profile'">
-            <div class="nav-item">
-                <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
-            </div>
-        </div>
-        <div class="item" onclick="location.href='/search'">
-            <div class="nav-item">
-                <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
-            </div>
-        </div>
-        <div class="item" onclick="location.href='/request'">
-            <div class="nav-item">
-                <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
-            </div>
-        </div>
-        <div class="item" onclick="location.href='/chatting_list/<%=id%>'">
-            <div class="nav-item">
-                <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
-            </div>
-        </div>
-    </section>
+      <div class="item" onclick="location.href='/profile'">
+          <div class="nav-item">
+              <i class="material-icons icon"><i class="far fa-home fa-2x"></i></i>
+          </div>
+      </div>
+      <div class="item" onclick="location.href='/search'">
+          <div class="nav-item">
+              <i class="material-icons icon"><i class="fas fa-search fa-2x"></i></i>
+          </div>
+      </div>
+      <div class="item" onclick="location.href='/request'">
+          <div class="nav-item">
+              <i class="material-icons icon"><i class="far fa-plus-square fa-2x"></i></i>
+          </div>
+      </div>
+      <div class="item">
+          <div class="nav-item" onclick="location.href='/chatting_list/<%=id%>'">
+              <i class="material-icons icon"><i class="far fa-comment-dots fa-2x"></i>
+          </div>
+      </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
@@ -136,7 +147,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   
     <!-- javascript -->
+    <script src="../js/category.js" type="text/javascript"></script>
     <script src="../js/profile.js" type="text/javascript"></script>
-  </body>
+    <script src="../js/bottom.js" type="text/javascript"></script>
+</body>
 
 </html>
