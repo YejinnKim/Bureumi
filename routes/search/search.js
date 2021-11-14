@@ -85,6 +85,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:page', function (req, res) {
+    var id = req.user;
     if (req.session.user_info == undefined) res.redirect('/error/info');
     else {
         var page = req.params.page
@@ -92,6 +93,7 @@ router.get('/:page', function (req, res) {
 
 
         res.render('search', {
+            id: id, 
             search: req.session.search_main,
             total_page: total_page,
             page: page,

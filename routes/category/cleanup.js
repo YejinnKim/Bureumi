@@ -14,6 +14,7 @@ router.get('/:page',async function (req, res) {
 
     var cag_flag = '6';
     res.render('category', {
+        id: id, 
         search: search_category,
         category : category_page,
         total_page: total_page,

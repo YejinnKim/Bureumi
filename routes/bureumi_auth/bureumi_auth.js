@@ -24,7 +24,7 @@ router.get('/', function (req, res) {
             if (result.length == 0) {
                 result = [{ "state": "미인증", "bureumi_code": "X" }]
             }
-            res.render('bureumi_auth', { value: result });
+            res.render('bureumi_auth', { id: id, value: result });
         });
     }
 });
@@ -97,7 +97,7 @@ router.get('/result', function (req, res) {
                 res.redirect('/error/connect')
             }
             logger.info('<BUREUMI_AUTH-bureumi proposal> [id] : ' + id);
-            res.render('bureumi_auth_result', { value: result, moment: moment });
+            res.render('bureumi_auth_result', { id: id, value: result, moment: moment });
         })
     }
 });

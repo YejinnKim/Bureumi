@@ -11,6 +11,7 @@ router.get('/', function (req, res) {
     if (req.session.user_info == undefined) res.redirect('/error/info')
     else if (req.session.user_info.addressLat == 0 && req.session.user_info.addressLon == 0) { res.send('<script type="text/javascript">alert("위치인증을 해주세요");window.location.href="/profile"</script>'); }
     else {
+        var id = req.user;
         var sql = 'select request_code from request order by length(request_code) desc, request_code desc limit 1';
         connection.query(sql, function (err, result) {
             if (err) {
@@ -24,7 +25,7 @@ router.get('/', function (req, res) {
             }
         })
 
-        res.render('request', { value: null });
+        res.render('request', { id: id, value: null });
     }
 });
 

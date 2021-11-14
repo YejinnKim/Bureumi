@@ -19,7 +19,7 @@ router.get('/question', function (req, res) {
             fcode = parseInt(fcode.substr(1)) + 1;
         });
 
-        res.render('faq_question');
+        res.render('faq_question', { id: id });
     }
 });
 

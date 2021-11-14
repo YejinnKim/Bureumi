@@ -23,7 +23,8 @@ btnSend.addEventListener('click', (e)=>{
 const sendMsg = message => {
     let msg = {
         user: document.querySelector('#your-name').textContent,
-        message: message.trim()
+        message: message.trim(),
+        room: decodeURI(document.location.href).substr(31)
     }
     display(msg, 'you-message')
     socket.emit('sendMessage', msg)

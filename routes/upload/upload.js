@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         sql = 'select * from user where user_id = ?'
         connection.query(sql, req.user, function (err, result) {
             if (err) {console.error(err); res.redirect('/error/connect')}
-            res.render('upload', {userinfo : result});
+            res.render('upload', {id: id, userinfo : result});
         });
     }
 });

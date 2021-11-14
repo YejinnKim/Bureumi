@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('index');
+    var id = req.user;
+    res.render('index', { id: id });
 });
 
 module.exports = router;
