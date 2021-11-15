@@ -152,6 +152,8 @@ body {
   transition: all .3s;
   border-radius: 30px;
   padding: 10px 15px;
+  border: 0;
+  width: 150px;
 }
 
 .nav-pills .nav-item .nav-link:hover {
@@ -249,9 +251,14 @@ body {
   border: none;
   background-color: #326cff;
   cursor: pointer;
+  color: #f2f2f2;
+  
 }
 .search-box button i{
   color: #f2f2f2;
+}
+.search-box select {
+  margin-left: 10px;
 }
 
 .inquiry_form {
@@ -420,8 +427,9 @@ footer .copyright {
   #recommend{
     width: 780px;
     margin: 0 auto;
-    border: 1px solid #eaeaea;
-    background-color: #eaeaea;
+    text-align: center;
+    /* border: 1px solid #eaeaea;
+    background-color: #eaeaea; */
   }
   #category{
     width: 780px;
